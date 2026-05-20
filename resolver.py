@@ -4,8 +4,12 @@ import time
 
 from sayari.client import Sayari
 
+# Path where resolved entity IDs are cached to avoid re-hitting the API on every run
 RESOLVED_CACHE = os.path.join(os.path.dirname(__file__), "data", "resolved.json")
 
+# The 50 sanctioned/high-risk entities from List 1 of the assessment.
+# Names are the best-match aliases confirmed to resolve in Sayari — a few required
+# corrections from the original list (e.g. "PDVSA" instead of the full parenthetical name).
 ENTITIES = [
     {"name": "Russian Direct Investment Fund", "country": "RUS"},
     {"name": "Sberbank", "country": "RUS"},
@@ -61,6 +65,16 @@ ENTITIES = [
 
 
 def resolve_entity(client: Sayari, name: str, country: str) -> dict:
+    """
+    Resolves a single entity name + country to a Sayari entity ID.
+
+    Uses the Sayari resolution endpoint, which ranks candidates by match confidence
+    and returns the best match. We take the top result (index 0) and capture the
+    entity ID, matched label, match strength, and type for use downstream.
+
+    Returns a dict with resolved=True on success, or resolved=False with an error
+    message if no match is found or the API call fails.
+    """
     try:
         response = client.resolution.resolution(name=name, country=country)
         if not response.data:
@@ -83,6 +97,8 @@ def resolve_entity(client: Sayari, name: str, country: str) -> dict:
 
 
 def _unresolved(name: str, country: str, error: str) -> dict:
+    """Returns a consistently structured failure record so the analytics layer
+    can count and report unresolved entities without special-casing None values."""
     return {
         "input_name": name,
         "input_country": country,
@@ -97,6 +113,13 @@ def _unresolved(name: str, country: str, error: str) -> dict:
 
 
 def resolve_all(client: Sayari) -> list[dict]:
+    """
+    Iterates over every entity in ENTITIES and resolves each one sequentially.
+
+    A 0.2s delay between calls keeps us well within Sayari's rate limits
+    (the SDK also handles 429s automatically, but this avoids hitting them at all).
+    Progress is printed to stdout so the operator can monitor the run.
+    """
     results = []
     for i, entity in enumerate(ENTITIES):
         print(f"  [{i + 1}/{len(ENTITIES)}] {entity['name']}")
@@ -109,6 +132,14 @@ def resolve_all(client: Sayari) -> list[dict]:
 
 
 def load_or_build_resolved(client: Sayari) -> list[dict]:
+    """
+    Returns resolved entity data from the local cache if it exists, otherwise
+    calls the Sayari API to resolve all entities and writes the results to disk.
+
+    Caching is critical during development — it means the full analytics pipeline
+    can be iterated on without consuming API credits or waiting for network calls.
+    Delete data/resolved.json to force a fresh resolution run.
+    """
     if os.path.exists(RESOLVED_CACHE):
         with open(RESOLVED_CACHE) as f:
             return json.load(f)

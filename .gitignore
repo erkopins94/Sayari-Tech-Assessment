@@ -1,5 +1,5 @@
 .env
-*.json
+sayari_api_keys.json
 __pycache__/
 *.pyc
 .venv/

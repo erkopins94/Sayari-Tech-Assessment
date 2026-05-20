@@ -1,0 +1,35 @@
+# docker-compose.yml — spins up the Sayari analytics Streamlit app in a
+# single container. Run with: docker compose up --build
+#
+# The .env file is loaded automatically for API credentials. If you only
+# want to browse the cached data (no live API calls), the app will work
+# without a .env file since profiles.json is bundled in the image.
+
+services:
+  analytics:
+    build: .
+    container_name: sayari-analytics
+
+    ports:
+      # Map host port 8501 to container port 8501.
+      # Open http://localhost:8501 in your browser after starting.
+      - "8501:8501"
+
+    env_file:
+      # Loads CLIENT_ID and CLIENT_SECRET from your local .env file.
+      # The .env file is gitignored and never baked into the image.
+      - .env
+
+    volumes:
+      # Mount the local data directory so any live API fetches during the
+      # container run are persisted back to the host cache files.
+      - ./data:/app/data
+
+    healthcheck:
+      # Confirms the Streamlit server is accepting connections before
+      # reporting the container as healthy.
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s

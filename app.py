@@ -17,6 +17,8 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from analytics import (
+    RISK_FLAG_LABELS,
+    SECTOR_MAP,
     country_breakdown,
     jurisdiction_exposure,
     risk_flag_frequency,
@@ -197,11 +199,7 @@ def render_sanctions(profiles: list[dict]) -> None:
     clicking a sanctions list bar shows which entities appear on it, and
     clicking an entity bar shows which lists that entity is on.
     """
-    from analytics import SECTOR_MAP
-
-    # Pre-build two lookups used by both drill-down panels:
-    #   list_to_entities  — sanctions list name → profiles on that list
-    #   entity_to_lists   — entity name → sanctions lists it appears on
+    # Pre-build lookup: sanctions list name → list of entity profiles on that list
     fetched = [p for p in profiles if p.get("fetched")]
     list_to_entities: dict[str, list[dict]] = {}
     for p in fetched:
@@ -327,8 +325,6 @@ def render_risk(profiles: list[dict]) -> None:
     severity landscape across the dataset. The risk flag chart is interactive —
     clicking a flag reveals which entities carry it and at what severity level.
     """
-    from analytics import RISK_FLAG_LABELS
-
     # Reverse the label map so we can go from readable label → raw API key
     # when a bar is clicked and we need to filter the profiles
     label_to_key = {v: k for k, v in RISK_FLAG_LABELS.items()}
@@ -394,7 +390,6 @@ def render_risk(profiles: list[dict]) -> None:
             matching = [p for p in fetched if raw_key in p["risk_flags"]]
             matching.sort(key=lambda p: p["input_name"])
 
-            from analytics import SECTOR_MAP
             st.success(f"**{selected_label}** — {len(matching)} {'entity' if len(matching) == 1 else 'entities'}")
 
             rows = []
@@ -433,8 +428,6 @@ def render_geography(profiles: list[dict]) -> None:
     are interactive — clicking a country shows which entities are present
     there, and clicking an entity shows all countries it operates in.
     """
-    from analytics import SECTOR_MAP
-
     # ISO-3 → readable country name lookup for display in drill-down panels.
     # Covers every country code that appears in the profiles dataset.
     COUNTRY_NAMES = {
@@ -613,8 +606,6 @@ def render_entity_table(profiles: list[dict]) -> None:
     """
     st.subheader("Entity Detail")
     st.caption("Full dataset — click column headers to sort.")
-
-    from analytics import SECTOR_MAP
 
     fetched = [p for p in profiles if p.get("fetched")]
     rows = []

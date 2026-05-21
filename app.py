@@ -324,16 +324,25 @@ def render_sanctions(profiles: list[dict]) -> None:
 def render_risk(profiles: list[dict]) -> None:
     """
     Risk tab: surfaces the distribution of risk flag types and the aggregate
-    severity landscape across the dataset. Helps a client understand not just
-    whether entities are sanctioned, but the full breadth of risk categories
-    and how severe the flagging is at a network level.
+    severity landscape across the dataset. The risk flag chart is interactive —
+    clicking a flag reveals which entities carry it and at what severity level.
     """
+    from analytics import RISK_FLAG_LABELS
+
+    # Reverse the label map so we can go from readable label → raw API key
+    # when a bar is clicked and we need to filter the profiles
+    label_to_key = {v: k for k, v in RISK_FLAG_LABELS.items()}
+    fetched = [p for p in profiles if p.get("fetched")]
+
     st.subheader("Risk Landscape")
+    st.caption("Click a risk flag on the left chart to see which entities carry it.")
 
     col_left, col_right = st.columns(2)
 
+    # Capture the click event inside the column but render the drill-down
+    # below the columns at full width so it isn't cramped
+    flag_event = None
     with col_left:
-        # Risk flag frequency — how many entities carry each direct flag
         flag_data = risk_flag_frequency(profiles)
         fig = horizontal_bar(
             flag_data,
@@ -342,7 +351,15 @@ def render_risk(profiles: list[dict]) -> None:
             x_label="Number of Entities",
             height=450,
         )
-        st.plotly_chart(fig, use_container_width=True)
+        # on_select="rerun" triggers a Streamlit rerun on click, returning the
+        # selected bar's y-value (the readable flag label) in the event object
+        flag_event = st.plotly_chart(
+            fig,
+            use_container_width=True,
+            on_select="rerun",
+            selection_mode="points",
+            key="risk_flag_chart",
+        )
 
     with col_right:
         # Aggregate risk level distribution — total flags at each severity level
@@ -363,6 +380,42 @@ def render_risk(profiles: list[dict]) -> None:
             margin=dict(l=10, r=10, t=40, b=10),
         )
         st.plotly_chart(fig, use_container_width=True)
+
+    # --- Drill-down panel (full width, below both columns) ---
+    selected_label = None
+    if flag_event and flag_event.selection and flag_event.selection.points:
+        # The y-axis of the horizontal bar holds the readable flag label
+        selected_label = flag_event.selection.points[0].get("y")
+
+    if selected_label:
+        raw_key = label_to_key.get(selected_label)
+        if raw_key:
+            # Filter to entities that carry this specific risk flag
+            matching = [p for p in fetched if raw_key in p["risk_flags"]]
+            matching.sort(key=lambda p: p["input_name"])
+
+            from analytics import SECTOR_MAP
+            st.success(f"**{selected_label}** — {len(matching)} {'entity' if len(matching) == 1 else 'entities'}")
+
+            rows = []
+            for p in matching:
+                rows.append({
+                    "Entity":          p["input_name"],
+                    "Sector":          SECTOR_MAP.get(p["input_name"], "Other"),
+                    "Flag Severity":   p["risk_flags"].get(raw_key, "—"),
+                    "Sanctioned":      "✓" if p["sanctioned"] else "—",
+                    "State-Owned":     "✓" if "state_owned" in p["risk_flags"] else "—",
+                    "Countries":       len(p["countries"]),
+                    "Network Degree":  f"{p['degree']:,}",
+                })
+
+            st.dataframe(
+                pd.DataFrame(rows),
+                use_container_width=True,
+                hide_index=True,
+            )
+    else:
+        st.info("👆 Click a risk flag above to see which entities carry it.")
 
     # Callout explaining what network-level risk flags mean in plain terms
     st.warning(

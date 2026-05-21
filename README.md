@@ -11,9 +11,9 @@ The app resolves a curated list of sanctioned entities against the Sayari knowle
 | Tab | What You'll See |
 |---|---|
 | **Overview** | KPI cards, sector breakdown, top entities by network degree |
-| **Sanctions** | Which sanctions lists are in play, per-entity list coverage |
-| **Risk Profile** | Risk flag frequency, aggregate severity distribution |
-| **Geography** | Choropleth world map, jurisdiction exposure ranking |
+| **Sanctions** | Entities per sanctions list (click a list → see which entities are on it); sanctions list coverage per entity (click an entity → see every list it appears on) |
+| **Risk Profile** | Risk flag frequency (click a flag → see which entities carry it); aggregate severity distribution |
+| **Geography** | Choropleth world map (click a country → see which entities are present there); top 20 entities by jurisdictional footprint (click an entity → see every country it operates in) |
 | **Entity Detail** | Sortable full-dataset table |
 
 Key findings from the dataset: **93.9% of entities are sanctioned**, spanning **53 countries** with **428,000+ known network connections** across **21 distinct sanctions lists**.

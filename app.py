@@ -429,19 +429,56 @@ def render_risk(profiles: list[dict]) -> None:
 def render_geography(profiles: list[dict]) -> None:
     """
     Geography tab: visualises the global footprint of these entities through
-    a choropleth world map and a jurisdiction exposure ranking. The map
-    immediately conveys that this is not a regionally confined risk — it is
-    a globally distributed network.
+    a choropleth world map and a jurisdiction exposure ranking. Both charts
+    are interactive — clicking a country shows which entities are present
+    there, and clicking an entity shows all countries it operates in.
     """
+    from analytics import SECTOR_MAP
+
+    # ISO-3 → readable country name lookup for display in drill-down panels.
+    # Covers every country code that appears in the profiles dataset.
+    COUNTRY_NAMES = {
+        "RUS": "Russia", "USA": "United States", "CYP": "Cyprus",
+        "CHN": "China", "DEU": "Germany", "BLR": "Belarus",
+        "KAZ": "Kazakhstan", "CAN": "Canada", "NLD": "Netherlands",
+        "ARE": "UAE", "HKG": "Hong Kong", "UKR": "Ukraine",
+        "AUS": "Australia", "MMR": "Myanmar", "GBR": "United Kingdom",
+        "CHE": "Switzerland", "FRA": "France", "SGP": "Singapore",
+        "AUT": "Austria", "BEL": "Belgium", "LUX": "Luxembourg",
+        "IRL": "Ireland", "CZE": "Czech Republic", "POL": "Poland",
+        "FIN": "Finland", "SWE": "Sweden", "DNK": "Denmark",
+        "NOR": "Norway", "LVA": "Latvia", "EST": "Estonia",
+        "LTU": "Lithuania", "GEO": "Georgia", "ARM": "Armenia",
+        "AZE": "Azerbaijan", "UZB": "Uzbekistan", "TKM": "Turkmenistan",
+        "TUR": "Turkey", "IRN": "Iran", "IRQ": "Iraq",
+        "SYR": "Syria", "PRK": "North Korea", "VEN": "Venezuela",
+        "CUB": "Cuba", "PAN": "Panama", "BHS": "Bahamas",
+        "VGB": "British Virgin Islands", "MLT": "Malta",
+        "GIB": "Gibraltar", "IMN": "Isle of Man", "LIE": "Liechtenstein",
+        "MCO": "Monaco", "SMR": "San Marino",
+    }
+
+    fetched = [p for p in profiles if p.get("fetched")]
+
+    # Pre-build lookup: country_code → list of entity profiles present in that country
+    country_to_entities: dict[str, list[dict]] = {}
+    for p in fetched:
+        for c in p["countries"]:
+            country_to_entities.setdefault(c, []).append(p)
+
     st.subheader("Geographic Reach")
 
-    # --- World map choropleth ---
+    # ---------------------------------------------------------------------------
+    # Chart 1 — Choropleth world map (clickable)
+    # ---------------------------------------------------------------------------
+    st.caption("Click a country on the map to see which entities are present there.")
+
     country_data = country_breakdown(profiles)
     df_map = pd.DataFrame(
         list(country_data.items()), columns=["country_code", "entity_count"]
     )
 
-    fig = px.choropleth(
+    fig_map = px.choropleth(
         df_map,
         locations="country_code",
         locationmode="ISO-3",
@@ -450,24 +487,71 @@ def render_geography(profiles: list[dict]) -> None:
         title="Entity Presence by Country",
         labels={"entity_count": "Entities Present"},
     )
-    fig.update_layout(
+    fig_map.update_layout(
         template=CHART_TEMPLATE,
         height=500,
         margin=dict(l=0, r=0, t=40, b=0),
         coloraxis_colorbar=dict(title="Entities"),
     )
-    st.plotly_chart(fig, use_container_width=True)
+
+    # Choropleth click events return the ISO-3 code under the "location" key,
+    # unlike bar charts which use "y". We handle both keys as a safety net.
+    map_event = st.plotly_chart(
+        fig_map,
+        use_container_width=True,
+        on_select="rerun",
+        selection_mode="points",
+        key="geography_map_chart",
+    )
+
+    # --- Drill-down: entities in the selected country ---
+    selected_country_code = None
+    if map_event and map_event.selection and map_event.selection.points:
+        pt = map_event.selection.points[0]
+        # Choropleth returns the country code under "location"
+        selected_country_code = pt.get("location") or pt.get("customdata")
+
+    if selected_country_code and selected_country_code in country_to_entities:
+        country_label = COUNTRY_NAMES.get(selected_country_code, selected_country_code)
+        entities_in_country = sorted(
+            country_to_entities[selected_country_code],
+            key=lambda p: p["input_name"],
+        )
+        st.success(f"**{country_label} ({selected_country_code})** — {len(entities_in_country)} {'entity' if len(entities_in_country) == 1 else 'entities'} present")
+
+        rows = []
+        for p in entities_in_country:
+            rows.append({
+                "Entity":          p["input_name"],
+                "Sector":          SECTOR_MAP.get(p["input_name"], "Other"),
+                "Sanctioned":      "✓" if p["sanctioned"] else "—",
+                "State-Owned":     "✓" if "state_owned" in p["risk_flags"] else "—",
+                "Total Countries": len(p["countries"]),
+                "Network Degree":  f"{p['degree']:,}",
+            })
+
+        st.dataframe(
+            pd.DataFrame(rows),
+            use_container_width=True,
+            hide_index=True,
+        )
+    elif selected_country_code:
+        st.info(f"No entities found for country code **{selected_country_code}**.")
+    else:
+        st.info("👆 Click a country on the map to see which entities are present there.")
 
     st.markdown("---")
 
-    # --- Jurisdiction exposure bar chart ---
+    # ---------------------------------------------------------------------------
+    # Chart 2 — Jurisdiction exposure bar chart (clickable)
+    # ---------------------------------------------------------------------------
     st.subheader("Entities with the Widest Jurisdictional Footprint")
-    st.caption("Entities present in more countries are harder to sanction effectively — corporate structures can shift assets across jurisdictions.")
+    st.caption("Entities present in more countries are harder to sanction effectively. Click an entity to see every country it operates in.")
 
     exposure = jurisdiction_exposure(profiles)[:20]
     df_exp = pd.DataFrame(exposure)
 
-    fig = px.bar(
+    fig_exp = px.bar(
         df_exp,
         x="country_count",
         y="name",
@@ -477,14 +561,48 @@ def render_geography(profiles: list[dict]) -> None:
         title="Top 20 Entities by Number of Countries Present",
         labels={"country_count": "Countries Present", "name": ""},
     )
-    fig.update_layout(
+    fig_exp.update_layout(
         template=CHART_TEMPLATE,
         height=600,
         yaxis={"categoryorder": "total ascending"},
         margin=dict(l=10, r=10, t=40, b=10),
         coloraxis_showscale=False,
     )
-    st.plotly_chart(fig, use_container_width=True)
+
+    entity_event = st.plotly_chart(
+        fig_exp,
+        use_container_width=True,
+        on_select="rerun",
+        selection_mode="points",
+        key="geography_entity_chart",
+    )
+
+    # --- Drill-down: countries for the selected entity ---
+    selected_entity = None
+    if entity_event and entity_event.selection and entity_event.selection.points:
+        selected_entity = entity_event.selection.points[0].get("y")
+
+    if selected_entity:
+        match = next((p for p in fetched if p["input_name"] == selected_entity), None)
+        if match:
+            country_list = sorted(match["countries"])
+            st.success(f"**{selected_entity}** — present in {len(country_list)} {'country' if len(country_list) == 1 else 'countries'}")
+
+            # Display as a two-column grid of country chips for easy scanning
+            rows = [
+                {
+                    "ISO-3 Code": code,
+                    "Country":    COUNTRY_NAMES.get(code, code),
+                }
+                for code in country_list
+            ]
+            st.dataframe(
+                pd.DataFrame(rows),
+                use_container_width=True,
+                hide_index=True,
+            )
+    else:
+        st.info("👆 Click an entity bar above to see every country it is present in.")
 
 
 def render_entity_table(profiles: list[dict]) -> None:

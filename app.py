@@ -193,13 +193,27 @@ def render_overview(profiles: list[dict]) -> None:
 def render_sanctions(profiles: list[dict]) -> None:
     """
     Sanctions tab: breaks down which sanctions lists are in play and which
-    entities carry the heaviest sanctions burden. This is the core 'Aha moment'
-    tab — showing that these aren't isolated sanctions but coordinated
-    multi-jurisdictional enforcement.
+    entities carry the heaviest sanctions burden. Both charts are interactive —
+    clicking a sanctions list bar shows which entities appear on it, and
+    clicking an entity bar shows which lists that entity is on.
     """
-    st.subheader("Sanctions Intelligence")
+    from analytics import SECTOR_MAP
 
-    # --- Sanctions list breakdown ---
+    # Pre-build two lookups used by both drill-down panels:
+    #   list_to_entities  — sanctions list name → profiles on that list
+    #   entity_to_lists   — entity name → sanctions lists it appears on
+    fetched = [p for p in profiles if p.get("fetched")]
+    list_to_entities: dict[str, list[dict]] = {}
+    for p in fetched:
+        for sl in p["sanctions_lists"]:
+            list_to_entities.setdefault(sl, []).append(p)
+
+    # ---------------------------------------------------------------------------
+    # Chart 1 — Entities per sanctions list (clickable)
+    # ---------------------------------------------------------------------------
+    st.subheader("Sanctions Intelligence")
+    st.caption("Click any bar to see which entities appear on that sanctions list.")
+
     sl_data = sanctions_list_breakdown(profiles)
     fig = horizontal_bar(
         sl_data,
@@ -208,20 +222,61 @@ def render_sanctions(profiles: list[dict]) -> None:
         x_label="Number of Entities",
         height=600,
     )
-    st.plotly_chart(fig, use_container_width=True)
+
+    # on_select="rerun" causes Streamlit to re-execute the script when a bar is
+    # clicked, returning the selected point data in the event object so we can
+    # render the drill-down panel below without any extra state management.
+    list_event = st.plotly_chart(
+        fig,
+        use_container_width=True,
+        on_select="rerun",
+        selection_mode="points",
+        key="sanctions_list_chart",
+    )
+
+    # --- Drill-down: entities on the selected list ---
+    selected_list = None
+    if list_event and list_event.selection and list_event.selection.points:
+        # For a horizontal bar chart, the y-axis holds the label (list name)
+        selected_list = list_event.selection.points[0].get("y")
+
+    if selected_list and selected_list in list_to_entities:
+        entities = sorted(list_to_entities[selected_list], key=lambda p: p["input_name"])
+        st.success(f"**{selected_list}** — {len(entities)} {'entity' if len(entities) == 1 else 'entities'}")
+
+        rows = []
+        for p in entities:
+            rows.append({
+                "Entity":              p["input_name"],
+                "Sector":              SECTOR_MAP.get(p["input_name"], "Other"),
+                "Countries":           len(p["countries"]),
+                "Total Sanctions Lists": len(p["sanctions_lists"]),
+                "Network Degree":      f"{p['degree']:,}",
+                "State-Owned":         "✓" if "state_owned" in p["risk_flags"] else "—",
+            })
+
+        st.dataframe(
+            pd.DataFrame(rows).sort_values("Entity"),
+            use_container_width=True,
+            hide_index=True,
+        )
+    else:
+        # Shown when no bar has been clicked yet
+        st.info("👆 Click a bar above to drill into the entities on that list.")
 
     st.markdown("---")
 
-    # --- Per-entity sanctions coverage ---
+    # ---------------------------------------------------------------------------
+    # Chart 2 — Sanctions list coverage per entity (clickable)
+    # ---------------------------------------------------------------------------
     st.subheader("Sanctions List Coverage per Entity")
-    st.caption("How many distinct sanctions lists each entity appears on — higher = more broadly targeted by the international community.")
+    st.caption("How many distinct sanctions lists each entity appears on. Click an entity to see exactly which lists it is on.")
 
     coverage = sanctions_coverage_per_entity(profiles)
-    df = pd.DataFrame(coverage)
+    df_cov = pd.DataFrame(coverage)
 
-    # Bubble chart: x = list count, y = entity name, sized by list_count for visual impact
-    fig = px.bar(
-        df,
+    fig2 = px.bar(
+        df_cov,
         x="list_count",
         y="name",
         orientation="h",
@@ -230,13 +285,40 @@ def render_sanctions(profiles: list[dict]) -> None:
         title="Number of Sanctions Lists per Entity",
         labels={"list_count": "Sanctions Lists", "name": ""},
     )
-    fig.update_layout(
+    fig2.update_layout(
         template=CHART_TEMPLATE,
         height=900,
         yaxis={"categoryorder": "total ascending"},
         margin=dict(l=10, r=10, t=40, b=10),
     )
-    st.plotly_chart(fig, use_container_width=True)
+
+    entity_event = st.plotly_chart(
+        fig2,
+        use_container_width=True,
+        on_select="rerun",
+        selection_mode="points",
+        key="entity_sanctions_chart",
+    )
+
+    # --- Drill-down: lists for the selected entity ---
+    selected_entity = None
+    if entity_event and entity_event.selection and entity_event.selection.points:
+        selected_entity = entity_event.selection.points[0].get("y")
+
+    if selected_entity:
+        # Find the matching profile (y label may be truncated, so use startswith match)
+        match = next(
+            (p for p in fetched if p["input_name"] == selected_entity),
+            None,
+        )
+        if match and match["sanctions_lists"]:
+            st.success(f"**{selected_entity}** — appears on {len(match['sanctions_lists'])} sanctions lists")
+            for sl in sorted(match["sanctions_lists"]):
+                st.markdown(f"- {sl}")
+        elif match:
+            st.info(f"**{selected_entity}** has no sanctions list entries in this dataset.")
+    else:
+        st.info("👆 Click an entity bar above to see its specific sanctions list memberships.")
 
 
 def render_risk(profiles: list[dict]) -> None:

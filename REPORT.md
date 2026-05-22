@@ -15,7 +15,7 @@ I built a four-stage pipeline:
 1. **Resolution** — Entity names from the provided list were resolved to canonical Sayari entity IDs using the resolution endpoint, which ranks candidates by match confidence and returns the best fit.
 2. **Fetching** — For each resolved entity, `entity_summary` was called to retrieve the full risk profile: sanctions status, country footprint, risk flags by severity, sanctions list memberships, and relationship counts.
 3. **Analytics** — A layer of pure functions transforms the cached profiles into macro-level insights: country breakdowns, sanctions list coverage, risk flag frequency, sector classification, network degree rankings, and jurisdiction exposure.
-4. **Presentation** — A Streamlit dashboard with Plotly charts surfaces these insights interactively across five views, deployed to Streamlit Community Cloud for zero-install access.
+4. **Presentation** — A Streamlit dashboard with Plotly charts surfaces these insights interactively across five views, deployed to Streamlit Community Cloud for zero-install access.  Additionally, an interactive AI chat interface for ad-hoc data requests and probing for more nuanced answers that the charts do not show.
 
 All API results are cached locally after the first run. This means the dashboard and tests run entirely offline — important for a client demo where you can't depend on network availability.
 

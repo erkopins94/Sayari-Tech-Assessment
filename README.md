@@ -8,7 +8,7 @@ A Streamlit dashboard that surfaces macro-level intelligence across 50 high-risk
 
 The app resolves a curated list of sanctioned entities against the Sayari knowledge graph, fetches their full risk profiles, and presents the findings in two ways:
 
-### 📊 Analytics Dashboard (`app.py`)
+### 📊 Analytics Dashboard (`Dashboards.py`)
 
 Five interactive tabs for visual exploration:
 
@@ -20,7 +20,7 @@ Five interactive tabs for visual exploration:
 | **Geography** | Choropleth world map (click a country → see which entities are present there); top 20 entities by jurisdictional footprint (click an entity → see every country it operates in) |
 | **Entity Detail** | Sortable full-dataset table |
 
-### 🤖 AI Analyst (`pages/chat.py`)
+### 🤖 AI Analyst (`pages/Chat.py`)
 
 A conversational interface powered by Claude. Ask any natural language question about the dataset — the AI calls the appropriate data tool and synthesises a plain-English answer backed by live data. Example questions:
 

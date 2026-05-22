@@ -129,7 +129,7 @@ docker compose down
 | `ANTHROPIC_API_KEY` | Yes** | Anthropic API key for the AI chat page |
 
 *Only required for live data fetching. The dashboard runs fully offline using the committed cache.
-**Only required for the AI chat page (`pages/chat.py`). The dashboard works without it.
+**Only required for the AI chat page (`pages/Chat.py`). The dashboard works without it.
 
 ---
 
@@ -198,7 +198,7 @@ Entity names (List 1)
         ▼                                                      ▼
     Dashboards.py  ── Streamlit + Plotly ───────────► Dashboard UI (5 tabs)
                                                                │
-  tools.py     ──── LLM-callable data tools ──────────► AI Chat (pages/chat.py)
+  tools.py     ──── LLM-callable data tools ──────────► AI Chat (pages/Chat.py)
   (5 tools)         Claude interprets questions,              │
                     calls tools, returns answers   ──────► Natural language UI
 ```

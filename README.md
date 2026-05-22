@@ -6,7 +6,11 @@ A Streamlit dashboard that surfaces macro-level intelligence across 50 high-risk
 
 ## What It Does
 
-The app resolves a curated list of sanctioned entities against the Sayari knowledge graph, fetches their full risk profiles, and presents the findings as an interactive analytics report across five views:
+The app resolves a curated list of sanctioned entities against the Sayari knowledge graph, fetches their full risk profiles, and presents the findings in two ways:
+
+### 📊 Analytics Dashboard (`app.py`)
+
+Five interactive tabs for visual exploration:
 
 | Tab | What You'll See |
 |---|---|
@@ -15,6 +19,16 @@ The app resolves a curated list of sanctioned entities against the Sayari knowle
 | **Risk Profile** | Risk flag frequency (click a flag → see which entities carry it); aggregate severity distribution |
 | **Geography** | Choropleth world map (click a country → see which entities are present there); top 20 entities by jurisdictional footprint (click an entity → see every country it operates in) |
 | **Entity Detail** | Sortable full-dataset table |
+
+### 🤖 AI Analyst (`pages/chat.py`)
+
+A conversational interface powered by Claude. Ask any natural language question about the dataset — the AI calls the appropriate data tool and synthesises a plain-English answer backed by live data. Example questions:
+
+- *"Which defense firms operate in China and have more than 10 sanctions lists?"*
+- *"Compare Rosneft and Gazprom across all risk dimensions"*
+- *"Which entity has the widest geographic footprint?"*
+
+The AI chat and dashboard share the same data cache and are intentionally separate — the dashboard for visual overviews, the chat for ad-hoc deep-dive queries.
 
 Key findings from the dataset: **93.9% of entities are sanctioned**, spanning **53 countries** with **428,000+ known network connections** across **21 distinct sanctions lists**.
 
@@ -27,8 +41,9 @@ Key findings from the dataset: **93.9% of entities are sanctioned**, spanning **
 | Python | 3.12+ |
 | Docker + Docker Compose | any recent version (optional) |
 | Sayari API credentials | `CLIENT_ID` and `CLIENT_SECRET` |
+| Anthropic API key | `ANTHROPIC_API_KEY` (AI chat only) |
 
-> **Note:** The data cache (`data/resolved.json`, `data/profiles.json`) is committed to this repository. You can run the dashboard and tests entirely without API credentials — credentials are only needed if you want to re-fetch live data.
+> **Note:** The data cache (`data/resolved.json`, `data/profiles.json`) is committed to this repository. You can run the dashboard and tests entirely without API credentials — credentials are only needed if you want to re-fetch live data. The Anthropic API key is only required for the AI chat page.
 
 ---
 
@@ -70,7 +85,10 @@ Open `.env` and fill in your credentials:
 ```
 CLIENT_ID=your_client_id_here
 CLIENT_SECRET=your_client_secret_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
 ```
+
+`ANTHROPIC_API_KEY` is only needed for the AI chat page — the dashboard works without it.
 
 **5. Run the app**
 
@@ -108,8 +126,10 @@ docker compose down
 |---|---|---|
 | `CLIENT_ID` | Yes* | Sayari API client ID |
 | `CLIENT_SECRET` | Yes* | Sayari API client secret |
+| `ANTHROPIC_API_KEY` | Yes** | Anthropic API key for the AI chat page |
 
-*Only required for live data fetching. The app runs fully offline using the committed cache.
+*Only required for live data fetching. The dashboard runs fully offline using the committed cache.
+**Only required for the AI chat page (`pages/chat.py`). The dashboard works without it.
 
 ---
 
@@ -139,11 +159,14 @@ tests/test_analytics.py::TestSanctionsCoveragePerEntity      5 tests
 
 ```
 .
-├── app.py                  # Streamlit dashboard (presentation layer)
+├── app.py                  # Streamlit dashboard (5 interactive tabs)
 ├── analytics.py            # Pure analytics functions over the profiles cache
+├── tools.py                # LLM-callable data-access functions (5 tools)
 ├── fetcher.py              # Fetches full entity profiles from the Sayari API
 ├── resolver.py             # Resolves entity names to Sayari entity IDs
 ├── client.py               # Authenticated Sayari SDK client factory
+├── pages/
+│   └── chat.py             # AI chat interface (Claude + tool use)
 ├── data/
 │   ├── resolved.json       # Cached name → entity ID mappings (49/50 resolved)
 │   └── profiles.json       # Cached full entity profiles (49/50 fetched)
@@ -171,9 +194,13 @@ Entity names (List 1)
         │
         ▼
   analytics.py ──── Pure functions over cache ─────► Computed insights
-        │
-        ▼
-    app.py     ──── Streamlit + Plotly ──────────────► Dashboard UI
+        │                                                      │
+        ▼                                                      ▼
+    app.py     ──── Streamlit + Plotly ──────────────► Dashboard UI (5 tabs)
+                                                               │
+  tools.py     ──── LLM-callable data tools ──────────► AI Chat (pages/chat.py)
+  (5 tools)         Claude interprets questions,              │
+                    calls tools, returns answers   ──────► Natural language UI
 ```
 
 **Data pipeline runs once.** On every subsequent launch the app loads directly from the local cache — no API calls are made during normal use. Delete either cache file to trigger a fresh fetch.
@@ -222,9 +249,10 @@ One entity (`Belnauchcompositit`) returned no match in the Sayari database and i
 |---|---|
 | `sayari` | Official Sayari Python SDK |
 | `python-dotenv` | Loads credentials from `.env` |
-| `streamlit` | Dashboard framework |
+| `streamlit` | Dashboard and chat interface framework |
 | `plotly` | Interactive charts |
 | `pandas` | Dataframe rendering in the Entity Detail tab |
+| `anthropic` | Claude API client for the AI chat page |
 
 ---
 

@@ -93,7 +93,7 @@ ANTHROPIC_API_KEY=your_anthropic_api_key_here
 **5. Run the app**
 
 ```bash
-streamlit run app.py
+streamlit run Dashboards.py
 ```
 
 Open [http://localhost:8501](http://localhost:8501) in your browser.
@@ -159,14 +159,14 @@ tests/test_analytics.py::TestSanctionsCoveragePerEntity      5 tests
 
 ```
 .
-├── app.py                  # Streamlit dashboard (5 interactive tabs)
+├── Dashboards.py           # Streamlit dashboard (5 interactive tabs)
 ├── analytics.py            # Pure analytics functions over the profiles cache
 ├── tools.py                # LLM-callable data-access functions (5 tools)
 ├── fetcher.py              # Fetches full entity profiles from the Sayari API
 ├── resolver.py             # Resolves entity names to Sayari entity IDs
 ├── client.py               # Authenticated Sayari SDK client factory
 ├── pages/
-│   └── chat.py             # AI chat interface (Claude + tool use)
+│   └── Chat.py             # AI chat interface (Claude + tool use)
 ├── data/
 │   ├── resolved.json       # Cached name → entity ID mappings (49/50 resolved)
 │   └── profiles.json       # Cached full entity profiles (49/50 fetched)
@@ -196,7 +196,7 @@ Entity names (List 1)
   analytics.py ──── Pure functions over cache ─────► Computed insights
         │                                                      │
         ▼                                                      ▼
-    app.py     ──── Streamlit + Plotly ──────────────► Dashboard UI (5 tabs)
+    Dashboards.py  ── Streamlit + Plotly ───────────► Dashboard UI (5 tabs)
                                                                │
   tools.py     ──── LLM-callable data tools ──────────► AI Chat (pages/chat.py)
   (5 tools)         Claude interprets questions,              │
@@ -220,7 +220,7 @@ python resolver.py
 python fetcher.py
 
 # Or let the app fetch on first load (requires credentials in .env)
-streamlit run app.py
+streamlit run Dashboards.py
 ```
 
 ---

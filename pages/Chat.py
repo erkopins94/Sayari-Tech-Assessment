@@ -16,10 +16,18 @@ import json
 import os
 
 import anthropic
+import plotly.graph_objects as go
 import streamlit as st
 from dotenv import load_dotenv
 
 from tools import (
+    ToolResult,
+    chart_country_map,
+    chart_risk_flags,
+    chart_risk_severity,
+    chart_sanctions_lists,
+    chart_sector_breakdown,
+    chart_top_entities,
     compare_entities,
     filter_entities,
     get_entity,
@@ -207,6 +215,100 @@ _TOOL_DEFINITIONS = [
             "properties": {},
         },
     },
+    # --- Chart tools ---
+    # These generate Plotly charts rendered inline in the chat UI.
+    # Use them whenever the user asks to "show", "plot", "visualise", or "chart" data.
+    {
+        "name": "chart_sector_breakdown",
+        "description": (
+            "Generate a donut chart showing the entity count per sector. "
+            "Use for any request to visualise or show the sector distribution of the dataset."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {},
+        },
+    },
+    {
+        "name": "chart_top_entities",
+        "description": (
+            "Generate a horizontal bar chart ranking the top N entities by a chosen metric. "
+            "Use for requests like 'plot the top 10 by network connections', "
+            "'show me a chart of defense firms ranked by sanctions lists', or "
+            "'visualise which entities have the widest geographic footprint'."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "metric": {
+                    "type": "string",
+                    "description": (
+                        "Metric to rank by. Same aliases as rank_entities: "
+                        "'degree' / 'connections', 'sanctions lists' / 'lists', "
+                        "'countries' / 'geographic footprint', "
+                        "'critical flags', 'high flags', 'elevated flags'."
+                    ),
+                },
+                "n": {
+                    "type": "integer",
+                    "description": "Number of entities to show. Defaults to 10.",
+                },
+                "sector": {
+                    "type": "string",
+                    "description": "Optional sector filter applied before ranking.",
+                },
+            },
+            "required": ["metric"],
+        },
+    },
+    {
+        "name": "chart_sanctions_lists",
+        "description": (
+            "Generate a horizontal bar chart showing how many entities appear on each "
+            "sanctions list. Use for requests to visualise sanctions list coverage or "
+            "compare the reach of different sanctions programmes."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {},
+        },
+    },
+    {
+        "name": "chart_risk_flags",
+        "description": (
+            "Generate a horizontal bar chart of risk flag frequency across all entities. "
+            "Use for requests to visualise or chart risk flags, risk indicators, or "
+            "how common each type of risk is in the dataset."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {},
+        },
+    },
+    {
+        "name": "chart_risk_severity",
+        "description": (
+            "Generate a vertical bar chart of aggregate risk flag counts by severity level "
+            "(critical, high, elevated, relevant). Use for requests to visualise the overall "
+            "risk severity distribution or compare risk levels across the dataset."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {},
+        },
+    },
+    {
+        "name": "chart_country_map",
+        "description": (
+            "Generate a choropleth world map showing how many entities are present in each "
+            "country. Use for requests to visualise geographic footprint, map entity presence "
+            "by country, or show where in the world these entities operate."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {},
+        },
+    },
 ]
 
 # ---------------------------------------------------------------------------
@@ -221,12 +323,23 @@ _SYSTEM_PROMPT = """You are an AI analyst with access to a curated dataset of 49
 
 Always call a tool to retrieve facts before answering. Do not rely on training knowledge for claims about these specific entities — the tools are the authoritative source.
 
-Tool selection guide:
+Tool selection guide — data tools (return text answers):
 - get_entity        → any question about a specific named entity
 - filter_entities   → filtering or searching by sector, country, sanctions list, risk flag, or status
 - rank_entities     → ranking, top N, or superlative questions ("most", "highest", "fewest")
 - compare_entities  → explicit side-by-side comparison of two or more named entities
 - get_summary_stats → macro or aggregate questions about the full dataset
+
+Tool selection guide — chart tools (render interactive charts in the UI):
+Use these whenever the user asks to "show", "plot", "visualise", "chart", or "draw" something.
+- chart_sector_breakdown → sector distribution donut chart
+- chart_top_entities     → horizontal bar chart ranking entities by any metric (requires: metric)
+- chart_sanctions_lists  → bar chart of entities per sanctions list
+- chart_risk_flags       → bar chart of risk flag frequency
+- chart_risk_severity    → bar chart of aggregate risk flags by severity level
+- chart_country_map      → choropleth world map of entity presence by country
+
+When you call a chart tool, the chart is rendered directly in the chat interface. In your text response, briefly describe what the chart shows and highlight the key insight — do not reproduce the data in table form, the chart speaks for itself.
 
 Style guidelines:
 - Be concise, direct, and analytical — this is a compliance intelligence tool
@@ -262,25 +375,64 @@ def _get_anthropic_client() -> anthropic.Anthropic:
 # the function signatures in tools.py.
 # ---------------------------------------------------------------------------
 
-def _dispatch_tool(name: str, inputs: dict, profiles: list[dict]) -> dict:
+def _dispatch_tool(name: str, inputs: dict, profiles: list[dict]) -> ToolResult:
     """
-    Call the appropriate tool function by name and return its result.
+    Call the appropriate tool function by name and return a ToolResult.
 
-    Returns an error dict (rather than raising) for unknown tool names so the
-    LLM can relay the issue gracefully without crashing the app.
+    Every return path is wrapped in ToolResult so the caller always receives
+    the same type and can unconditionally use .api_payload for the Anthropic
+    API and .figure for the Streamlit UI.
+
+    Data tools  → ToolResult(api_payload=<result dict>, figure=None)
+    Chart tools → ToolResult(api_payload={"status": "chart_rendered", ...},
+                             figure=<go.Figure>)
+                  OR ToolResult(api_payload=<error dict>, figure=None) on failure
+    Unknown     → ToolResult(api_payload=<error dict>, figure=None)
     """
+    # --- Data tools (return plain dicts for the LLM) ---
     if name == "get_entity":
-        return get_entity(inputs["name"], profiles)
+        return ToolResult(api_payload=get_entity(inputs["name"], profiles))
     if name == "filter_entities":
-        return filter_entities(profiles, **inputs)
+        return ToolResult(api_payload=filter_entities(profiles, **inputs))
     if name == "rank_entities":
-        return rank_entities(profiles, **inputs)
+        return ToolResult(api_payload=rank_entities(profiles, **inputs))
     if name == "compare_entities":
-        return compare_entities(inputs["names"], profiles)
+        return ToolResult(api_payload=compare_entities(inputs["names"], profiles))
     if name == "get_summary_stats":
-        return get_summary_stats(profiles)
+        return ToolResult(api_payload=get_summary_stats(profiles))
 
-    return {"error": True, "message": f"Unknown tool '{name}'."}
+    # --- Chart tools (return go.Figure; send Claude a lightweight confirmation) ---
+    chart_fn_map = {
+        "chart_sector_breakdown": lambda: chart_sector_breakdown(profiles),
+        "chart_top_entities":     lambda: chart_top_entities(
+            profiles,
+            metric=inputs["metric"],
+            n=inputs.get("n", 10),
+            sector=inputs.get("sector"),
+        ),
+        "chart_sanctions_lists":  lambda: chart_sanctions_lists(profiles),
+        "chart_risk_flags":       lambda: chart_risk_flags(profiles),
+        "chart_risk_severity":    lambda: chart_risk_severity(profiles),
+        "chart_country_map":      lambda: chart_country_map(profiles),
+    }
+
+    if name in chart_fn_map:
+        result = chart_fn_map[name]()
+        if isinstance(result, go.Figure):
+            # Extract the title so Claude can reference it in its response
+            chart_title = (
+                result.layout.title.text
+                if result.layout.title and result.layout.title.text
+                else name
+            )
+            return ToolResult(
+                api_payload={"status": "chart_rendered", "chart_title": chart_title},
+                figure=result,
+            )
+        # Chart function returned an error dict
+        return ToolResult(api_payload=result)
+
+    return ToolResult(api_payload={"error": True, "message": f"Unknown tool '{name}'."})
 
 
 # ---------------------------------------------------------------------------
@@ -299,7 +451,7 @@ def _dispatch_tool(name: str, inputs: dict, profiles: list[dict]) -> dict:
 def _call_claude(
     api_messages: list[dict],
     profiles: list[dict],
-) -> tuple[str, list[str]]:
+) -> tuple[str, list[str], list[go.Figure]]:
     """
     Send the conversation to Claude and process tool calls until done.
 
@@ -310,11 +462,14 @@ def _call_claude(
         profiles:     Entity profiles passed through to the tool dispatcher.
 
     Returns:
-        (response_text, tools_used) — the final text answer and a list of
-        tool names called this turn, shown in the UI as attribution.
+        (response_text, tools_used, figures) — the final text answer, a list
+        of tool names called this turn (shown in the UI as attribution), and a
+        list of Plotly Figure objects collected from chart tools (rendered
+        inline by the Streamlit UI after the text response).
     """
     client = _get_anthropic_client()
     tools_used: list[str] = []
+    figures: list[go.Figure] = []   # figures collected from chart tools this turn
 
     while True:
         response = client.messages.create(
@@ -331,27 +486,40 @@ def _call_claude(
                 (block.text for block in response.content if block.type == "text"),
                 "No response generated.",
             )
-            return text, tools_used
+            return text, tools_used, figures
 
         # Claude wants to call one or more tools — run them and loop back
         if response.stop_reason == "tool_use":
             # Append Claude's assistant turn (contains the tool_use blocks)
             api_messages.append({"role": "assistant", "content": response.content})
 
-            # Execute each tool and collect results
+            # Execute each tool, collect API payloads and any chart figures
             tool_results = []
             for block in response.content:
                 if block.type == "tool_use":
                     tools_used.append(block.name)
-                    result = _dispatch_tool(block.name, block.input, profiles)
+                    tool_result = _dispatch_tool(block.name, block.input, profiles)
+                    # Collect the figure for UI rendering (None for data tools)
+                    if tool_result.figure is not None:
+                        figures.append(tool_result.figure)
+                    # Only the JSON-serialisable api_payload goes to the Anthropic API
                     tool_results.append({
                         "type":        "tool_result",
                         "tool_use_id": block.id,
-                        "content":     json.dumps(result),
+                        "content":     json.dumps(tool_result.api_payload),
                     })
 
             # Append all results as a single user turn and loop for final answer
             api_messages.append({"role": "user", "content": tool_results})
+
+        else:
+            # Unexpected stop reason (e.g. "max_tokens") — exit the loop rather
+            # than spinning forever. Surface whatever partial text Claude produced.
+            text = next(
+                (block.text for block in response.content if block.type == "text"),
+                f"Response stopped unexpectedly (reason: {response.stop_reason}).",
+            )
+            return text, tools_used, figures
 
 
 # ---------------------------------------------------------------------------
@@ -397,6 +565,9 @@ def main() -> None:
     for msg in st.session_state.display_messages:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
+            # Render any charts that were generated with this response
+            for fig in msg.get("figures", []):
+                st.plotly_chart(fig, use_container_width=True)
             # Show which tools backed this answer so the user knows it's data-driven
             if msg["role"] == "assistant" and msg.get("tools_used"):
                 labels = ", ".join(f"`{t}`" for t in msg["tools_used"])
@@ -426,22 +597,27 @@ def main() -> None:
         st.session_state.display_messages.append({"role": "user", "content": prompt})
         st.session_state.api_messages.append({"role": "user", "content": prompt})
 
-        # Call Claude, display the response, show tool attribution
+        # Call Claude, display the response, render any charts, show tool attribution
         with st.chat_message("assistant"):
             with st.spinner("Querying dataset…"):
-                response_text, tools_used = _call_claude(
+                response_text, tools_used, figures = _call_claude(
                     st.session_state.api_messages, profiles
                 )
             st.markdown(response_text)
+            # Render Plotly charts immediately below the text response
+            for fig in figures:
+                st.plotly_chart(fig, use_container_width=True)
             if tools_used:
                 labels = ", ".join(f"`{t}`" for t in tools_used)
                 st.caption(f"Tools used: {labels}")
 
-        # Store the assistant response for display history
+        # Store the assistant response for display history (figures included so
+        # they re-render correctly when the chat history is replayed on rerun)
         st.session_state.display_messages.append({
             "role":       "assistant",
             "content":    response_text,
             "tools_used": tools_used,
+            "figures":    figures,
         })
         # Append text-only to API history — the tool_use/tool_result blocks
         # were already appended inside _call_claude during the tool loop

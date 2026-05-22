@@ -13,18 +13,51 @@ Design principles:
     rather than raising exceptions, so the LLM can relay the issue naturally
   - Profiles are passed in: tools do not load data themselves, keeping them
     stateless, testable, and consistent with analytics.py's design
+
+Chart tools return go.Figure objects — these are never serialised to JSON and
+sent to the Anthropic API. Instead _dispatch_tool wraps every return value in a
+ToolResult dataclass that separates the API payload (what Claude sees) from the
+optional figure (what the Streamlit UI renders). This keeps the serialisation
+boundary explicit and in one place.
 """
 
 import difflib
 from collections.abc import Callable
+from dataclasses import dataclass
+
+import plotly.express as px
+import plotly.graph_objects as go
 
 from analytics import (
     RISK_FLAG_LABELS,
     SECTOR_MAP,
+    country_breakdown,
+    risk_flag_frequency,
+    risk_level_distribution,
     sanctions_list_breakdown,
     sector_breakdown,
     summary_stats,
 )
+
+
+# ---------------------------------------------------------------------------
+# ToolResult — return type for _dispatch_tool
+#
+# Separates what Claude sees (api_payload, always JSON-serialisable) from what
+# the Streamlit UI renders (figure, a Plotly Figure or None).
+#
+# For data tools:  api_payload = the full result dict, figure = None
+# For chart tools: api_payload = lightweight confirmation dict,
+#                  figure      = the go.Figure to render in the chat
+# For errors:      api_payload = {"error": True, "message": "..."},
+#                  figure      = None
+# ---------------------------------------------------------------------------
+
+@dataclass
+class ToolResult:
+    """Wrapper returned by _dispatch_tool for every tool call."""
+    api_payload: dict                    # sent to Anthropic API as tool_result content
+    figure:      go.Figure | None = None # rendered by Streamlit UI; never sent to API
 
 
 # ---------------------------------------------------------------------------
@@ -697,3 +730,341 @@ def get_summary_stats(profiles: list[dict]) -> dict:
         "top_entity_degree":       top_entity["degree"] if top_entity else 0,
         "sector_breakdown":        sectors,
     }
+
+
+# ===========================================================================
+# Chart tools — Phase 2 of the AI feature
+#
+# These functions return Plotly Figure objects for rendering directly in the
+# chat UI. They differ from the data tools above in two key ways:
+#
+#   1. Return type: go.Figure (not dict) on success, dict on error
+#   2. They are never serialised and sent to the Anthropic API — instead the
+#      dispatcher sends Claude a lightweight confirmation dict, and the figure
+#      is collected separately and rendered by the Streamlit UI.
+#
+# Styling constants are defined here rather than imported from app.py to keep
+# tools.py self-contained (app.py is a Streamlit entry point, not a library).
+# ===========================================================================
+
+# Shared chart styling — mirrors app.py for visual consistency
+_CHART_TEMPLATE = "plotly_white"
+
+# Severity colours follow standard risk-traffic-light conventions
+_RISK_COLORS: dict[str, str] = {
+    "critical": "#C0392B",
+    "high":     "#E67E22",
+    "elevated": "#F1C40F",
+    "relevant": "#3498DB",
+}
+
+# Qualitative palette for sector and multi-category charts
+_SECTOR_PALETTE = px.colors.qualitative.Safe
+
+
+# ---------------------------------------------------------------------------
+# Chart Tool 1 — chart_sector_breakdown
+# ---------------------------------------------------------------------------
+
+def chart_sector_breakdown(profiles: list[dict]) -> go.Figure | dict:
+    """
+    Return a donut chart showing the entity count for each sector.
+
+    Reuses sector_breakdown() from analytics.py for the underlying counts —
+    no data logic is duplicated here, this function is purely presentational.
+
+    Args:
+        profiles: Full profiles list loaded from the cache.
+
+    Returns:
+        A Plotly Figure on success, or {"error": True, "message": "..."} if
+        there is no data to plot.
+
+    Example questions this chart covers:
+        "Show me a breakdown of entities by sector"
+        "Visualise the sector distribution"
+        "What does the sector split look like?"
+    """
+    sectors = sector_breakdown(profiles)
+
+    if not sectors:
+        return {"error": True, "message": "No sector data available to chart."}
+
+    fig = px.pie(
+        names=list(sectors.keys()),
+        values=list(sectors.values()),
+        title="Entity Breakdown by Sector",
+        hole=0.45,                          # donut shape — easier to read than a solid pie
+        color_discrete_sequence=_SECTOR_PALETTE,
+    )
+    fig.update_traces(textposition="inside", textinfo="percent+label")
+    fig.update_layout(
+        template=_CHART_TEMPLATE,
+        showlegend=False,
+        margin=dict(l=10, r=10, t=40, b=10),
+    )
+    return fig
+
+
+# ---------------------------------------------------------------------------
+# Chart Tool 2 — chart_top_entities
+# ---------------------------------------------------------------------------
+
+def chart_top_entities(
+    profiles: list[dict],
+    metric: str,
+    n: int = 10,
+    sector: str | None = None,
+) -> go.Figure | dict:
+    """
+    Return a horizontal bar chart of the top N entities ranked by a metric.
+
+    Delegates entirely to rank_entities() for data retrieval and metric
+    resolution — no ranking logic lives here. The chart is built from
+    whatever rank_entities() returns, so all metric aliases and sector
+    filters work transparently.
+
+    Args:
+        profiles: Full profiles list loaded from the cache.
+        metric:   Same aliases as rank_entities() — "degree", "connections",
+                  "sanctions lists", "countries", "critical flags", etc.
+        n:        How many entities to show (default 10).
+        sector:   Optional sector filter applied before ranking.
+
+    Returns:
+        A Plotly Figure on success, or {"error": True, "message": "..."} if
+        the metric is unrecognised or the filtered dataset is empty.
+
+    Example questions this chart covers:
+        "Plot the top 10 entities by network connections"
+        "Show me a chart of banking firms ranked by sanctions lists"
+        "Visualise which entities have the widest geographic footprint"
+    """
+    # Delegate to the data tool — inherits all metric resolution and error handling
+    result = rank_entities(profiles, metric=metric, n=n, sector=sector)
+
+    if result.get("error"):
+        return result  # pass the error dict straight through
+
+    if not result["ranking"]:
+        return {"error": True, "message": "No entities matched the given filters."}
+
+    names  = [row["name"]  for row in result["ranking"]]
+    values = [row["value"] for row in result["ranking"]]
+    label  = result["metric"]   # human-readable metric name from rank_entities
+
+    # Sort ascending so the highest bar sits at the top of the chart
+    pairs = sorted(zip(values, names))
+    values, names = zip(*pairs)
+
+    fig = go.Figure(go.Bar(
+        x=values,
+        y=list(names),
+        orientation="h",
+        marker_color="#2E86AB",
+        hovertemplate="%{y}: %{x:,}<extra></extra>",
+    ))
+    title = f"Top {len(result['ranking'])} Entities by {label}"
+    if sector:
+        title += f" — {result['sector']} sector"
+
+    fig.update_layout(
+        title=title,
+        template=_CHART_TEMPLATE,
+        xaxis_title=label,
+        yaxis_title=None,
+        height=max(300, len(names) * 35),   # scale height to number of bars
+        margin=dict(l=10, r=10, t=40, b=10),
+    )
+    return fig
+
+
+# ---------------------------------------------------------------------------
+# Chart Tool 3 — chart_sanctions_lists
+# ---------------------------------------------------------------------------
+
+def chart_sanctions_lists(profiles: list[dict]) -> go.Figure | dict:
+    """
+    Return a horizontal bar chart of how many entities appear on each
+    sanctions list, sorted by entity count descending.
+
+    Args:
+        profiles: Full profiles list loaded from the cache.
+
+    Returns:
+        A Plotly Figure on success, or {"error": True, "message": "..."}.
+
+    Example questions this chart covers:
+        "Show me a chart of sanctions list coverage"
+        "Visualise which sanctions lists are most widely applied"
+        "Plot entities per sanctions list"
+    """
+    sl_data = sanctions_list_breakdown(profiles)
+
+    if not sl_data:
+        return {"error": True, "message": "No sanctions list data available to chart."}
+
+    # Sort ascending so the most-used list sits at the top
+    pairs  = sorted(sl_data.items(), key=lambda x: x[1])
+    labels = [p[0] for p in pairs]
+    values = [p[1] for p in pairs]
+
+    fig = go.Figure(go.Bar(
+        x=values,
+        y=labels,
+        orientation="h",
+        marker_color="#C0392B",             # red — consistent with dashboard Sanctions tab
+        hovertemplate="%{y}: %{x} entities<extra></extra>",
+    ))
+    fig.update_layout(
+        title="Entities per Sanctions List",
+        template=_CHART_TEMPLATE,
+        xaxis_title="Number of Entities",
+        yaxis_title=None,
+        height=max(400, len(labels) * 28),
+        margin=dict(l=10, r=10, t=40, b=10),
+    )
+    return fig
+
+
+# ---------------------------------------------------------------------------
+# Chart Tool 4 — chart_risk_flags
+# ---------------------------------------------------------------------------
+
+def chart_risk_flags(profiles: list[dict]) -> go.Figure | dict:
+    """
+    Return a horizontal bar chart of risk flag frequency across all entities.
+
+    Uses RISK_FLAG_LABELS-translated labels (the readable names, not raw API
+    keys) so the chart is immediately legible without a legend explanation.
+
+    Args:
+        profiles: Full profiles list loaded from the cache.
+
+    Returns:
+        A Plotly Figure on success, or {"error": True, "message": "..."}.
+
+    Example questions this chart covers:
+        "Show me a chart of risk flags"
+        "Visualise how common each risk flag is"
+        "Plot risk flag frequency"
+    """
+    flag_data = risk_flag_frequency(profiles)
+
+    if not flag_data:
+        return {"error": True, "message": "No risk flag data available to chart."}
+
+    pairs  = sorted(flag_data.items(), key=lambda x: x[1])
+    labels = [p[0] for p in pairs]
+    values = [p[1] for p in pairs]
+
+    fig = go.Figure(go.Bar(
+        x=values,
+        y=labels,
+        orientation="h",
+        marker_color="#E67E22",             # orange — consistent with dashboard Risk tab
+        hovertemplate="%{y}: %{x} entities<extra></extra>",
+    ))
+    fig.update_layout(
+        title="Risk Flag Frequency Across All Entities",
+        template=_CHART_TEMPLATE,
+        xaxis_title="Number of Entities",
+        yaxis_title=None,
+        height=max(300, len(labels) * 35),
+        margin=dict(l=10, r=10, t=40, b=10),
+    )
+    return fig
+
+
+# ---------------------------------------------------------------------------
+# Chart Tool 5 — chart_risk_severity
+# ---------------------------------------------------------------------------
+
+def chart_risk_severity(profiles: list[dict]) -> go.Figure | dict:
+    """
+    Return a vertical bar chart of aggregate risk flag counts by severity level.
+
+    Bars are coloured by severity using standard risk-traffic-light conventions
+    (critical=red, high=orange, elevated=yellow, relevant=blue) so the chart
+    is readable at a glance without needing to read the axis labels.
+
+    Args:
+        profiles: Full profiles list loaded from the cache.
+
+    Returns:
+        A Plotly Figure on success, or {"error": True, "message": "..."}.
+
+    Example questions this chart covers:
+        "Show me the risk severity distribution"
+        "Visualise critical vs high vs elevated flags"
+        "Chart the aggregate risk levels across the dataset"
+    """
+    levels = risk_level_distribution(profiles)
+
+    if not levels:
+        return {"error": True, "message": "No risk level data available to chart."}
+
+    # Use _RISK_COLORS for each bar; fall back to grey for any unexpected level
+    colors = [_RISK_COLORS.get(level, "#95A5A6") for level in levels.keys()]
+
+    fig = go.Figure(go.Bar(
+        x=list(levels.keys()),
+        y=list(levels.values()),
+        marker_color=colors,
+        hovertemplate="%{x}: %{y} flags<extra></extra>",
+    ))
+    fig.update_layout(
+        title="Aggregate Risk Flags by Severity Level",
+        template=_CHART_TEMPLATE,
+        xaxis_title="Severity Level",
+        yaxis_title="Total Flag Count",
+        height=400,
+        margin=dict(l=10, r=10, t=40, b=10),
+    )
+    return fig
+
+
+# ---------------------------------------------------------------------------
+# Chart Tool 6 — chart_country_map
+# ---------------------------------------------------------------------------
+
+def chart_country_map(profiles: list[dict]) -> go.Figure | dict:
+    """
+    Return a choropleth world map showing how many entities are present in
+    each country, coloured by entity count on a red scale.
+
+    Args:
+        profiles: Full profiles list loaded from the cache.
+
+    Returns:
+        A Plotly Figure on success, or {"error": True, "message": "..."}.
+
+    Example questions this chart covers:
+        "Show me a map of where these entities operate"
+        "Visualise the geographic footprint of the dataset"
+        "Plot entity presence by country"
+    """
+    country_data = country_breakdown(profiles)
+
+    if not country_data:
+        return {"error": True, "message": "No country data available to chart."}
+
+    # Build a flat list of (iso3, count) pairs for Plotly
+    codes   = list(country_data.keys())
+    counts  = list(country_data.values())
+
+    fig = px.choropleth(
+        locations=codes,
+        locationmode="ISO-3",
+        color=counts,
+        color_continuous_scale="Reds",
+        title="Entity Presence by Country",
+        labels={"color": "Entities Present"},
+    )
+    fig.update_layout(
+        template=_CHART_TEMPLATE,
+        height=500,
+        margin=dict(l=0, r=0, t=40, b=0),
+        coloraxis_colorbar=dict(title="Entities"),
+    )
+    return fig

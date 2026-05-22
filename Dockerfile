@@ -25,7 +25,7 @@ EXPOSE 8501
 # --server.address=0.0.0.0 is required inside Docker so the port is
 # reachable from the host machine. Without it Streamlit binds to localhost
 # only, which is not accessible outside the container.
-ENTRYPOINT ["streamlit", "run", "app.py", \
+ENTRYPOINT ["streamlit", "run", "Dashboards.py", \
             "--server.port=8501", \
             "--server.address=0.0.0.0", \
             "--server.headless=true"]

@@ -2,7 +2,7 @@
 
 **Scenario:** Scenario 2 — Analytics Report
 **Dataset:** 50 high-risk / sanctioned entities (List 1)
-**Author:** Eric Hulse
+**Author:** Eric Kopins
 
 ---
 

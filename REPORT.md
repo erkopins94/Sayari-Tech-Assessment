@@ -41,7 +41,7 @@ The data tells a striking story. These 50 entities are not simply names on a lis
 
 - **Entity names.** Three entities required alias corrections to resolve successfully: `PDVSA` (listed as "Venezuelan State-Owned Oil Company (PDVSA)"), `Belarusian Potash Company` (listed as "Belorusskaya Kaliynaya Companya"), and `Belnauchcompositit` which returned no match in Sayari and is represented as an unresolved stub.
 - **Sector classification.** Sayari does not provide SIC or NAICS industry codes, so all 50 entities were manually classified into seven sectors based on publicly known business activities.
-- **`entity_summary` over `get_entity`.** The summary endpoint returns all the risk, country, and relationship metadata needed for macro analytics without paginating through individual relationship records, making it significantly more credit-efficient for a 50-entity batch.
+- **`entity_summary` for profiles, `get_entity` for relationships.** Profile fetching uses `entity_summary`, which returns all risk, country, and relationship metadata needed for macro analytics without paginating through individual relationship records — significantly more credit-efficient for a 50-entity batch. A separate one-time fetch via `rel_fetcher.py` calls `get_entity` with `relationships_limit=50` to cache the top 50 network connections per entity, enabling the AI chat to answer counterparty and network questions against real relationship records rather than aggregate counts.
 - **Direct vs. network risk flags.** The analytics layer separates direct risk flags (an entity being sanctioned) from network-level flags (being owned by a sanctioned entity). Both are captured, but they are reported distinctly to avoid conflating an entity's own exposure with its neighborhood's.
 
 ---
@@ -61,12 +61,3 @@ The central "Aha moment" this report is designed to create is this: **a complian
 That shift — from a flat list to a risk graph — is what Sayari uniquely enables. A client cannot get this from OFAC's SDN list alone, or from a single-jurisdiction registry. The value is in the aggregation: Sayari has already done the work of linking corporate registries, sanctions lists, trade data, and ownership networks across hundreds of jurisdictions into a single queryable graph.
 
 For a forward-deployed use case, this PoC demonstrates that Sayari can power a compliance dashboard in hours, not weeks — with data that is immediately richer and more actionable than anything a client could assemble themselves.
-
----
-
-## Given More Time
-
-- **Relationship network visualisation.** A force-directed graph (using `pyvis` or `networkx`) showing ownership links between entities would powerfully illustrate how interconnected the dataset is — some entities share shareholders or officers, creating hidden exposure pathways.
-- **Temporal risk analysis.** Sayari's data includes sanctions dates. Plotting when entities were added to lists over time would reveal the escalation arc of international enforcement.
-- **Counterparty exposure.** Using `traversal()` or `shortest_path()`, it would be possible to show a client which of *their own* known counterparties are one or two hops away from these sanctioned entities — turning the report from an abstract intelligence brief into a direct business risk assessment.
-- **Live search.** Adding a search bar to the dashboard that resolves arbitrary entity names in real-time would let a client use the app interactively during a meeting, rather than just browsing a pre-built report.

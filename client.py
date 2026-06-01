@@ -1,4 +1,16 @@
+"""
+client.py — Authenticated Sayari SDK client factory.
+
+Reads CLIENT_ID and CLIENT_SECRET from the .env file and returns a
+ready-to-use Sayari client instance. Imported by resolver.py, fetcher.py,
+and rel_fetcher.py whenever a live API call is needed.
+
+All three pipeline scripts use load_or_build_* patterns so this module is
+only invoked on a cache miss — never during normal dashboard use.
+"""
+
 import os
+
 from dotenv import load_dotenv
 from sayari.client import Sayari
 

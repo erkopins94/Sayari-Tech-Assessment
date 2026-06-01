@@ -20,13 +20,15 @@ Five interactive tabs for visual exploration:
 | **Geography** | Choropleth world map (click a country → see which entities are present there); top 20 entities by jurisdictional footprint (click an entity → see every country it operates in) |
 | **Entity Detail** | Sortable full-dataset table |
 
-### 🤖 AI Analyst (`pages/chat.py`)
+### 🤖 AI Analyst (`pages/Chat.py`)
 
 A conversational interface powered by Claude. Ask any natural language question about the dataset — the AI calls the appropriate data tool and synthesises a plain-English answer backed by live data. Example questions:
 
 - *"Which defense firms operate in China and have more than 10 sanctions lists?"*
 - *"Compare Rosneft and Gazprom across all risk dimensions"*
 - *"Which entity has the widest geographic footprint?"*
+- *"Who are Rosneft's top network connections?"*
+- *"Which of Rostec's counterparties are sanctioned?"*
 
 The AI chat and dashboard share the same data cache and are intentionally separate — the dashboard for visual overviews, the chat for ad-hoc deep-dive queries.
 
@@ -43,7 +45,7 @@ Key findings from the dataset: **93.9% of entities are sanctioned**, spanning **
 | Sayari API credentials | `CLIENT_ID` and `CLIENT_SECRET` |
 | Anthropic API key | `ANTHROPIC_API_KEY` (AI chat only) |
 
-> **Note:** The data cache (`data/resolved.json`, `data/profiles.json`) is committed to this repository. You can run the dashboard and tests entirely without API credentials — credentials are only needed if you want to re-fetch live data. The Anthropic API key is only required for the AI chat page.
+> **Note:** The data cache (`data/resolved.json`, `data/profiles.json`, `data/relationships.json`) is committed to this repository. You can run the dashboard and tests entirely without API credentials — credentials are only needed if you want to re-fetch live data. The Anthropic API key is only required for the AI chat page.
 
 ---
 
@@ -129,7 +131,7 @@ docker compose down
 | `ANTHROPIC_API_KEY` | Yes** | Anthropic API key for the AI chat page |
 
 *Only required for live data fetching. The dashboard runs fully offline using the committed cache.
-**Only required for the AI chat page (`pages/chat.py`). The dashboard works without it.
+**Only required for the AI chat page (`pages/Chat.py`). The dashboard works without it.
 
 ---
 
@@ -161,15 +163,17 @@ tests/test_analytics.py::TestSanctionsCoveragePerEntity      5 tests
 .
 ├── Dashboards.py           # Streamlit dashboard (5 interactive tabs)
 ├── analytics.py            # Pure analytics functions over the profiles cache
-├── tools.py                # LLM-callable data-access functions (5 tools)
+├── tools.py                # LLM-callable data-access functions (6 tools)
 ├── fetcher.py              # Fetches full entity profiles from the Sayari API
+├── rel_fetcher.py          # Fetches top-50 network connections per entity
 ├── resolver.py             # Resolves entity names to Sayari entity IDs
 ├── client.py               # Authenticated Sayari SDK client factory
 ├── pages/
 │   └── Chat.py             # AI chat interface (Claude + tool use)
 ├── data/
 │   ├── resolved.json       # Cached name → entity ID mappings (49/50 resolved)
-│   └── profiles.json       # Cached full entity profiles (49/50 fetched)
+│   ├── profiles.json       # Cached full entity profiles (49/50 fetched)
+│   └── relationships.json  # Cached top-50 network connections per entity
 ├── tests/
 │   └── test_analytics.py   # Unit tests for analytics.py
 ├── Dockerfile
@@ -187,19 +191,22 @@ tests/test_analytics.py::TestSanctionsCoveragePerEntity      5 tests
 Entity names (List 1)
         │
         ▼
-  resolver.py  ──── Sayari resolution endpoint ────► data/resolved.json
+  resolver.py    ──── Sayari resolution endpoint ────► data/resolved.json
         │
         ▼
-  fetcher.py   ──── Sayari entity_summary + risk ──► data/profiles.json
+  fetcher.py     ──── Sayari entity_summary + risk ──► data/profiles.json
         │
         ▼
-  analytics.py ──── Pure functions over cache ─────► Computed insights
+  rel_fetcher.py ──── Sayari get_entity (top 50) ────► data/relationships.json
+        │
+        ▼
+  analytics.py   ──── Pure functions over cache ─────► Computed insights
         │                                                      │
         ▼                                                      ▼
     Dashboards.py  ── Streamlit + Plotly ───────────► Dashboard UI (5 tabs)
                                                                │
-  tools.py     ──── LLM-callable data tools ──────────► AI Chat (pages/chat.py)
-  (5 tools)         Claude interprets questions,              │
+  tools.py     ──── LLM-callable data tools ──────────► AI Chat (pages/Chat.py)
+  (6 tools)         Claude interprets questions,              │
                     calls tools, returns answers   ──────► Natural language UI
 ```
 
@@ -213,13 +220,15 @@ To re-resolve entities from scratch:
 
 ```bash
 # Delete the cache files
-rm data/resolved.json data/profiles.json
+rm data/resolved.json data/profiles.json data/relationships.json
 
 # Re-run the pipeline
 python resolver.py
 python fetcher.py
+python rel_fetcher.py
 
-# Or let the app fetch on first load (requires credentials in .env)
+# Or let the app fetch profiles on first load (requires credentials in .env)
+# Note: relationships must be fetched manually via rel_fetcher.py
 streamlit run Dashboards.py
 ```
 
@@ -253,6 +262,7 @@ One entity (`Belnauchcompositit`) returned no match in the Sayari database and i
 | `plotly` | Interactive charts |
 | `pandas` | Dataframe rendering in the Entity Detail tab |
 | `anthropic` | Claude API client for the AI chat page |
+| `pycountry` | ISO 3166-1 country name resolution for the AI chat filters |
 
 ---
 

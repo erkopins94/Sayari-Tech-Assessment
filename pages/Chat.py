@@ -14,6 +14,7 @@ They share the same profiles cache and tools.py, but serve different use cases:
 
 import json
 import os
+import time
 
 import anthropic
 import plotly.graph_objects as go
@@ -31,6 +32,7 @@ from tools import (
     compare_entities,
     filter_entities,
     get_entity,
+    get_entity_relationships,
     get_summary_stats,
     rank_entities,
 )
@@ -60,6 +62,9 @@ st.set_page_config(
 _PROFILES_CACHE = os.path.join(
     os.path.dirname(__file__), "..", "data", "profiles.json"
 )
+_RELATIONSHIPS_CACHE = os.path.join(
+    os.path.dirname(__file__), "..", "data", "relationships.json"
+)
 
 
 @st.cache_data
@@ -75,6 +80,23 @@ def load_profiles() -> list[dict]:
     return load_or_build_profiles(get_client())
 
 
+@st.cache_data
+def load_relationships() -> dict[str, list[dict]]:
+    """
+    Load the pre-fetched relationship cache from disk.
+
+    Returns an empty dict (not an error) if the cache hasn't been built yet —
+    get_entity_relationships handles missing data gracefully so the app stays
+    functional before rel_fetcher.py has been run.
+    """
+    if os.path.exists(_RELATIONSHIPS_CACHE):
+        with open(_RELATIONSHIPS_CACHE) as f:
+            return json.load(f)
+
+    # Cache not built yet — return empty so tools degrade gracefully
+    return {}
+
+
 # ---------------------------------------------------------------------------
 # Anthropic tool definitions
 #
@@ -82,6 +104,19 @@ def load_profiles() -> list[dict]:
 # Anthropic API requires. The descriptions are what Claude reads to decide
 # which tool to call — they must be accurate and unambiguous.
 # ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Cost-control constants
+#
+# _SESSION_REQUEST_LIMIT — max API calls per browser session. Resets on page
+#   refresh. Prevents runaway usage without penalising legitimate reviewers.
+# _MIN_REQUEST_INTERVAL  — minimum seconds between requests. Prevents
+#   rapid-fire spam within a session.
+# ---------------------------------------------------------------------------
+
+_SESSION_REQUEST_LIMIT = 30   # questions per session
+_MIN_REQUEST_INTERVAL  = 3    # seconds between requests
+
 
 _TOOL_DEFINITIONS = [
     {
@@ -201,6 +236,39 @@ _TOOL_DEFINITIONS = [
                 },
             },
             "required": ["names"],
+        },
+    },
+    {
+        "name": "get_entity_relationships",
+        "description": (
+            "Return the top 50 pre-cached network connections for a specific entity. "
+            "Use this for any question about who an entity is connected to, its counterparties, "
+            "subsidiaries, shareholders, or network neighbours — e.g. 'Who are Rosneft's top "
+            "connections?', 'Show Gazprom's network', 'Which of Rostec's connections are sanctioned?', "
+            "or 'What companies is ZTE linked to?'."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Entity name as typed by the user. Fuzzy matched.",
+                },
+                "relationship_type": {
+                    "type": "string",
+                    "description": (
+                        "Optional case-insensitive substring filter on relationship types. "
+                        "Each connection can have multiple types; this matches if the query "
+                        "appears in any of them. E.g. 'shareholder' matches 'has_shareholder' "
+                        "and 'shareholder_of'; 'director' matches 'has_director' and 'director_of'."
+                    ),
+                },
+                "sanctioned_only": {
+                    "type": "boolean",
+                    "description": "If true, return only connections where the counterparty is sanctioned.",
+                },
+            },
+            "required": ["name"],
         },
     },
     {
@@ -324,11 +392,12 @@ _SYSTEM_PROMPT = """You are an AI analyst with access to a curated dataset of 49
 Always call a tool to retrieve facts before answering. Do not rely on training knowledge for claims about these specific entities — the tools are the authoritative source.
 
 Tool selection guide — data tools (return text answers):
-- get_entity        → any question about a specific named entity
-- filter_entities   → filtering or searching by sector, country, sanctions list, risk flag, or status
-- rank_entities     → ranking, top N, or superlative questions ("most", "highest", "fewest")
-- compare_entities  → explicit side-by-side comparison of two or more named entities
-- get_summary_stats → macro or aggregate questions about the full dataset
+- get_entity               → any question about a specific named entity
+- filter_entities          → filtering or searching by sector, country, sanctions list, risk flag, or status
+- rank_entities            → ranking, top N, or superlative questions ("most", "highest", "fewest")
+- compare_entities         → explicit side-by-side comparison of two or more named entities
+- get_entity_relationships → top 50 network connections for a specific entity; use for questions about counterparties, subsidiaries, shareholders, or who an entity is linked to
+- get_summary_stats        → macro or aggregate questions about the full dataset
 
 Tool selection guide — chart tools (render interactive charts in the UI):
 Use these whenever the user asks to "show", "plot", "visualise", "chart", or "draw" something.
@@ -369,13 +438,18 @@ def _get_anthropic_client() -> anthropic.Anthropic:
 # ---------------------------------------------------------------------------
 # Tool dispatcher
 #
-# Maps tool names returned by Claude → actual Python functions in tools.py.
-# Uses **inputs unpacking so each function receives exactly the kwargs it
-# expects — no translation layer needed as long as the JSON schema matches
-# the function signatures in tools.py.
+# Routes tool names returned by Claude to the appropriate Python function in
+# tools.py. Data tools return plain dicts wrapped in ToolResult; chart tools
+# return a go.Figure wrapped in ToolResult alongside a lightweight JSON
+# confirmation dict — figures are never sent to the Anthropic API.
 # ---------------------------------------------------------------------------
 
-def _dispatch_tool(name: str, inputs: dict, profiles: list[dict]) -> ToolResult:
+def _dispatch_tool(
+    name: str,
+    inputs: dict,
+    profiles: list[dict],
+    relationships: dict[str, list[dict]],
+) -> ToolResult:
     """
     Call the appropriate tool function by name and return a ToolResult.
 
@@ -398,6 +472,14 @@ def _dispatch_tool(name: str, inputs: dict, profiles: list[dict]) -> ToolResult:
         return ToolResult(api_payload=rank_entities(profiles, **inputs))
     if name == "compare_entities":
         return ToolResult(api_payload=compare_entities(inputs["names"], profiles))
+    if name == "get_entity_relationships":
+        return ToolResult(api_payload=get_entity_relationships(
+            name=inputs["name"],
+            profiles=profiles,
+            relationships=relationships,
+            relationship_type=inputs.get("relationship_type"),
+            sanctioned_only=inputs.get("sanctioned_only", False),
+        ))
     if name == "get_summary_stats":
         return ToolResult(api_payload=get_summary_stats(profiles))
 
@@ -436,6 +518,21 @@ def _dispatch_tool(name: str, inputs: dict, profiles: list[dict]) -> ToolResult:
 
 
 # ---------------------------------------------------------------------------
+# Custom exceptions for _call_claude
+#
+# Using dedicated exception types keeps the error-handling logic in main()
+# readable — a single except clause per failure mode rather than inspecting
+# error message strings in the UI layer.
+# ---------------------------------------------------------------------------
+
+class _ContextWindowError(Exception):
+    """Raised when the conversation history exceeds Claude's context window."""
+
+class _APIError(Exception):
+    """Raised when the Anthropic API returns a transient or unexpected error."""
+
+
+# ---------------------------------------------------------------------------
 # Claude API call with tool-use loop
 #
 # Implements the standard Anthropic multi-step tool-use pattern:
@@ -451,15 +548,18 @@ def _dispatch_tool(name: str, inputs: dict, profiles: list[dict]) -> ToolResult:
 def _call_claude(
     api_messages: list[dict],
     profiles: list[dict],
+    relationships: dict[str, list[dict]],
 ) -> tuple[str, list[str], list[go.Figure]]:
     """
     Send the conversation to Claude and process tool calls until done.
 
     Args:
-        api_messages: Full message history in Anthropic API format. Modified
-                      in-place — tool_use and tool_result blocks are appended
-                      during the loop so context is preserved for future turns.
-        profiles:     Entity profiles passed through to the tool dispatcher.
+        api_messages:  Full message history in Anthropic API format. Modified
+                       in-place — tool_use and tool_result blocks are appended
+                       during the loop so context is preserved for future turns.
+        profiles:      Entity profiles passed through to the tool dispatcher.
+        relationships: Pre-loaded relationship cache passed through to the
+                       tool dispatcher for get_entity_relationships calls.
 
     Returns:
         (response_text, tools_used, figures) — the final text answer, a list
@@ -472,13 +572,23 @@ def _call_claude(
     figures: list[go.Figure] = []   # figures collected from chart tools this turn
 
     while True:
-        response = client.messages.create(
-            model="claude-sonnet-4-5",
-            max_tokens=1024,
-            system=_SYSTEM_PROMPT,
-            tools=_TOOL_DEFINITIONS,
-            messages=api_messages,
-        )
+        try:
+            response = client.messages.create(
+                model="claude-sonnet-4-5",
+                max_tokens=4096,
+                system=_SYSTEM_PROMPT,
+                tools=_TOOL_DEFINITIONS,
+                messages=api_messages,
+            )
+        except anthropic.BadRequestError as e:
+            # Context window exceeded — conversation history is too long.
+            # Signal the UI to show a clear recovery message rather than crashing.
+            if "prompt is too long" in str(e).lower() or "context" in str(e).lower():
+                raise _ContextWindowError from e
+            raise  # re-raise any other BadRequestError unchanged
+        except anthropic.APIError as e:
+            # Transient API errors (rate limits, server errors) — surface a clean message
+            raise _APIError(str(e)) from e
 
         # Claude produced a final text answer — we're done
         if response.stop_reason == "end_turn":
@@ -498,7 +608,7 @@ def _call_claude(
             for block in response.content:
                 if block.type == "tool_use":
                     tools_used.append(block.name)
-                    tool_result = _dispatch_tool(block.name, block.input, profiles)
+                    tool_result = _dispatch_tool(block.name, block.input, profiles, relationships)
                     # Collect the figure for UI rendering (None for data tools)
                     if tool_result.figure is not None:
                         figures.append(tool_result.figure)
@@ -536,7 +646,8 @@ def main() -> None:
                          tool_result blocks, needed to maintain conversation
                          context across turns
     """
-    profiles = load_profiles()
+    profiles      = load_profiles()
+    relationships = load_relationships()
 
     # --- Header ---
     st.title("🤖 Sayari AI Analyst")
@@ -560,6 +671,19 @@ def main() -> None:
         st.session_state.display_messages = []
     if "api_messages" not in st.session_state:
         st.session_state.api_messages = []
+    if "request_count" not in st.session_state:
+        st.session_state.request_count = 0
+    if "last_request_time" not in st.session_state:
+        st.session_state.last_request_time = 0.0
+
+    # --- New conversation button ---
+    # Shown whenever there is chat history so the user can reset cleanly.
+    # Also serves as the recovery path after a context-window error.
+    if st.session_state.display_messages:
+        if st.button("🗑️ New conversation", type="secondary"):
+            st.session_state.display_messages = []
+            st.session_state.api_messages = []
+            st.rerun()
 
     # --- Render full chat history ---
     for msg in st.session_state.display_messages:
@@ -588,8 +712,30 @@ def main() -> None:
         for i, s in enumerate(suggestions):
             (col1 if i % 2 == 0 else col2).markdown(f"- *{s}*")
 
+    # --- Request counter display ---
+    # Show remaining questions so the user always knows where they stand.
+    remaining = _SESSION_REQUEST_LIMIT - st.session_state.request_count
+    if remaining <= 5:
+        st.caption(f"⚠️ {remaining} question{'s' if remaining != 1 else ''} remaining this session.")
+
     # --- Chat input ---
     if prompt := st.chat_input("Ask anything about the dataset…"):
+
+        # --- Cost controls ---
+        # Session cap — enforced before touching the API
+        if st.session_state.request_count >= _SESSION_REQUEST_LIMIT:
+            st.warning(
+                f"**Session limit reached ({_SESSION_REQUEST_LIMIT} questions).** "
+                "Click **New conversation** above to start a fresh session."
+            )
+            st.stop()
+
+        # Rate limit — prevent rapid-fire requests within a session
+        elapsed = time.time() - st.session_state.last_request_time
+        if elapsed < _MIN_REQUEST_INTERVAL:
+            wait = int(_MIN_REQUEST_INTERVAL - elapsed) + 1
+            st.warning(f"Please wait {wait} second{'s' if wait != 1 else ''} before asking another question.")
+            st.stop()
 
         # Display and record the user message
         with st.chat_message("user"):
@@ -600,9 +746,27 @@ def main() -> None:
         # Call Claude, display the response, render any charts, show tool attribution
         with st.chat_message("assistant"):
             with st.spinner("Querying dataset…"):
-                response_text, tools_used, figures = _call_claude(
-                    st.session_state.api_messages, profiles
-                )
+                try:
+                    response_text, tools_used, figures = _call_claude(
+                        st.session_state.api_messages, profiles, relationships
+                    )
+                except _ContextWindowError:
+                    # Conversation history too long — prompt the user to reset
+                    st.error(
+                        "**Conversation too long.** The chat history has exceeded the "
+                        "AI's context limit. Click **New conversation** above to start fresh — "
+                        "your dashboard data is unaffected."
+                    )
+                    # Remove the user message we just appended so the history stays consistent
+                    st.session_state.display_messages.pop()
+                    st.session_state.api_messages.pop()
+                    st.stop()
+                except _APIError as e:
+                    st.error(f"**API error.** The request failed: {e}. Please try again.")
+                    st.session_state.display_messages.pop()
+                    st.session_state.api_messages.pop()
+                    st.stop()
+
             st.markdown(response_text)
             # Render Plotly charts immediately below the text response
             for fig in figures:
@@ -610,6 +774,10 @@ def main() -> None:
             if tools_used:
                 labels = ", ".join(f"`{t}`" for t in tools_used)
                 st.caption(f"Tools used: {labels}")
+
+        # Increment cost-control counters only on a successful response
+        st.session_state.request_count += 1
+        st.session_state.last_request_time = time.time()
 
         # Store the assistant response for display history (figures included so
         # they re-render correctly when the chat history is replayed on rerun)

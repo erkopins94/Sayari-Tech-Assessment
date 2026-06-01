@@ -25,12 +25,15 @@ import difflib
 from collections.abc import Callable
 from dataclasses import dataclass
 
+import pycountry
+
 import plotly.express as px
 import plotly.graph_objects as go
 
 from analytics import (
     RISK_FLAG_LABELS,
     SECTOR_MAP,
+    SECTOR_NOTES,
     country_breakdown,
     risk_flag_frequency,
     risk_level_distribution,
@@ -73,15 +76,29 @@ def _build_name_index(profiles: list[dict]) -> dict[str, dict]:
     """
     Build a normalised-name → profile lookup used by fuzzy matching.
 
-    Both input_name (the name we searched for) and matched_name (the name
-    Sayari resolved to) are indexed so that abbreviations and aliases both
-    resolve to the same profile.
+    Uses two passes so input_name always takes priority over matched_name:
+
+      Pass 1 — input_name entries (authoritative: what the dataset is built on)
+      Pass 2 — matched_name entries added only where the key is not already
+               claimed, making them aliases rather than overrides
+
+    This prevents silent collisions where a matched_name (the Sayari-resolved
+    canonical name) would overwrite a different entity's input_name that happens
+    to normalise to the same string.
     """
-    index = {}
+    index: dict[str, dict] = {}
+
+    # Pass 1 — input_name is the authoritative key; always wins
     for p in profiles:
         index[p["input_name"].lower()] = p
+
+    # Pass 2 — matched_name as a fallback alias only if the key is unclaimed
+    for p in profiles:
         if p.get("matched_name"):
-            index[p["matched_name"].lower()] = p
+            key = p["matched_name"].lower()
+            if key not in index:
+                index[key] = p
+
     return index
 
 
@@ -129,16 +146,19 @@ def _fuzzy_match(
 def _format_profile(profile: dict) -> dict:
     """
     Convert a raw profile dict into the clean, LLM-readable shape returned
-    by all tools. Translates raw API risk flag keys into readable labels and
-    adds sector classification.
+    by all tools. Translates raw API risk flag keys into readable labels,
+    adds sector classification, and includes the sector methodology note so
+    the AI can explain or defend the classification when asked.
 
     Keeping this in one place means every tool returns a consistent structure.
     """
+    name = profile["input_name"]
     return {
-        "input_name":          profile["input_name"],
+        "input_name":          name,
         "matched_name":        profile["matched_name"],
         "entity_type":         profile["entity_type"],
-        "sector":              SECTOR_MAP.get(profile["input_name"], "Other"),
+        "sector":              SECTOR_MAP.get(name, "Other"),
+        "sector_note":         SECTOR_NOTES.get(name, "No classification note available."),
         "sanctioned":          profile["sanctioned"],
         "state_owned":         "state_owned" in profile["risk_flags"],
         "pep":                 profile["pep"],
@@ -209,38 +229,32 @@ def get_entity(name: str, profiles: list[dict]) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Country name → ISO-3 code lookup (used by filter_entities)
+# Country name resolution (used by filter_entities)
 #
-# app.py holds the inverse mapping (ISO-3 → display name) for chart labels.
-# This dict handles the reverse direction so users can type "Russia" instead
-# of "RUS" when filtering. Covers every country code present in the dataset.
+# _resolve_country converts user-supplied country strings to ISO-3 codes.
+# Full country names are handled by pycountry (all 249 ISO 3166-1 countries).
+# _COUNTRY_ALIASES covers only the informal abbreviations and name changes
+# that pycountry cannot resolve on its own.
 # ---------------------------------------------------------------------------
 
-_COUNTRY_CODES: dict[str, str] = {
-    "russia": "RUS", "united states": "USA", "us": "USA", "usa": "USA",
-    "cyprus": "CYP", "china": "CHN", "germany": "DEU", "belarus": "BLR",
-    "kazakhstan": "KAZ", "canada": "CAN", "netherlands": "NLD",
-    "uae": "ARE", "united arab emirates": "ARE", "hong kong": "HKG",
-    "ukraine": "UKR", "australia": "AUS", "myanmar": "MMR",
-    "united kingdom": "GBR", "uk": "GBR", "switzerland": "CHE",
-    "france": "FRA", "singapore": "SGP", "austria": "AUT",
-    "belgium": "BEL", "luxembourg": "LUX", "ireland": "IRL",
-    "czech republic": "CZE", "poland": "POL", "finland": "FIN",
-    "sweden": "SWE", "denmark": "DNK", "norway": "NOR", "latvia": "LVA",
-    "estonia": "EST", "lithuania": "LTU", "georgia": "GEO",
-    "armenia": "ARM", "azerbaijan": "AZE", "uzbekistan": "UZB",
-    "turkmenistan": "TKM", "turkey": "TUR", "iran": "IRN", "iraq": "IRQ",
-    "syria": "SYR", "north korea": "PRK", "venezuela": "VEN",
-    "cuba": "CUB", "panama": "PAN", "bahamas": "BHS",
-    "british virgin islands": "VGB", "bvi": "VGB", "malta": "MLT",
-    "gibraltar": "GIB", "isle of man": "IMN", "liechtenstein": "LIE",
-    "monaco": "MCO", "san marino": "SMR",
+# Informal abbreviations and renamed countries that pycountry cannot resolve.
+# Everything else (all 249 ISO 3166-1 countries by full name) is handled by
+# pycountry.countries.search_fuzzy() in _resolve_country below.
+# "turkey" is here because pycountry uses the 2022 rename "Turkiye".
+_COUNTRY_ALIASES: dict[str, str] = {
+    "turkey": "TUR",  # ISO name changed to "Turkiye" in 2022
+    "uk":     "GBR",  # informal abbreviation for "United Kingdom"
+    "us":     "USA",  # informal abbreviation for "United States"
+    "usa":    "USA",  # informal abbreviation for "United States"
+    "uae":    "ARE",  # informal abbreviation for "United Arab Emirates"
+    "bvi":    "VGB",  # informal abbreviation for "Virgin Islands, British"
 }
 
 
-# Precomputed once at import time — SECTOR_MAP never changes at runtime so
-# there is no reason to recompute set(SECTOR_MAP.values()) on every call.
-_KNOWN_SECTORS: frozenset[str] = frozenset(SECTOR_MAP.values())
+# Precomputed once at import time as a sorted tuple — SECTOR_MAP never changes
+# at runtime, and a sorted tuple gives deterministic iteration order in
+# _resolve_sector (frozenset iteration order is not guaranteed).
+_KNOWN_SECTORS: tuple[str, ...] = tuple(sorted(set(SECTOR_MAP.values())))
 
 
 def _resolve_sector(sector: str) -> str | None:
@@ -260,20 +274,33 @@ def _resolve_country(country: str) -> str | None:
     """
     Resolve a user-supplied country string to an ISO-3 code.
 
-    Accepts:
-      - ISO-3 codes directly ("RUS", "CHN") — returned as-is after uppercasing
-      - Common English names and abbreviations ("Russia", "UK", "UAE")
+    Resolution order:
+      1. _COUNTRY_ALIASES -> checked first; some aliases are 3 letters ("uae",
+                            "bvi") and would be mistaken for ISO-3 codes otherwise
+      2. 3-letter input   -> treated as an ISO-3 code directly (fast path)
+      3. pycountry        -> fuzzy search across all 249 ISO 3166-1 countries;
+                            no manual maintenance required
 
     Returns None if the input cannot be resolved, so filter_entities can
     return a helpful error rather than silently returning zero results.
     """
     normalised = country.strip().lower()
 
-    # If the user typed a 3-letter code, treat it as ISO-3 directly
+    # Aliases checked first — some are 3 letters ("uae", "bvi") and would
+    # otherwise be mistaken for ISO-3 codes by the fast path below
+    if normalised in _COUNTRY_ALIASES:
+        return _COUNTRY_ALIASES[normalised]
+
+    # Fast path — user typed a 3-letter ISO-3 code directly (e.g. "RUS", "CHN")
     if len(normalised) == 3 and normalised.upper().isalpha():
         return normalised.upper()
 
-    return _COUNTRY_CODES.get(normalised)
+    # Delegate full name resolution to pycountry
+    try:
+        results = pycountry.countries.search_fuzzy(normalised)
+        return results[0].alpha_3
+    except LookupError:
+        return None
 
 
 # ---------------------------------------------------------------------------
@@ -661,7 +688,110 @@ def compare_entities(names: list[str], profiles: list[dict]) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Tool 5 — get_summary_stats
+# Tool 5 — get_entity_relationships
+# ---------------------------------------------------------------------------
+
+def get_entity_relationships(
+    name: str,
+    profiles: list[dict],
+    relationships: dict[str, list[dict]],
+    relationship_type: str | None = None,
+    sanctioned_only: bool = False,
+) -> dict:
+    """
+    Return the top cached network connections for a specific entity.
+
+    The relationships cache (data/relationships.json) holds up to 50 connections
+    per entity, pre-fetched by rel_fetcher.py. This makes relationship queries
+    fast and credit-free during normal app usage — no live Sayari API calls.
+
+    Args:
+        name:              Entity name. Fuzzy matched as usual.
+        profiles:          Full profiles list — used for name resolution and the
+                           total degree count (reported alongside cached results).
+        relationships:     Pre-loaded cache from data/relationships.json, keyed
+                           by input_name.
+        relationship_type: Optional case-insensitive substring filter on the
+                           relationship type field. "shareholder" matches both
+                           "has_shareholder" and "shareholder_of"; "subsidiary"
+                           matches "has_subsidiary" and "subsidiary_of", etc.
+        sanctioned_only:   If True, return only connections where the counterparty
+                           is itself a sanctioned entity.
+
+    Returns:
+        On success — {
+            "error": False,
+            "entity": entity_name,
+            "total_known_connections": degree from profiles (full network size),
+            "cached_connections": how many are in the top-50 cache,
+            "returned": count after applying filters,
+            "relationships": [list of connection records],
+            "note": human-readable summary of what is shown
+        }
+        On failure — {"error": True, "message": "..."}
+
+    Example questions this tool covers:
+        "Who are Rosneft's top connections?"
+        "Show me Gazprom's network counterparties"
+        "Which of Rostec's connections are sanctioned?"
+        "What companies is ZTE linked to?"
+        "Show me Russian Railways' top shareholders"
+    """
+    profile = _fuzzy_match(name, profiles)
+
+    if not profile:
+        return {
+            "error":   True,
+            "message": (
+                f"No entity matching '{name}' found in the dataset. "
+                "Try a different spelling, abbreviation, or partial name."
+            ),
+        }
+
+    if not profile.get("fetched"):
+        return {
+            "error":   True,
+            "message": (
+                f"'{profile['input_name']}' is in the dataset but has no profile data available."
+            ),
+        }
+
+    entity_name = profile["input_name"]
+    cached      = relationships.get(entity_name, [])
+
+    # Apply optional filters
+    filtered = cached
+    if relationship_type is not None:
+        # relationship_types is a list — match if the query substring appears in any type
+        query    = relationship_type.lower()
+        filtered = [
+            r for r in filtered
+            if any(query in rt.lower() for rt in r.get("relationship_types", []))
+        ]
+    if sanctioned_only:
+        filtered = [r for r in filtered if r.get("sanctioned")]
+
+    total_degree  = profile["degree"]
+    cached_count  = len(cached)
+    returned_count = len(filtered)
+
+    note = f"Showing top {cached_count:,} of {total_degree:,} total known connections."
+    if relationship_type or sanctioned_only:
+        note += f" Filtered to {returned_count:,} matching records."
+
+    return {
+        "error":                   False,
+        "entity":                  entity_name,
+        "total_known_connections": total_degree,
+        "cached_connections":      cached_count,
+        "returned":                returned_count,
+        "relationships":           filtered,
+        "note":                    note,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Tool 6 — get_summary_stats
 # ---------------------------------------------------------------------------
 
 def get_summary_stats(profiles: list[dict]) -> dict:

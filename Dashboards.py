@@ -1,5 +1,5 @@
 """
-app.py — Streamlit dashboard for the Sayari Entity Analytics Report.
+Dashboards.py — Streamlit dashboard for the Sayari Entity Analytics Report.
 
 This is the presentation layer. It loads profiles from the local cache,
 calls analytics.py for computed insights, and renders everything as
@@ -62,6 +62,30 @@ RISK_COLORS = {
 SECTOR_PALETTE = px.colors.qualitative.Safe
 
 PROFILES_CACHE = os.path.join(os.path.dirname(__file__), "data", "profiles.json")
+
+# ISO-3 → readable country name lookup used by render_geography drill-down panels.
+# Defined at module level (not inside the function) so it is built once at startup
+# rather than reconstructed on every Streamlit rerun.
+COUNTRY_NAMES: dict[str, str] = {
+    "RUS": "Russia",          "USA": "United States",    "CYP": "Cyprus",
+    "CHN": "China",           "DEU": "Germany",           "BLR": "Belarus",
+    "KAZ": "Kazakhstan",      "CAN": "Canada",            "NLD": "Netherlands",
+    "ARE": "UAE",             "HKG": "Hong Kong",         "UKR": "Ukraine",
+    "AUS": "Australia",       "MMR": "Myanmar",           "GBR": "United Kingdom",
+    "CHE": "Switzerland",     "FRA": "France",            "SGP": "Singapore",
+    "AUT": "Austria",         "BEL": "Belgium",           "LUX": "Luxembourg",
+    "IRL": "Ireland",         "CZE": "Czech Republic",    "POL": "Poland",
+    "FIN": "Finland",         "SWE": "Sweden",            "DNK": "Denmark",
+    "NOR": "Norway",          "LVA": "Latvia",            "EST": "Estonia",
+    "LTU": "Lithuania",       "GEO": "Georgia",           "ARM": "Armenia",
+    "AZE": "Azerbaijan",      "UZB": "Uzbekistan",        "TKM": "Turkmenistan",
+    "TUR": "Turkey",          "IRN": "Iran",              "IRQ": "Iraq",
+    "SYR": "Syria",           "PRK": "North Korea",       "VEN": "Venezuela",
+    "CUB": "Cuba",            "PAN": "Panama",            "BHS": "Bahamas",
+    "VGB": "British Virgin Islands", "MLT": "Malta",
+    "GIB": "Gibraltar",       "IMN": "Isle of Man",       "LIE": "Liechtenstein",
+    "MCO": "Monaco",          "SMR": "San Marino",
+}
 
 
 # ---------------------------------------------------------------------------
@@ -428,29 +452,6 @@ def render_geography(profiles: list[dict]) -> None:
     are interactive — clicking a country shows which entities are present
     there, and clicking an entity shows all countries it operates in.
     """
-    # ISO-3 → readable country name lookup for display in drill-down panels.
-    # Covers every country code that appears in the profiles dataset.
-    COUNTRY_NAMES = {
-        "RUS": "Russia", "USA": "United States", "CYP": "Cyprus",
-        "CHN": "China", "DEU": "Germany", "BLR": "Belarus",
-        "KAZ": "Kazakhstan", "CAN": "Canada", "NLD": "Netherlands",
-        "ARE": "UAE", "HKG": "Hong Kong", "UKR": "Ukraine",
-        "AUS": "Australia", "MMR": "Myanmar", "GBR": "United Kingdom",
-        "CHE": "Switzerland", "FRA": "France", "SGP": "Singapore",
-        "AUT": "Austria", "BEL": "Belgium", "LUX": "Luxembourg",
-        "IRL": "Ireland", "CZE": "Czech Republic", "POL": "Poland",
-        "FIN": "Finland", "SWE": "Sweden", "DNK": "Denmark",
-        "NOR": "Norway", "LVA": "Latvia", "EST": "Estonia",
-        "LTU": "Lithuania", "GEO": "Georgia", "ARM": "Armenia",
-        "AZE": "Azerbaijan", "UZB": "Uzbekistan", "TKM": "Turkmenistan",
-        "TUR": "Turkey", "IRN": "Iran", "IRQ": "Iraq",
-        "SYR": "Syria", "PRK": "North Korea", "VEN": "Venezuela",
-        "CUB": "Cuba", "PAN": "Panama", "BHS": "Bahamas",
-        "VGB": "British Virgin Islands", "MLT": "Malta",
-        "GIB": "Gibraltar", "IMN": "Isle of Man", "LIE": "Liechtenstein",
-        "MCO": "Monaco", "SMR": "San Marino",
-    }
-
     fetched = [p for p in profiles if p.get("fetched")]
 
     # Pre-build lookup: country_code → list of entity profiles present in that country
@@ -625,7 +626,7 @@ def render_entity_table(profiles: list[dict]) -> None:
         })
 
     df = pd.DataFrame(rows).sort_values("Network Degree", ascending=False)
-    st.dataframe(df, use_container_width=True, height=700)
+    st.dataframe(df, use_container_width=True, height=700, hide_index=True)
 
 
 # ---------------------------------------------------------------------------

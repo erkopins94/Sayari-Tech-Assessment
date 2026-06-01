@@ -78,6 +78,260 @@ SECTOR_MAP = {
     "Myanmar Economic Holdings Limited": "State Trade & Other",
 }
 
+# ---------------------------------------------------------------------------
+# Sector classification notes
+#
+# Documents the reasoning behind each entity's sector assignment. Sayari does
+# not provide SIC/NAICS codes, so all classifications are manually derived from
+# publicly available information (annual reports, sanctions designations, and
+# regulatory filings). Notes are surfaced by the AI chat when asked about an
+# entity's classification, making the methodology auditable and defensible.
+#
+# Methodology rule: primary sector = the entity's dominant revenue-generating
+# or operational activity based on public reporting at time of classification.
+# ---------------------------------------------------------------------------
+
+SECTOR_NOTES = {
+    # Banking & Finance
+    "Russian Direct Investment Fund": (
+        "Russia's sovereign wealth fund. Primary activity is equity investment "
+        "and co-investment with foreign partners on behalf of the Russian state."
+    ),
+    "Sberbank": (
+        "Russia's largest state-owned bank by assets. Core business is retail "
+        "and corporate banking; over 70% of revenues from financial services."
+    ),
+    "VTB Bank": (
+        "Second-largest Russian state-owned bank. Primary activity is corporate "
+        "lending, investment banking, and retail deposits."
+    ),
+    "State Development Bank VEB.RF": (
+        "Russian state development corporation. Functions as a policy bank "
+        "financing infrastructure and industrial projects on behalf of the state."
+    ),
+    "Promsvyazbank": (
+        "Russian state-owned bank designated to finance defense procurement "
+        "contracts. Reclassified from private to defense-adjacent banking in 2018."
+    ),
+    "Alfa-Bank": (
+        "Russia's largest privately-owned bank by assets at time of sanctions. "
+        "Primary activity is corporate and retail banking."
+    ),
+    "Bank Rossiya": (
+        "Private Russian bank with close ties to the Kremlin. Primary activity "
+        "is corporate and retail banking for Russian state-connected clients."
+    ),
+    "Novikombank": (
+        "Russian bank owned by Rostec state corporation. Primarily finances "
+        "defense-industrial complex transactions — borderline Defense/Banking; "
+        "classified Banking due to primary regulated activity being deposit-taking."
+    ),
+    "Sovcombank": (
+        "Large privately-owned Russian retail bank. Primary activity is consumer "
+        "lending and retail deposits."
+    ),
+    "Bank Otkritie": (
+        "Russian state-owned bank following 2017 bailout by the Central Bank of "
+        "Russia. Primary activity is retail and corporate banking."
+    ),
+
+    # Energy & Oil/Gas
+    "Rosneft": (
+        "Russia's largest oil company and the world's largest publicly traded "
+        "petroleum company by output. Primary activity is upstream oil and gas "
+        "production and refining."
+    ),
+    "Gazprom": (
+        "Russian state-owned energy giant. Primary activity is natural gas "
+        "extraction, transmission, and export — world's largest natural gas "
+        "producer at time of classification."
+    ),
+    "National Iranian Oil Company": (
+        "Iranian state-owned entity responsible for all upstream oil and gas "
+        "operations in Iran. Primary activity is petroleum extraction and export."
+    ),
+    "PDVSA": (
+        "Venezuelan state oil company. Primary activity is crude oil production, "
+        "refining, and export — Venezuela's dominant revenue source."
+    ),
+    "Venezuelan State-Owned Oil Company (PDVSA)": (
+        "Original list name for PDVSA. See PDVSA entry."
+    ),
+    "Transneft": (
+        "Russian state-owned pipeline monopoly. Operates the world's largest "
+        "oil pipeline network; primary activity is crude oil transportation."
+    ),
+    "Belneftegaz": (
+        "Belarusian state oil and gas company. Primary activity is exploration, "
+        "production, and distribution of hydrocarbons in Belarus."
+    ),
+
+    # Defense & Aerospace
+    "Rostec": (
+        "Russian state defense conglomerate controlling over 800 subsidiaries. "
+        "Defense and aerospace revenues dominate (~75% of consolidated revenue "
+        "per public disclosures), though the group also produces civilian "
+        "aircraft, medical equipment, and automotive components. Classified "
+        "Defense & Aerospace on primary-revenue basis."
+    ),
+    "Almaz-Antey": (
+        "Russian state-owned developer and manufacturer of air defense systems "
+        "(S-300, S-400, Buk). Exclusively defense-focused."
+    ),
+    "Uralvagonzavod": (
+        "Russian manufacturer of T-72/T-90 main battle tanks and armored "
+        "vehicles. Also produces railway freight cars; defense is primary "
+        "revenue driver."
+    ),
+    "Kalashnikov Concern": (
+        "Russian manufacturer of Kalashnikov-series assault rifles and other "
+        "small arms. Exclusively defense-focused."
+    ),
+    "NPO High Precision Systems": (
+        "Russian manufacturer of guided missiles and precision weapons systems. "
+        "Exclusively defense-focused; subsidiary of Rostec."
+    ),
+    "Tactical Missiles Corporation JSC": (
+        "Russian developer and producer of air-launched cruise missiles and "
+        "anti-ship missiles. Exclusively defense-focused."
+    ),
+    "NPK Tekhmash OAO": (
+        "Russian manufacturer of ammunition, artillery rounds, and rocket "
+        "propellants. Exclusively defense-focused; subsidiary of Rostec."
+    ),
+    "Molot-Oruzhie": (
+        "Russian small arms manufacturer (Vyatskie Polyany plant). Produces "
+        "military and civilian firearms. Classified Defense on primary activity."
+    ),
+    "Rustec": (
+        "Russian defense export and technology entity associated with the Rostec "
+        "ecosystem. Primary activity is defense technology transfer."
+    ),
+    "Rosoboronexport": (
+        "Russian state-owned arms export agency and the sole authorized exporter "
+        "of Russian defense products. Exclusively defense-focused."
+    ),
+    "Sukhoi Company": (
+        "Russian aircraft design bureau producing Su-series fighter jets and "
+        "military aircraft. Primary activity is military aviation."
+    ),
+    "Irkut Corporation": (
+        "Russian manufacturer of military aircraft (Su-30) and the civilian "
+        "MC-21 airliner. Military contracts remain the primary revenue driver."
+    ),
+    "MiG Corporation": (
+        "Russian manufacturer of MiG-series fighter aircraft. Exclusively "
+        "military aviation focused."
+    ),
+    "Tupolev PJSC": (
+        "Russian aircraft design bureau producing Tu-series bombers and "
+        "airliners. Defense contracts (Tu-160, Tu-95) are the primary activity; "
+        "civilian production is secondary."
+    ),
+    "Sevmash": (
+        "Russia's largest shipyard, producing nuclear submarines for the Russian "
+        "Navy. Exclusively defense-focused."
+    ),
+    "Admiralty Shipyards": (
+        "Russian shipyard producing submarines and surface vessels for the "
+        "Russian Navy. Primarily defense-focused."
+    ),
+    "Zvezdochka Shipyard": (
+        "Russian shipyard specializing in submarine repair and overhaul for the "
+        "Russian Navy. Primarily defense-focused."
+    ),
+    "Baltic Shipyard": (
+        "Russian shipyard producing nuclear-powered icebreakers and naval "
+        "vessels. Defense and state contracts are the primary activity."
+    ),
+    "United Aircraft Corporation": (
+        "Russian state holding company for military and civilian aircraft "
+        "manufacturers (Sukhoi, MiG, Tupolev, Ilyushin). Defense contracts "
+        "dominate consolidated revenue."
+    ),
+    "United Shipbuilding Corporation": (
+        "Russian state holding company for naval shipyards. Primary activity is "
+        "construction and repair of Russian Navy vessels."
+    ),
+
+    # Technology
+    "Huawei Technologies Co. Ltd.": (
+        "Chinese multinational telecommunications equipment and consumer "
+        "electronics manufacturer. Primary revenue from network infrastructure "
+        "and handsets. Classified Technology; defense adjacency noted via "
+        "export control and military end-use flags."
+    ),
+    "ZTE Corporation": (
+        "Chinese telecommunications equipment and systems company. Primary "
+        "activity is telecoms infrastructure and handsets."
+    ),
+    "Hangzhou Hikvision Digital Technology Co. Ltd.": (
+        "Chinese manufacturer of video surveillance equipment and AI-powered "
+        "security systems. Primary activity is security technology; flagged for "
+        "supply of surveillance systems to Xinjiang detention facilities."
+    ),
+
+    # Mining & Resources
+    "Belaruskali OAO": (
+        "Belarusian state-owned potash mining company; one of the world's "
+        "largest potash producers. Exclusively mining and resources."
+    ),
+    "Belarusian Potash Company": (
+        "Trading and export arm for Belarusian potash. Primary activity is "
+        "potash marketing and export, closely linked to Belaruskali."
+    ),
+    "Belorusskaya Kaliynaya Companya": (
+        "Original list name for Belarusian Potash Company. See that entry."
+    ),
+    "Belnauchcompositit": (
+        "Belarusian entity listed in the assessment dataset. Could not be "
+        "resolved in Sayari — classification as Mining & Resources is based "
+        "on name similarity to other Belarusian industrial entities and "
+        "should be treated as provisional."
+    ),
+
+    # Transport & Industrial
+    "Russian Railways": (
+        "Russian state-owned railway monopoly. Primary activity is freight and "
+        "passenger rail transport across Russia and the CIS. Classified "
+        "Transport & Industrial on primary operational activity."
+    ),
+    "Kamaz": (
+        "Russian manufacturer of heavy trucks, military vehicles, and diesel "
+        "engines. Civilian trucking dominates revenue; military vehicle "
+        "production is secondary. Classified Transport & Industrial."
+    ),
+    "Power Machines": (
+        "Russian manufacturer of power generation equipment (turbines, "
+        "generators). Primary activity is heavy industrial equipment for "
+        "energy infrastructure."
+    ),
+    "Syrian Arab Airlines": (
+        "Syrian state-owned national carrier. Primary activity is commercial "
+        "aviation. Classified Transport & Industrial."
+    ),
+
+    # State Trade & Other
+    "Korea Mining Development Trading Corporation": (
+        "North Korean state entity (KOMID) designated as DPRK's primary arms "
+        "dealer and main exporter of ballistic missiles and conventional weapons."
+    ),
+    "Cubametales": (
+        "Cuban state metals trading company. Primary activity is import/export "
+        "of metals and minerals on behalf of the Cuban state."
+    ),
+    "Myanmar Economic Corporation": (
+        "Myanmar military-owned conglomerate with interests spanning mining, "
+        "manufacturing, real estate, and banking. Classified State Trade & Other "
+        "given diversified conglomerate structure with no single dominant sector."
+    ),
+    "Myanmar Economic Holdings Limited": (
+        "Myanmar military-owned holding company with diversified commercial "
+        "interests. Classified State Trade & Other for the same reasons as MEC."
+    ),
+}
+
+
 # Human-readable labels for the risk flag keys returned by the Sayari API
 RISK_FLAG_LABELS = {
     "sanctioned": "Sanctioned",

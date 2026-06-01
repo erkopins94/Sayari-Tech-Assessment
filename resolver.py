@@ -1,3 +1,15 @@
+"""
+resolver.py — Resolves entity names to Sayari entity IDs.
+
+Takes the 50 entities in the ENTITIES list and calls the Sayari resolution
+endpoint for each one, capturing the best-match entity ID, label, and match
+strength. Results are written to data/resolved.json and reused on all
+subsequent runs so no credits are spent after the first execution.
+
+Run directly to (re-)build the resolved cache:
+    python resolver.py
+"""
+
 import json
 import os
 import time

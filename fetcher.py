@@ -1,3 +1,19 @@
+"""
+fetcher.py — Fetches full entity profiles from the Sayari API.
+
+For each resolved entity (from data/resolved.json), calls entity_summary to
+retrieve the complete risk profile: sanctions status, country footprint, risk
+flags by severity, sanctions list memberships, and relationship counts.
+Results are written to data/profiles.json and reused on all subsequent runs.
+
+entity_summary is preferred over get_entity here because it returns everything
+needed for macro analytics without paginating through individual relationship
+records — significantly more credit-efficient for a 50-entity batch.
+
+Run directly to (re-)build the profiles cache:
+    python fetcher.py
+"""
+
 import json
 import os
 import time

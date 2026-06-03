@@ -141,19 +141,17 @@ docker compose down
 python -m pytest tests/ -v
 ```
 
-**40 tests** covering every analytics function — no API calls, no file I/O. All tests use a fixture factory that builds synthetic profile data so the suite runs in under 1 second.
+**144 tests** covering every non-UI module — no API calls, no file I/O. All tests use fixture factories that build synthetic profile and relationship data, plus mocked SDK clients for the fetch paths, so the full suite runs in under 10 seconds.
 
 ```
-tests/test_analytics.py::TestSummaryStats                    9 tests
-tests/test_analytics.py::TestSectorBreakdown                 5 tests
-tests/test_analytics.py::TestCountryBreakdown                4 tests
-tests/test_analytics.py::TestSanctionsListBreakdown          3 tests
-tests/test_analytics.py::TestRiskFlagFrequency               3 tests
-tests/test_analytics.py::TestRiskLevelDistribution           3 tests
-tests/test_analytics.py::TestTopEntitiesByDegree             5 tests
-tests/test_analytics.py::TestJurisdictionExposure            3 tests
-tests/test_analytics.py::TestSanctionsCoveragePerEntity      5 tests
+tests/test_analytics.py     40 tests   Pure analytics functions over the profiles cache
+tests/test_tools.py         64 tests   All 6 AI chat tools + 4 shared resolution helpers
+tests/test_fetcher.py       24 tests   Risk flag/level extraction, sanctions parsing, fetch_profile
+tests/test_rel_fetcher.py    9 tests   Relationship flattening + fetch_relationships error path
+tests/test_resolver.py       7 tests   Resolution success, no-match, and exception handling
 ```
+
+The Sayari API calls in `fetcher.py`, `rel_fetcher.py`, and `resolver.py` are exercised with mocked SDK clients, so no credentials or network access are required. The Streamlit UI layers (`Dashboards.py`, `pages/Chat.py`) and the credentialed client factory (`client.py`) are intentionally excluded, as they require a live session or real API keys.
 
 ---
 
@@ -166,7 +164,7 @@ tests/test_analytics.py::TestSanctionsCoveragePerEntity      5 tests
 ├── tools.py                # LLM-callable data-access functions (6 tools)
 ├── fetcher.py              # Fetches full entity profiles from the Sayari API
 ├── rel_fetcher.py          # Fetches top-50 network connections per entity
-├── resolver.py             # Resolves entity names to Sayari entity IDs
+├── resolver.py             # Resolves entity names to Sayari entity IDs by best match score
 ├── client.py               # Authenticated Sayari SDK client factory
 ├── pages/
 │   └── Chat.py             # AI chat interface (Claude + tool use)
@@ -175,7 +173,11 @@ tests/test_analytics.py::TestSanctionsCoveragePerEntity      5 tests
 │   ├── profiles.json       # Cached full entity profiles (49/50 fetched)
 │   └── relationships.json  # Cached top-50 network connections per entity
 ├── tests/
-│   └── test_analytics.py   # Unit tests for analytics.py
+│   ├── test_analytics.py   # Unit tests for analytics.py
+│   ├── test_tools.py       # Unit tests for tools.py (AI chat tools + helpers)
+│   ├── test_fetcher.py     # Unit tests for fetcher.py
+│   ├── test_rel_fetcher.py # Unit tests for rel_fetcher.py
+│   └── test_resolver.py    # Unit tests for resolver.py
 ├── Dockerfile
 ├── docker-compose.yml
 ├── requirements.txt

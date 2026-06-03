@@ -4,9 +4,48 @@
     "input_country": "RUS",
     "entity_id": "5fFhX0dMY2GliW0F5kOs4A",
     "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0423\u041f\u0420\u0410\u0412\u041b\u042f\u042e\u0429\u0410\u042f \u041a\u041e\u041c\u041f\u0410\u041d\u0418\u042f \u0420\u041e\u0421\u0421\u0418\u0419\u0421\u041a\u041e\u0413\u041e \u0424\u041e\u041d\u0414\u0410 \u041f\u0420\u042f\u041c\u042b\u0425 \u0418\u041d\u0412\u0415\u0421\u0422\u0418\u0426\u0418\u0419",
-    "match_strength": "value='weak'",
-    "score": 138.5521,
+    "match_strength": "weak",
+    "score": 130.06705,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "5fFhX0dMY2GliW0F5kOs4A",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0423\u041f\u0420\u0410\u0412\u041b\u042f\u042e\u0429\u0410\u042f \u041a\u041e\u041c\u041f\u0410\u041d\u0418\u042f \u0420\u041e\u0421\u0421\u0418\u0419\u0421\u041a\u041e\u0413\u041e \u0424\u041e\u041d\u0414\u0410 \u041f\u0420\u042f\u041c\u042b\u0425 \u0418\u041d\u0412\u0415\u0421\u0422\u0418\u0426\u0418\u0419",
+        "score": 130.06705,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "0E9c4XYvl9mVEWpw9eVXHg",
+        "matched_name": "Russian Direct Investment Fund",
+        "score": 115.41768,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "cTULB-RudDuji2Tz9L35KQ",
+        "matched_name": "RUSSIAN DIRECT INVESTMENT FUND MANAGEMENT COMPANY",
+        "score": 104.714966,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "USA",
+          "AUS",
+          "CYP"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -15,31 +54,245 @@
     "input_country": "RUS",
     "entity_id": "6xwgbegScTfcmhTM2e3oqw",
     "matched_name": "LIMITED LIABILITY COMPANY SBERBANK INVESTMENTS",
-    "match_strength": "value='weak'",
-    "score": 168.39111,
+    "match_strength": "weak",
+    "score": 168.38733,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "6xwgbegScTfcmhTM2e3oqw",
+        "matched_name": "LIMITED LIABILITY COMPANY SBERBANK INVESTMENTS",
+        "score": 168.38733,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CYP",
+          "KAZ",
+          "SGP"
+        ]
+      },
+      {
+        "entity_id": "VkvLxkwFkxQduR6FYuNiXQ",
+        "matched_name": "\u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0421 \u041e\u0413\u0420\u0410\u041d\u0418\u0427\u0415\u041d\u041d\u041e\u0419 \u041e\u0422\u0412\u0415\u0422\u0421\u0422\u0412\u0415\u041d\u041d\u041e\u0421\u0422\u042c\u042e \"\u0421\u0411\u0415\u0420\u0411\u0410\u041d\u041a-\u0421\u0415\u0420\u0412\u0418\u0421\"",
+        "score": 166.34384,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "KAZ"
+        ]
+      },
+      {
+        "entity_id": "OWwtbp9y51OcLHJQakLaMw",
+        "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0421\u0411\u0415\u0420\u0411\u0410\u041d\u041a \u0420\u041e\u0421\u0421\u0418\u0418\"",
+        "score": 158.06105,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "IND",
+          "CHN",
+          "IRL",
+          "CYP",
+          "USA",
+          "BEL",
+          "UKR",
+          "DEU",
+          "KAZ",
+          "AUT"
+        ]
+      },
+      {
+        "entity_id": "X3vqjYmqvXwk2ahEkjS6og",
+        "matched_name": "JOINT STOCK COMPANY SBERBANK LEASING",
+        "score": 157.43207,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "KAZ"
+        ]
+      },
+      {
+        "entity_id": "ut0wZrm2_klcSHu5O9CZWA",
+        "matched_name": "JOINT STOCK COMPANY SBERBANK AUTOMATED TRADE SYSTEM",
+        "score": 155.96088,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "KAZ"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
   {
     "input_name": "VTB Bank",
     "input_country": "RUS",
-    "entity_id": "E6whS6agAS4Jba7EwOQlNQ",
+    "entity_id": "45T9jyVcw-09mpfbhb7EyQ",
     "matched_name": "VTB CAPITAL HOLDINGS CLOSED JOINT STOCK COMPANY",
-    "match_strength": "value='weak'",
-    "score": 177.66608,
+    "match_strength": "weak",
+    "score": 169.40237,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "45T9jyVcw-09mpfbhb7EyQ",
+        "matched_name": "VTB CAPITAL HOLDINGS CLOSED JOINT STOCK COMPANY",
+        "score": 169.40237,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "HKG",
+          "GBR",
+          "IRL",
+          "ARE",
+          "DEU",
+          "CYP",
+          "BGR",
+          "EST",
+          "FRA",
+          "KAZ",
+          "SGP",
+          "USA"
+        ]
+      },
+      {
+        "entity_id": "gzhVoMZ1emCsdYmh3GrRpw",
+        "matched_name": "VTB Bank (Europe) SE",
+        "score": 168.6777,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "DEU",
+          "IRL",
+          "FRA",
+          "AUT",
+          "RUS",
+          "KAZ",
+          "SVN"
+        ]
+      },
+      {
+        "entity_id": "dy-rh2g0QtzUN_jC_e9S_A",
+        "matched_name": "\u0411\u0410\u041d\u041a \u0412\u0422\u0411 (\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e)",
+        "score": 158.46468,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CHN",
+          "IND",
+          "UKR",
+          "USA",
+          "QAT",
+          "ITA"
+        ]
+      },
+      {
+        "entity_id": "R1MgpGUCCe-VhuB14Oy_UA",
+        "matched_name": "\u0411\u0410\u041d\u041a \u0412\u0422\u0411 24 (\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e)",
+        "score": 157.21017,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "KAZ",
+          "UKR"
+        ]
+      },
+      {
+        "entity_id": "eN-JOYBlz2SwiJlWaVfZPg",
+        "matched_name": "VTB BANK GEORGIA JOINT STOCK COMPANY",
+        "score": 148.67355,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "GEO",
+          "RUS",
+          "KAZ"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
   {
     "input_name": "Rostec",
     "input_country": "RUS",
-    "entity_id": "D-jLpScdAGFGgR4dtYnu_A",
-    "matched_name": "Rostec (Russian Technologies State Corporation)",
-    "match_strength": "value='weak'",
-    "score": 68.41789,
+    "entity_id": "zXh47GddUNA_0ss28GNdYQ",
+    "matched_name": "State Corporation Rostec",
+    "match_strength": "weak",
+    "score": 117.67248,
     "entity_type": "company",
+    "confidence": "low",
+    "needs_review": true,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "zXh47GddUNA_0ss28GNdYQ",
+        "matched_name": "State Corporation Rostec",
+        "score": 117.67248,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "D-jLpScdAGFGgR4dtYnu_A",
+        "matched_name": "\u0413\u043e\u0441\u0443\u0434\u0430\u0440\u0441\u0442\u0432\u0435\u043d\u043d\u0430\u044f \u043a\u043e\u0440\u043f\u043e\u0440\u0430\u0446\u0438\u044f \u043f\u043e \u0441\u043e\u0434\u0435\u0439\u0441\u0442\u0432\u0438\u044e \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0435, \u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0441\u0442\u0432\u0443 \u0438 \u044d\u043a\u0441\u043f\u043e\u0440\u0442\u0443 \u0432\u044b\u0441\u043e\u043a\u043e\u0442\u0435\u0445\u043d\u043e\u043b\u043e\u0433\u0438\u0447\u043d\u043e\u0439 \u043f\u0440\u043e\u043c\u044b\u0448\u043b\u0435\u043d\u043d\u043e\u0439 \u043f\u0440\u043e\u0434\u0443\u043a\u0446\u0438\u0438 \u00ab\u0420\u043e\u0441\u0442\u0435\u0445\u043d\u043e\u043b\u043e\u0433\u0438\u0438\u00bb",
+        "score": 113.580765,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "USA",
+          "CAN"
+        ]
+      },
+      {
+        "entity_id": "34WLo6MFrfc2gRuxLfzTkQ",
+        "matched_name": "\u041e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \u0441 \u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u043d\u043e\u0439 \u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0441\u0442\u044c\u044e \"\u0420\u043e\u0441\u0442\u0435\u0445-\u041f\u043e\u0441\u0442\u0430\u0432\u043a\u0430\"",
+        "score": 119.64359,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "jFZsZTbYgFSyhBE9jB0Qqg",
+        "matched_name": "\"\u0420\u043e\u0441\u0442\u0435\u0445-\u041f\u043e\u0441\u0442\u0430\u0432\u043a\u0430\"",
+        "score": 111.233635,
+        "match_strength": "weak",
+        "entity_type": "person",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "ug-U6-wRgfg7KZ-HGDeDuw",
+        "matched_name": "\u0413\u041a \"\u0420\u043e\u0441\u0442\u0435\u0445\"",
+        "score": 106.097466,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -48,9 +301,102 @@
     "input_country": "RUS",
     "entity_id": "uKGj1Dx23piV16B7oVDwoQ",
     "matched_name": "\u041f\u0410\u041e \"\u041d\u041a \"\u0420\u041e\u0421\u041d\u0415\u0424\u0422\u042c\"",
-    "match_strength": "value='weak'",
-    "score": 173.72234,
+    "match_strength": "weak",
+    "score": 172.19614,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "uKGj1Dx23piV16B7oVDwoQ",
+        "matched_name": "\u041f\u0410\u041e \"\u041d\u041a \"\u0420\u041e\u0421\u041d\u0415\u0424\u0422\u042c\"",
+        "score": 172.19614,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "ARE",
+          "CYP",
+          "DEU",
+          "HKG",
+          "LUX",
+          "BGR",
+          "KGZ",
+          "NLD",
+          "CAN",
+          "EST",
+          "USA",
+          "CHN",
+          "KOR"
+        ]
+      },
+      {
+        "entity_id": "M2JTaqT6c-ivoVkAY_M2yQ",
+        "matched_name": "\u041e\u041e\u041e \"\u0420\u041d-\u0410\u042d\u0420\u041e\"",
+        "score": 140.25684,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CHN",
+          "AUT",
+          "CZE",
+          "POL"
+        ]
+      },
+      {
+        "entity_id": "cG2AvslN2l7FhdO8cHEFKw",
+        "matched_name": "Rosneft Finance S.A.",
+        "score": 132.25452,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "LUX"
+        ]
+      },
+      {
+        "entity_id": "yVQLDF1VSueeyGfCNw9VoA",
+        "matched_name": "Rosneft Trade Limited",
+        "score": 131.91557,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CYP",
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "qJIyshjt_QRTYCW0TVNoDw",
+        "matched_name": "ROSNEFT TRADING S.A.",
+        "score": 117.11404,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHE",
+          "ROU",
+          "MLT",
+          "NLD",
+          "ITA",
+          "RUS",
+          "DEU",
+          "ESP",
+          "FIN",
+          "BGR",
+          "LVA",
+          "CHN",
+          "DNK",
+          "LTU",
+          "FRA",
+          "GRC",
+          "BEL",
+          "PRT",
+          "SWE"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -59,31 +405,309 @@
     "input_country": "RUS",
     "entity_id": "RZAPsBRdYXTToVqy4ZuNow",
     "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0413\u0410\u0417\u041f\u0420\u041e\u041c\"",
-    "match_strength": "value='weak'",
-    "score": 202.31256,
+    "match_strength": "weak",
+    "score": 202.20195,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "RZAPsBRdYXTToVqy4ZuNow",
+        "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0413\u0410\u0417\u041f\u0420\u041e\u041c\"",
+        "score": 202.20195,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "KAZ",
+          "USA",
+          "TKM",
+          "LVA",
+          "NLD",
+          "UKR",
+          "UZB",
+          "TUR",
+          "AZE",
+          "BEL",
+          "BGR",
+          "BRA",
+          "CHN",
+          "DZA",
+          "GEO",
+          "IND",
+          "IRN",
+          "JPN",
+          "MDA",
+          "QAT",
+          "SVK"
+        ]
+      },
+      {
+        "entity_id": "H9uGBIflUjUx_7IolJumiA",
+        "matched_name": "\u041e\u041e\u041e \"\u0413\u0430\u0437\u043f\u0440\u043e\u043c \u0433\u0435\u043e\u0440\u0435\u0441\u0443\u0440\u0441\"",
+        "score": 148.64064,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "JW1pTRkqC2gthkE17ql0Zw",
+        "matched_name": "\u041f\u0410\u041e \"\u0413\u0410\u0417\u041f\u0420\u041e\u041c \u041d\u0415\u0424\u0422\u042c\"",
+        "score": 147.65334,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "MEX",
+          "USA",
+          "HKG",
+          "CAN",
+          "AUS",
+          "CIV",
+          "SRB",
+          "JPN",
+          "KGZ",
+          "GBR"
+        ]
+      },
+      {
+        "entity_id": "iGdRbUHhBIEDwfAhqtg8Fw",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0413\u0410\u0417\u041f\u0420\u041e\u041c \u041f\u0420\u041e\u041c\u0413\u0410\u0417\"",
+        "score": 147.16357,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "0nywPKDnFqbU6eXpfW6Q5Q",
+        "matched_name": "\u041e\u041e\u041e \"\u0413\u0430\u0437\u043f\u0440\u043e\u043c \u0441\u0432\u044f\u0437\u044c\"",
+        "score": 146.52069,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
   {
     "input_name": "National Iranian Oil Company",
     "input_country": "IRN",
-    "entity_id": "xYCkQF4AB2p2YUI7EAL-YQ",
-    "matched_name": "NATIONAL IRANIAN OIL COMPANY",
-    "match_strength": "value='weak'",
-    "score": 160.80133,
+    "entity_id": "FHVL9G1S-Y0Qk4QzZxHyjQ",
+    "matched_name": "NATIONAL IRANIAN TANKER COMPANY",
+    "match_strength": "weak",
+    "score": 161.37964,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "FHVL9G1S-Y0Qk4QzZxHyjQ",
+        "matched_name": "NATIONAL IRANIAN TANKER COMPANY",
+        "score": 161.37964,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "IRN",
+          "ARE",
+          "CHN",
+          "CYP",
+          "MLT"
+        ]
+      },
+      {
+        "entity_id": "xYCkQF4AB2p2YUI7EAL-YQ",
+        "matched_name": "NATIONAL IRANIAN OIL COMPANY",
+        "score": 155.81462,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "IRN",
+          "GBR",
+          "SGP",
+          "ARE"
+        ]
+      },
+      {
+        "entity_id": "QXzneZlZ-Mj0shAdo7-YTA",
+        "matched_name": "National Iranian Oil Refining and Distribution Company",
+        "score": 148.32133,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "IRN"
+        ]
+      },
+      {
+        "entity_id": "HKMbV1WSOmItfx8y9_66Gw",
+        "matched_name": "National Iranian Oil Products Distribution Company",
+        "score": 136.86569,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "IRN"
+        ]
+      },
+      {
+        "entity_id": "8dwa26C06xN9YJCj3GrIGg",
+        "matched_name": "National Iranian Oil Engineering And Construction Company",
+        "score": 128.9018,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "IRN"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
   {
     "input_name": "Huawei Technologies Co. Ltd.",
     "input_country": "CHN",
-    "entity_id": "BLLE7w4Z6UpJqjYpJIyCDg",
-    "matched_name": "\u534e\u4e3a\u6280\u672f\u6709\u9650\u516c\u53f8",
-    "match_strength": "value='weak'",
-    "score": 139.42307,
+    "entity_id": "5n9BpqEMoMVQvMKBBKbk2g",
+    "matched_name": "HUAWEI TECHNOLOGIES CO., LTD.",
+    "match_strength": "weak",
+    "score": 148.95927,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "5n9BpqEMoMVQvMKBBKbk2g",
+        "matched_name": "HUAWEI TECHNOLOGIES CO., LTD.",
+        "score": 148.95927,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CHN",
+          "MEX",
+          "ECU",
+          "USA",
+          "AUS",
+          "CAN",
+          "UZB",
+          "ARE",
+          "CZE",
+          "KOR",
+          "NLD",
+          "GBR",
+          "HKG",
+          "BRA",
+          "KWT",
+          "KAZ",
+          "BEL",
+          "TUR",
+          "CHE",
+          "SWE",
+          "SGP",
+          "VEN",
+          "DEU",
+          "ROU",
+          "JPN",
+          "LKA",
+          "ESP",
+          "FIN",
+          "PAK",
+          "MMR",
+          "PRK",
+          "THA"
+        ]
+      },
+      {
+        "entity_id": "pL08GSdjWfp2fADBp4DmrQ",
+        "matched_name": "HUAWEI DEVICE (HONG KONG) CO., LIMITED",
+        "score": 145.83983,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN",
+          "HKG",
+          "MYS",
+          "SGP",
+          "TUR",
+          "PRT",
+          "LVA",
+          "ROU",
+          "ARE",
+          "CAN",
+          "POL",
+          "CZE",
+          "JPN",
+          "CYP",
+          "FIN",
+          "KOR",
+          "NLD",
+          "ECU",
+          "GBR",
+          "DEU",
+          "ESP",
+          "FRA",
+          "AUS",
+          "IDN"
+        ]
+      },
+      {
+        "entity_id": "DGT7evBViTjRI5N0OaNLHg",
+        "matched_name": "\u534e\u4e3a\u8f6f\u4ef6\u6280\u672f\u6709\u9650\u516c\u53f8",
+        "score": 138.02531,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN"
+        ]
+      },
+      {
+        "entity_id": "yVmiTqzPefYj10CrFzkAQg",
+        "matched_name": "\u534e\u6d77\u667a\u6c47\u6280\u672f\u6709\u9650\u516c\u53f8",
+        "score": 127.95453,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN",
+          "DEU",
+          "SWE"
+        ]
+      },
+      {
+        "entity_id": "BRr1qDpXEmaoUYTPtqQXww",
+        "matched_name": "HUAWEI TECH INVESTMENT CO LTD",
+        "score": 121.21787,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "ARG",
+          "HKG",
+          "CHN",
+          "CMR",
+          "DNK",
+          "NGA",
+          "CYP",
+          "SVK",
+          "KEN",
+          "NLD",
+          "DEU",
+          "SGP",
+          "USA",
+          "FRA",
+          "IDN",
+          "TUR"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -92,9 +716,110 @@
     "input_country": "CHN",
     "entity_id": "SOvsvbXjFuEa1qzCitrfKg",
     "matched_name": "ZTE CORPORATION",
-    "match_strength": "value='weak'",
-    "score": 136.31754,
+    "match_strength": "weak",
+    "score": 136.33157,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "SOvsvbXjFuEa1qzCitrfKg",
+        "matched_name": "ZTE CORPORATION",
+        "score": 136.33157,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN",
+          "HKG",
+          "ECU",
+          "USA",
+          "MEX",
+          "AUS",
+          "TUN",
+          "TWN",
+          "IND",
+          "CAN",
+          "ITA",
+          "ESP",
+          "DEU",
+          "KOR",
+          "EGY",
+          "BRA",
+          "ARE",
+          "SAU",
+          "FRA",
+          "BEL",
+          "JPN",
+          "RUS",
+          "KEN",
+          "CHL",
+          "SWE",
+          "BHR",
+          "CHE",
+          "JOR",
+          "VEN",
+          "GRC",
+          "NLD",
+          "SVN",
+          "DNK",
+          "NGA",
+          "TUR",
+          "WSM",
+          "CZE",
+          "IRL",
+          "MMR",
+          "PNG",
+          "AUT",
+          "GBR",
+          "LBN",
+          "ROU"
+        ]
+      },
+      {
+        "entity_id": "qqsFBdC4j7bl_WH2uuY2Eg",
+        "matched_name": "ZTE CORPORATION",
+        "score": 110.68745,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN",
+          "HKG"
+        ]
+      },
+      {
+        "entity_id": "kkBFoL9r44oa9H1hEnuWRw",
+        "matched_name": "ZTE CORPORATION",
+        "score": 110.68745,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN",
+          "HKG"
+        ]
+      },
+      {
+        "entity_id": "zO61C0upAxWWVwcOeUG1Fw",
+        "matched_name": "ZTE CORPORATION.",
+        "score": 108.28813,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "TWN"
+        ]
+      },
+      {
+        "entity_id": "Q65YnW7VWHJ5UcDjsDkTtA",
+        "matched_name": "ZTE CORPORATION.",
+        "score": 104.25615,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -102,21 +827,144 @@
     "input_name": "Hangzhou Hikvision Digital Technology Co. Ltd.",
     "input_country": "CHN",
     "entity_id": "CF2ca8pzwEMGmKrENIifNA",
-    "matched_name": "Hangzhou Hikvision Digital Technology Co., Ltd.",
-    "match_strength": "value='weak'",
-    "score": 196.19507,
+    "matched_name": "\u676d\u5dde\u6d77\u5eb7\u5a01\u89c6\u6570\u5b57\u6280\u672f\u80a1\u4efd\u6709\u9650\u516c\u53f8",
+    "match_strength": "weak",
+    "score": 183.89275,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "CF2ca8pzwEMGmKrENIifNA",
+        "matched_name": "\u676d\u5dde\u6d77\u5eb7\u5a01\u89c6\u6570\u5b57\u6280\u672f\u80a1\u4efd\u6709\u9650\u516c\u53f8",
+        "score": 183.89275,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN",
+          "MEX",
+          "USA",
+          "CAN",
+          "AUS",
+          "BRA",
+          "NZL",
+          "RUS",
+          "SGP",
+          "GBR"
+        ]
+      },
+      {
+        "entity_id": "5H3PXljo-J_x3LkrK3589w",
+        "matched_name": "\u676d\u5dde\u6d77\u5eb7\u5a01\u89c6\u6570\u5b57\u6280\u672f\u80a1\u4efd\u6709\u9650\u516c\u53f8\u6d77\u53e3\u5206\u516c\u53f8",
+        "score": 67.21832,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN"
+        ]
+      },
+      {
+        "entity_id": "snLpwTKgSBXI0GHUPYdH-A",
+        "matched_name": "\u676d\u5dde\u6d77\u5eb7\u5a01\u89c6\u6570\u5b57\u6280\u672f\u80a1\u4efd\u6709\u9650\u516c\u53f8A\u80a1|\u6d77\u5eb7\u5a01\u89c6002415.SZ",
+        "score": 60.151257,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN"
+        ]
+      },
+      {
+        "entity_id": "D1TvN5R3R8-0AEIO0QYBtQ",
+        "matched_name": "\u676d\u5dde\u6d77\u5eb7\u5a01\u89c6\u6570\u5b57\u6280\u672f\u80a1\u4efd\u6709\u9650\u516c\u53f8\u65e0\u9521\u5206\u516c\u53f8",
+        "score": 59.218327,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN"
+        ]
+      },
+      {
+        "entity_id": "sREDRqSAsJAvTcviM81EBw",
+        "matched_name": "\u676d\u5dde\u6d77\u5eb7\u5a01\u89c6\u6570\u5b57\u6280\u672f\u80a1\u4efd\u6709\u9650\u516c\u53f8\u897f\u5b89\u5206\u516c\u53f8",
+        "score": 58.218327,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
   {
-    "input_name": "Venezuelan State-Owned Oil Company (PDVSA)",
+    "input_name": "PDVSA",
     "input_country": "VEN",
     "entity_id": "tA9blnIZJ8CO-RnLHLYwqw",
     "matched_name": "PETROLEOS DE VENEZUELA S A",
     "match_strength": "weak",
-    "score": null,
-    "entity_type": null,
+    "score": 125.55348,
+    "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "tA9blnIZJ8CO-RnLHLYwqw",
+        "matched_name": "PETROLEOS DE VENEZUELA S A",
+        "score": 125.55348,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "VEN",
+          "NLD"
+        ]
+      },
+      {
+        "entity_id": "-n_KnoVJLLkifl9YmgTW5A",
+        "matched_name": "PDVSA ASFALTO",
+        "score": 138.76276,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "VEN"
+        ]
+      },
+      {
+        "entity_id": "X_VZojBPCrS-3BJkXiraDg",
+        "matched_name": "PDVSA Servicios Petroleros S.A.",
+        "score": 92.41078,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "VEN"
+        ]
+      },
+      {
+        "entity_id": "MOCvq2ImpVWc2_pSMFWCxQ",
+        "matched_name": "PDVSA CUBA, S.A.",
+        "score": 91.163,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CUB",
+          "VEN"
+        ]
+      },
+      {
+        "entity_id": "14_jJ-39E2YbTXPzJPidTw",
+        "matched_name": "PDVSA Bolivia S.A.",
+        "score": 89.62214,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "BOL"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -125,9 +973,68 @@
     "input_country": "SYR",
     "entity_id": "v6qt9ZlyXkJb5AHmURHh0g",
     "matched_name": "Syrian Arab Airlines",
-    "match_strength": "value='weak'",
-    "score": 200.3043,
+    "match_strength": "weak",
+    "score": 200.27835,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "v6qt9ZlyXkJb5AHmURHh0g",
+        "matched_name": "Syrian Arab Airlines",
+        "score": 200.27835,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "SYR"
+        ]
+      },
+      {
+        "entity_id": "NNUIQp39ujo1GSTVWgkF_A",
+        "matched_name": "SYRIAN ARAB AIRLINES CORPORATION",
+        "score": 166.89346,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "ITA",
+          "SYR"
+        ]
+      },
+      {
+        "entity_id": "FhfWdlf8ykj_inHpEMu_vw",
+        "matched_name": "SYRIAN ARAB AIRLINES CORPORATION",
+        "score": 162.89346,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "GBR",
+          "SYR"
+        ]
+      },
+      {
+        "entity_id": "ku6F7aXoOKcYGvy46k1aaA",
+        "matched_name": "SYRIAN ARAB AIRLINES",
+        "score": 152.0847,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "SYR"
+        ]
+      },
+      {
+        "entity_id": "MQ4BxryKOMShGKl8UrfjBQ",
+        "matched_name": "SOC SYRIAN ARAB AIRLINES",
+        "score": 154.96211,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "FRA",
+          "SYR"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -136,9 +1043,49 @@
     "input_country": "PRK",
     "entity_id": "743PV9hvik01AFVlWI-oTg",
     "matched_name": "Korea Mining Development Trading Corporation",
-    "match_strength": "value='weak'",
-    "score": 166.14261,
+    "match_strength": "weak",
+    "score": 168.05893,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "743PV9hvik01AFVlWI-oTg",
+        "matched_name": "Korea Mining Development Trading Corporation",
+        "score": 168.05893,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN",
+          "IRN",
+          "RUS",
+          "SYR",
+          "PRK"
+        ]
+      },
+      {
+        "entity_id": "TJy31Uko5Pkd9Nl7snClmQ",
+        "matched_name": "Tosong Technology Trading Corporation",
+        "score": 98.15877,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "PRK"
+        ]
+      },
+      {
+        "entity_id": "qobFSY9Y3fWoBxub4McHxQ",
+        "matched_name": "KOREA MINING DEVELOPMENT TRADING CORPORATION",
+        "score": 143.34485,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "PRK"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -147,9 +1094,45 @@
     "input_country": "CUB",
     "entity_id": "clqpsHHBxcbf9k6ZrXb20g",
     "matched_name": "Cubametales",
-    "match_strength": "value='weak'",
-    "score": 79.63006,
+    "match_strength": "weak",
+    "score": 79.6635,
     "entity_type": "company",
+    "confidence": "low",
+    "needs_review": true,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "clqpsHHBxcbf9k6ZrXb20g",
+        "matched_name": "Cubametales",
+        "score": 79.6635,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CUB"
+        ]
+      },
+      {
+        "entity_id": "yPMqDvYBVDqz8q9iJmlqpA",
+        "matched_name": "EMPRESA CUBANA IMPORTADORA Y EXPORTADORA DE COMBUSTIBLES Y LUBRICANTES",
+        "score": 101.961655,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CUB"
+        ]
+      },
+      {
+        "entity_id": "IYDe3vyCt1VSmuznmNP_jw",
+        "matched_name": "CUBAMETALES",
+        "score": 108.92739,
+        "match_strength": "weak",
+        "entity_type": "person",
+        "countries": [
+          "CUB"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -157,10 +1140,67 @@
     "input_name": "Myanmar Economic Corporation",
     "input_country": "MMR",
     "entity_id": "HnScpf2HFS3-Qf_x-0qwLQ",
-    "matched_name": "Myanmar Economic Corporation Limited",
-    "match_strength": "value='weak'",
-    "score": 178.50781,
+    "matched_name": "Myanmar  Economic Corporation  Limited",
+    "match_strength": "weak",
+    "score": 178.49944,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "HnScpf2HFS3-Qf_x-0qwLQ",
+        "matched_name": "Myanmar  Economic Corporation  Limited",
+        "score": 178.49944,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "MMR"
+        ]
+      },
+      {
+        "entity_id": "PNCfdPZenKKPQYzg0983yg",
+        "matched_name": "Myanmar  Economic  Holdings  Public  Company  Ltd",
+        "score": 141.57738,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "MMR"
+        ]
+      },
+      {
+        "entity_id": "RQXoEZlTjQbrcyGZFwVZew",
+        "matched_name": "INTERNATIONAL COOPERATION AND DEVELOPMENT FUND",
+        "score": 56.107,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "MMR",
+          "TWN"
+        ]
+      },
+      {
+        "entity_id": "piWxTXjgMBbPLBPFPjt9bw",
+        "matched_name": "Myanmar Economic Corporation Limited.",
+        "score": 96.82666,
+        "match_strength": "weak",
+        "entity_type": "person",
+        "countries": [
+          "MMR"
+        ]
+      },
+      {
+        "entity_id": "0tmbQY45FyHpYnJL2jfLvA",
+        "matched_name": "MYANMAR ECONOMIC CORPORATION",
+        "score": 95.57596,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "MMR"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -169,9 +1209,55 @@
     "input_country": "MMR",
     "entity_id": "PNCfdPZenKKPQYzg0983yg",
     "matched_name": "Myanmar  Economic  Holdings  Public  Company  Ltd",
-    "match_strength": "value='weak'",
-    "score": 187.1922,
+    "match_strength": "weak",
+    "score": 187.17056,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "PNCfdPZenKKPQYzg0983yg",
+        "matched_name": "Myanmar  Economic  Holdings  Public  Company  Ltd",
+        "score": 187.17056,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "MMR"
+        ]
+      },
+      {
+        "entity_id": "i9ChGdCKDOh1Htf7iGE7_w",
+        "matched_name": "Union of Burma Economic Holding Ltd.",
+        "score": 104.719025,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "MMR"
+        ]
+      },
+      {
+        "entity_id": "QAw9ttkeEnZWAVYA8JHOcA",
+        "matched_name": "MYANMAR ECONOMIC HOLDINGS LIMITED",
+        "score": 132.08261,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "MMR"
+        ]
+      },
+      {
+        "entity_id": "rIQs7Ww-Wt-Vv1ss_g59kw",
+        "matched_name": "MYANMA ECONOMIC HOLDINGS PUBLIC COMPANY LIMITED",
+        "score": 35.41693,
+        "match_strength": "weak",
+        "entity_type": "person",
+        "countries": [
+          "MMR"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -180,20 +1266,71 @@
     "input_country": "BLR",
     "entity_id": "hBbGwsQXUAZVHl-EeRmfsQ",
     "matched_name": "Sociedade por a\u00e7\u00f5es aberta \u201cBelaruskali\u201d",
-    "match_strength": "value='weak'",
-    "score": 186.06018,
+    "match_strength": "weak",
+    "score": 187.2077,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "hBbGwsQXUAZVHl-EeRmfsQ",
+        "matched_name": "Sociedade por a\u00e7\u00f5es aberta \u201cBelaruskali\u201d",
+        "score": 187.2077,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "BLR",
+          "LTU",
+          "DEU",
+          "BEL",
+          "ESP",
+          "RUS",
+          "FRA",
+          "NLD"
+        ]
+      },
+      {
+        "entity_id": "-AbOWXBCg4wwdD0BGIAuVw",
+        "matched_name": "OAO Belaruskali",
+        "score": 138.03067,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "AUT",
+          "BLR"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
   {
     "input_name": "State Development Bank VEB.RF",
     "input_country": "RUS",
-    "entity_id": "M532cb-M3JKpfCOrNwgvXQ",
-    "matched_name": "BANK BELVEB OJSC",
-    "match_strength": "value='strong'",
-    "score": 65.01172,
+    "entity_id": "vKGLHYhKWC19yOV2fGVpcw",
+    "matched_name": "State Development Corporation VEB.RF (formerly known as State Corporation Bank for Development and Foreign Economic Affairs (Vnesheconombank))",
+    "match_strength": "strong",
+    "score": 39.851032,
     "entity_type": "company",
+    "confidence": "low",
+    "needs_review": true,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "vKGLHYhKWC19yOV2fGVpcw",
+        "matched_name": "State Development Corporation VEB.RF (formerly known as State Corporation Bank for Development and Foreign Economic Affairs (Vnesheconombank))",
+        "score": 39.851032,
+        "match_strength": "strong",
+        "entity_type": "company",
+        "countries": [
+          "IRL",
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -202,9 +1339,71 @@
     "input_country": "RUS",
     "entity_id": "xH8jHy73cLhkzYVQpFDvUQ",
     "matched_name": "PROMSVYAZBANK",
-    "match_strength": "value='weak'",
-    "score": 178.15094,
+    "match_strength": "weak",
+    "score": 179.5231,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "xH8jHy73cLhkzYVQpFDvUQ",
+        "matched_name": "PROMSVYAZBANK",
+        "score": 179.5231,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CHN",
+          "IND",
+          "IRL",
+          "KGZ",
+          "CYP",
+          "UKR"
+        ]
+      },
+      {
+        "entity_id": "QP40CcYmW5rmYaCyOajPRw",
+        "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u041f\u0420\u041e\u041c\u0421\u0412\u042f\u0417\u042c\u0411\u0410\u041d\u041a\"",
+        "score": 154.07013,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "735CIklM15BImjOKWpT3xg",
+        "matched_name": "\"\u041f\u0440\u043e\u043c\u0441\u0432\u044f\u0437\u044c\u0431\u0430\u043d\u043a\"",
+        "score": 101.50265,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "AG7BVq2TOfnQX0cPrKsr0g",
+        "matched_name": "\u041f\u0410\u041e  \"\u041f\u0440\u043e\u043c\u0441\u0432\u044f\u0437\u044c\u0431\u0430\u043d\u043a\"",
+        "score": 92.957214,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "rKzdyofBlU39p2spgXaZNQ",
+        "matched_name": "PROMSVYAZBANK PAO",
+        "score": 85.965935,
+        "match_strength": "weak",
+        "entity_type": "person",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -213,9 +1412,73 @@
     "input_country": "RUS",
     "entity_id": "w_HwwyFYfw8OVwST7AoSUw",
     "matched_name": "Alfa-Bank JSC",
-    "match_strength": "value='weak'",
-    "score": 163.33945,
+    "match_strength": "weak",
+    "score": 162.47256,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "w_HwwyFYfw8OVwST7AoSUw",
+        "matched_name": "Alfa-Bank JSC",
+        "score": 162.47256,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "BLR",
+          "CYP",
+          "UKR",
+          "KAZ"
+        ]
+      },
+      {
+        "entity_id": "kQbzD3gLV4Kq4jE4mw6FxQ",
+        "matched_name": "\u0417\u0410\u041e \u0410\u043b\u044c\u0444\u0430-\u0411\u0430\u043d\u043a",
+        "score": 127.43182,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "BLR",
+          "RUS",
+          "KAZ"
+        ]
+      },
+      {
+        "entity_id": "FJleikbL56mWLTP6n_je_g",
+        "matched_name": "Alfa Bank",
+        "score": 123.10016,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "KAZ"
+        ]
+      },
+      {
+        "entity_id": "CAhgiBLYxzOXD8gjj3qFGg",
+        "matched_name": "Alfa-Bank (Belarus)",
+        "score": 115.90808,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "BLR"
+        ]
+      },
+      {
+        "entity_id": "QW9ZaT21blyq_fb2Swjgqg",
+        "matched_name": "Closed Joint-Stock Company Alfa-Bank",
+        "score": 101.17266,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "BLR",
+          "USA"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -227,17 +1490,66 @@
     "match_strength": null,
     "score": null,
     "entity_type": null,
+    "confidence": "none",
+    "needs_review": true,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [],
     "resolved": false,
     "error": "no_match"
   },
   {
-    "input_name": "Belorusskaya Kaliynaya Companya",
+    "input_name": "Belarusian Potash Company",
     "input_country": "BLR",
     "entity_id": "BSsUPVlxsICOW4GCjb4fqQ",
-    "matched_name": "Avoin osakeyhti\u00f6 Belarusian Potash Company",
+    "matched_name": "Avoin osakeyhti\u00f6 \u201dBelarusian Potash Company\u201d",
     "match_strength": "weak",
-    "score": null,
-    "entity_type": null,
+    "score": 215.32603,
+    "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "BSsUPVlxsICOW4GCjb4fqQ",
+        "matched_name": "Avoin osakeyhti\u00f6 \u201dBelarusian Potash Company\u201d",
+        "score": 215.32603,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "BLR",
+          "RUS",
+          "LTU",
+          "CHN",
+          "IND",
+          "DEU",
+          "TUR",
+          "AUS",
+          "USA"
+        ]
+      },
+      {
+        "entity_id": "WWj24UNzBY_gMkshByiaIQ",
+        "matched_name": "Belarusian Potash Company",
+        "score": 146.64517,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "BLR"
+        ]
+      },
+      {
+        "entity_id": "0JGXMMAvMK1lwYq5H5QM2w",
+        "matched_name": "JSC Belarusian Potash Company",
+        "score": 149.9432,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "IND"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -246,9 +1558,46 @@
     "input_country": "BLR",
     "entity_id": "kdOb4CZZrQ-yJpITOfuP0A",
     "matched_name": "Additional Liability Company Belneftegaz",
-    "match_strength": "value='weak'",
-    "score": 140.1865,
+    "match_strength": "weak",
+    "score": 139.5397,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "kdOb4CZZrQ-yJpITOfuP0A",
+        "matched_name": "Additional Liability Company Belneftegaz",
+        "score": 139.5397,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "BLR",
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "H_wOZWSRdq2QqaBYkD58EQ",
+        "matched_name": "BELNEFTEGAZ",
+        "score": 100.71957,
+        "match_strength": "weak",
+        "entity_type": "person",
+        "countries": [
+          "BLR"
+        ]
+      },
+      {
+        "entity_id": "7VrKpHKfNrWYpZYmRAmRkQ",
+        "matched_name": "ALC BELNEFTEGAZ",
+        "score": 95.77874,
+        "match_strength": "weak",
+        "entity_type": "person",
+        "countries": [
+          "BLR"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -257,9 +1606,37 @@
     "input_country": "RUS",
     "entity_id": "IqT-ciRIQc9XuMllE0Acpw",
     "matched_name": "Bank Rossiya",
-    "match_strength": "value='weak'",
-    "score": 157.31213,
+    "match_strength": "weak",
+    "score": 156.47133,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "IqT-ciRIQc9XuMllE0Acpw",
+        "matched_name": "Bank Rossiya",
+        "score": 156.47133,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "USA",
+          "CYP"
+        ]
+      },
+      {
+        "entity_id": "YtxfUZ8Bon6Qi3CA-t7Z9Q",
+        "matched_name": "\u041e\u0410\u041e \"\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u044b\u0439 \u0411\u0430\u043d\u043a \"\u0420\u041e\u0421\u0421\u0418\u042f\" \u0422\u0430\u043c\u0431\u043e\u0432\u0441\u043a\u0438\u0439 \u0444\u0438\u043b\u0438\u0430\u043b",
+        "score": 71.007484,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -268,9 +1645,66 @@
     "input_country": "RUS",
     "entity_id": "E_NabEdOK7AokStLfvF1rQ",
     "matched_name": "\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u044b\u0439 \u041a\u043e\u043c\u043c\u0435\u0440\u0447\u0435\u0441\u043a\u0438\u0439 \u0411\u0430\u043d\u043a \u041d\u043e\u0432\u0438\u043a\u043e\u043c\u0431\u0430\u043d\u043a \u0430\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e",
-    "match_strength": "value='weak'",
-    "score": 173.82451,
+    "match_strength": "weak",
+    "score": 173.91068,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "E_NabEdOK7AokStLfvF1rQ",
+        "matched_name": "\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u044b\u0439 \u041a\u043e\u043c\u043c\u0435\u0440\u0447\u0435\u0441\u043a\u0438\u0439 \u0411\u0430\u043d\u043a \u041d\u043e\u0432\u0438\u043a\u043e\u043c\u0431\u0430\u043d\u043a \u0430\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e",
+        "score": 173.91068,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "BRA"
+        ]
+      },
+      {
+        "entity_id": "4QaMY1WzyyNwFu0JginOjA",
+        "matched_name": "\u0417\u0410\u041e \u0410\u041a\u0411 \"\u041d\u041e\u0412\u0418\u041a\u041e\u041c\u0411\u0410\u041d\u041a\"",
+        "score": 97.63324,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "lqt5zxu4MYaweBc5RFWdew",
+        "matched_name": "\u0417\u0410\u041e \u0410\u041a\u0411 \"\u041d\u043e\u0432\u0438\u043a\u043e\u043c\u0431\u0430\u043d\u043a\"",
+        "score": 93.63324,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "2TUrfU3hWV2Usgvyz5OJMg",
+        "matched_name": "\u0424\u0438\u043b\u0438\u0430\u043b \u0410\u041e \u0410\u041a\u0411 \u00ab\u041d\u041e\u0412\u0418\u041a\u041e\u041c\u0411\u0410\u041d\u041a\u00bb",
+        "score": 93.21595,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "Wn8QHjTvRencTJOxK1Gjtg",
+        "matched_name": "\u0424\u0438\u043b\u0438\u0430\u043b \u0410\u041e \u0410\u041a\u0411 \u00ab\u041d\u041e\u0412\u0418\u041a\u041e\u041c\u0411\u0410\u041d\u041a\u00bb",
+        "score": 93.21595,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -279,9 +1713,66 @@
     "input_country": "RUS",
     "entity_id": "GGHASgIP4hQ3e180IDb8Qw",
     "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0421\u041e\u0412\u041a\u041e\u041c\u0411\u0410\u041d\u041a\"",
-    "match_strength": "value='weak'",
-    "score": 174.40869,
+    "match_strength": "weak",
+    "score": 175.43712,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "GGHASgIP4hQ3e180IDb8Qw",
+        "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0421\u041e\u0412\u041a\u041e\u041c\u0411\u0410\u041d\u041a\"",
+        "score": 175.43712,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CYP"
+        ]
+      },
+      {
+        "entity_id": "BseIzrkqC0FV7uI7UvtIkQ",
+        "matched_name": "AKTSIONERNOE OBSHCHESTVO SOVKOMBANK STRAKHOVANIE",
+        "score": 145.61786,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "LXoYJI_5pWV2JlI8ykPRjQ",
+        "matched_name": "SOLLERS-FINANCE LIMITED LIABILITY COMPANY",
+        "score": 124.69293,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "-aQZamESzkg-PXBGvf9orQ",
+        "matched_name": "SOVCOMBANK FACTORING LIMITED LIABILITY COMPANY",
+        "score": 119.92177,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "5QbJ0I-zkcelCJfs19okoA",
+        "matched_name": "SOVCOMBANK TECHNOLOGIES LIMITED LIABILITY COMPANY",
+        "score": 115.16667,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -290,9 +1781,72 @@
     "input_country": "RUS",
     "entity_id": "fcyGF6c60wnDy29rB3IWiQ",
     "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0411\u0410\u041d\u041a \"\u0424\u0418\u041d\u0410\u041d\u0421\u041e\u0412\u0410\u042f \u041a\u041e\u0420\u041f\u041e\u0420\u0410\u0426\u0418\u042f \u041e\u0422\u041a\u0420\u042b\u0422\u0418\u0415\"",
-    "match_strength": "value='weak'",
-    "score": 161.00732,
+    "match_strength": "weak",
+    "score": 157.29712,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "fcyGF6c60wnDy29rB3IWiQ",
+        "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0411\u0410\u041d\u041a \"\u0424\u0418\u041d\u0410\u041d\u0421\u041e\u0412\u0410\u042f \u041a\u041e\u0420\u041f\u041e\u0420\u0410\u0426\u0418\u042f \u041e\u0422\u041a\u0420\u042b\u0422\u0418\u0415\"",
+        "score": 157.29712,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CYP",
+          "USA",
+          "KAZ",
+          "ITA"
+        ]
+      },
+      {
+        "entity_id": "ApjJGWFV6grsy-Pj4Aop5g",
+        "matched_name": "Otkritie Broker Group",
+        "score": 115.78009,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CYP"
+        ]
+      },
+      {
+        "entity_id": "zE0Z5y2y07b4FnMvOTh7ag",
+        "matched_name": "\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \"\u041e\u0442\u043a\u0440\u044b\u0442\u0438\u0435 \u0425\u043e\u043b\u0434\u0438\u043d\u0433\"",
+        "score": 131.77496,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CYP",
+          "USA"
+        ]
+      },
+      {
+        "entity_id": "WxWzKkni4Pgmco6Syb6Ktw",
+        "matched_name": "\u041f\u0443\u0431\u043b\u0438\u0447\u043d\u043e\u0435 \u0430\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \"\u0425\u0430\u043d\u0442\u044b-\u041c\u0430\u043d\u0441\u0438\u0439\u0441\u043a\u0438\u0439 \u0431\u0430\u043d\u043a \u041e\u0442\u043a\u0440\u044b\u0442\u0438\u0435\"",
+        "score": 112.93707,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "HQ28Oy9kb3GUVb4YIfLDvg",
+        "matched_name": "\u041e\u0442\u043a\u0440\u044b\u0442\u043e\u0435 \u0430\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \u0411\u0430\u043d\u043a \"\u041e\u0422\u041a\u0420\u042b\u0422\u0418\u0415\"",
+        "score": 111.130066,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -301,9 +1855,67 @@
     "input_country": "RUS",
     "entity_id": "1SPZkpmp0pW3kKdLrE027g",
     "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0422\u0420\u0410\u041d\u0421\u041d\u0415\u0424\u0422\u042c",
-    "match_strength": "value='weak'",
-    "score": 153.73956,
+    "match_strength": "weak",
+    "score": 153.75864,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "1SPZkpmp0pW3kKdLrE027g",
+        "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0422\u0420\u0410\u041d\u0421\u041d\u0415\u0424\u0422\u042c",
+        "score": 153.75864,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CZE",
+          "HUN"
+        ]
+      },
+      {
+        "entity_id": "PoiyFJOvMgkMKye5auOTmw",
+        "matched_name": "\u041e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \u0441 \u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u043d\u043e\u0439 \u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0441\u0442\u044c\u044e \u00ab\u0422\u0440\u0430\u043d\u0441\u043d\u0435\u0444\u0442\u044c \u0424\u0438\u043d\u0430\u043d\u0441\u00bb",
+        "score": 151.1503,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "QTkbROY0AUS35X9Imk-y2w",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0422\u0420\u0410\u041d\u0421\u041d\u0415\u0424\u0422\u042c-\u041f\u041e\u0414\u0412\u041e\u0414\u0421\u0415\u0420\u0412\u0418\u0421\"",
+        "score": 149.7405,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "Q_a6peTJ1kY_9fGeFOBCcQ",
+        "matched_name": "TRANSNEFT-METROLOGIYA, AO",
+        "score": 148.9229,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "Eal_v09vR3YA8pWSqSgS5g",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0422\u0420\u0410\u041d\u0421\u041d\u0415\u0424\u0422\u042c - \u0414\u0418\u0410\u0421\u041a\u0410\u041d\"",
+        "score": 145.7803,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -311,10 +1923,88 @@
     "input_name": "Russian Railways",
     "input_country": "RUS",
     "entity_id": "RqBOnCZOD5pWG-tCf8wr8A",
-    "matched_name": "\u041e\u0422\u041a\u0420\u042b\u0422\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0420\u041e\u0421\u0421\u0418\u0419\u0421\u041a\u0418\u0415 \u0416\u0415\u041b\u0415\u0417\u041d\u042b\u0415 \u0414\u041e\u0420\u041e\u0413\u0418\"",
-    "match_strength": "value='weak'",
-    "score": 146.10805,
+    "matched_name": "Russian Railways JSC",
+    "match_strength": "weak",
+    "score": 146.69414,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "RqBOnCZOD5pWG-tCf8wr8A",
+        "matched_name": "Russian Railways JSC",
+        "score": 146.69414,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "MEX",
+          "AUS",
+          "USA",
+          "BLR",
+          "CAN",
+          "CHN",
+          "DEU",
+          "EST",
+          "FIN",
+          "HUN",
+          "IRN",
+          "POL",
+          "PRK",
+          "SVK",
+          "UKR",
+          "FRA"
+        ]
+      },
+      {
+        "entity_id": "iwcZLBPWwHqFz-mhXn8BWQ",
+        "matched_name": "\u041e\u0422\u041a\u0420\u042b\u0422\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0420\u041e\u0421\u0421\u0418\u0419\u0421\u041a\u0418\u0415 \u0416\u0415\u041b\u0415\u0417\u041d\u042b\u0415 \u0414\u041e\u0420\u041e\u0413\u0418\"",
+        "score": 127.4988,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "MLT",
+          "FRA",
+          "KAZ"
+        ]
+      },
+      {
+        "entity_id": "lBY5dA0J0xgoP_EXIeN_Jg",
+        "matched_name": "\u041e\u041e\u041e \"\u0414\u0418\u0410\u041b\u041a\u041e\u041d \u0422\u0415\u0425\u041d\u041e\u041b\u041e\u0414\u0416\u0418\"",
+        "score": 124.85137,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CHN",
+          "KAZ"
+        ]
+      },
+      {
+        "entity_id": "dEjJZ-o8PoWqYQxSABMeAg",
+        "matched_name": "\u0424\u0415\u0414\u0415\u0420\u0410\u041b\u042c\u041d\u041e\u0415 \u0413\u041e\u0421\u0423\u0414\u0410\u0420\u0421\u0422\u0412\u0415\u041d\u041d\u041e\u0415 \u041f\u0420\u0415\u0414\u041f\u0420\u0418\u042f\u0422\u0418\u0415 \"\u0412\u0415\u0414\u041e\u041c\u0421\u0422\u0412\u0415\u041d\u041d\u0410\u042f \u041e\u0425\u0420\u0410\u041d\u0410 \u0416\u0415\u041b\u0415\u0417\u041d\u041e\u0414\u041e\u0420\u041e\u0416\u041d\u041e\u0413\u041e \u0422\u0420\u0410\u041d\u0421\u041f\u041e\u0420\u0422\u0410 \u0420\u041e\u0421\u0421\u0418\u0419\u0421\u041a\u041e\u0419 \u0424\u0415\u0414\u0415\u0420\u0410\u0426\u0418\u0418\"",
+        "score": 104.56328,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "CAjZ5Wn9-ApiiknnkN_oeQ",
+        "matched_name": "\u041e\u0442\u043a\u0440\u044b\u0442\u043e\u0435 \u0430\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \u00ab\u041a\u0420\u041f-\u0418\u043d\u0432\u0435\u0441\u0442\u00bb",
+        "score": 98.7923,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "SGP"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -323,9 +2013,67 @@
     "input_country": "RUS",
     "entity_id": "T8xxeh7qY1AW7ISrGZKLdQ",
     "matched_name": "\u041f\u0410\u041e \"\u041e\u0411\u042a\u0415\u0414\u0418\u041d\u0415\u041d\u041d\u0410\u042f \u0410\u0412\u0418\u0410\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u0410\u042f \u041a\u041e\u0420\u041f\u041e\u0420\u0410\u0426\u0418\u042f\"",
-    "match_strength": "value='weak'",
-    "score": 133.1939,
+    "match_strength": "weak",
+    "score": 132.70035,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "T8xxeh7qY1AW7ISrGZKLdQ",
+        "matched_name": "\u041f\u0410\u041e \"\u041e\u0411\u042a\u0415\u0414\u0418\u041d\u0415\u041d\u041d\u0410\u042f \u0410\u0412\u0418\u0410\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u0410\u042f \u041a\u041e\u0420\u041f\u041e\u0420\u0410\u0426\u0418\u042f\"",
+        "score": 132.70035,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CHN",
+          "USA"
+        ]
+      },
+      {
+        "entity_id": "33ZjYU6JWsWoFH2_G43OAA",
+        "matched_name": "Nizhny Novgorod Sokol Aircraft Plant",
+        "score": 113.92873,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "SRmoipwI1afQ1w6pwuYMYA",
+        "matched_name": "United Aircraft Corporation",
+        "score": 102.56153,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "prGswcTsMm_i_KZ6Tp5Zug",
+        "matched_name": "Public Joint Stock Company United Aircraft Corporation",
+        "score": 96.16372,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "h7ppJbHa5hV1pFj2tBM0QA",
+        "matched_name": "KOMSOMOLSK-ON-AMUR AIRCRAFT PLANT",
+        "score": 83.44522,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -334,9 +2082,65 @@
     "input_country": "RUS",
     "entity_id": "C5evl7eZKYvMMZHtGrm5UQ",
     "matched_name": "\u0410\u041e \"\u041e\u0411\u042a\u0415\u0414\u0418\u041d\u0415\u041d\u041d\u0410\u042f \u0421\u0423\u0414\u041e\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u0410\u042f \u041a\u041e\u0420\u041f\u041e\u0420\u0410\u0426\u0418\u042f\" \u0427\u0415\u0420\u0415\u0417 \u0410\u041e \"\u041f\u0421\u0417 \"\u042f\u041d\u0422\u0410\u0420\u042c\"",
-    "match_strength": "value='weak'",
-    "score": 135.13126,
+    "match_strength": "weak",
+    "score": 135.5922,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "C5evl7eZKYvMMZHtGrm5UQ",
+        "matched_name": "\u0410\u041e \"\u041e\u0411\u042a\u0415\u0414\u0418\u041d\u0415\u041d\u041d\u0410\u042f \u0421\u0423\u0414\u041e\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u0410\u042f \u041a\u041e\u0420\u041f\u041e\u0420\u0410\u0426\u0418\u042f\" \u0427\u0415\u0420\u0415\u0417 \u0410\u041e \"\u041f\u0421\u0417 \"\u042f\u041d\u0422\u0410\u0420\u042c\"",
+        "score": 135.5922,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "2LlstOOQKWJMpGhiph87IA",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u041f\u0420\u0418\u0411\u0410\u041b\u0422\u0418\u0419\u0421\u041a\u0418\u0419 \u0421\u0423\u0414\u041e\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u042b\u0419 \u0417\u0410\u0412\u041e\u0414 \"\u042f\u041d\u0422\u0410\u0420\u042c\"",
+        "score": 117.5815,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "-7tJhjA_TNu-JD98ZKwcyQ",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0421\u0420\u0415\u0414\u041d\u0415-\u041d\u0415\u0412\u0421\u041a\u0418\u0419 \u0421\u0423\u0414\u041e\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u042b\u0419 \u0417\u0410\u0412\u041e\u0414\"",
+        "score": 116.6473,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "UTqozNydpeMkK77bVml1Xg",
+        "matched_name": "\u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0421 \u041e\u0413\u0420\u0410\u041d\u0418\u0427\u0415\u041d\u041d\u041e\u0419 \u041e\u0422\u0412\u0415\u0422\u0421\u0422\u0412\u0415\u041d\u041d\u041e\u0421\u0422\u042c\u042e \"\u0411\u0410\u041b\u0422\u0418\u0419\u0421\u041a\u0418\u0419 \u0417\u0410\u0412\u041e\u0414 - \u0421\u0423\u0414\u041e\u0421\u0422\u0420\u041e\u0415\u041d\u0418\u0415\"",
+        "score": 115.06615,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "9fiGgW8JSHDcfCUeKnVMXA",
+        "matched_name": "\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \"\u0411\u0430\u043b\u0442\u0438\u0439\u0441\u043a\u0438\u0439 \u0437\u0430\u0432\u043e\u0434\"",
+        "score": 106.331314,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -345,9 +2149,67 @@
     "input_country": "RUS",
     "entity_id": "7h4KiPgnAb6t497bGQSXRA",
     "matched_name": "\u041f\u0410\u041e \"\u041a\u0410\u041c\u0410\u0417\"",
-    "match_strength": "value='weak'",
-    "score": 140.0025,
+    "match_strength": "weak",
+    "score": 139.92578,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "7h4KiPgnAb6t497bGQSXRA",
+        "matched_name": "\u041f\u0410\u041e \"\u041a\u0410\u041c\u0410\u0417\"",
+        "score": 139.92578,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CYP",
+          "AUT"
+        ]
+      },
+      {
+        "entity_id": "cN3bRfBzdUeSXsUuKSRaOw",
+        "matched_name": "\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \"\u0422\u041e\u0420\u0413\u041e\u0412\u041e-\u0424\u0418\u041d\u0410\u041d\u0421\u041e\u0412\u0410\u042f \u041a\u041e\u041c\u041f\u0410\u041d\u0418\u042f \"\u041a\u0410\u041c\u0410\u0417\"",
+        "score": 136.69264,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "2QZ-RxEkV1UOUev5o8vGSg",
+        "matched_name": "\u0410\u041e \"\u041a\u0410\u041c\u0410 \u0414\u0418\u0417\u0415\u041b\u042c\"",
+        "score": 124.68469,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "lJtvxqUoHKjTWAt3z24YTw",
+        "matched_name": "\u041e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \u0441 \u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u043d\u043e\u0439 \u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0441\u0442\u044c\u044e \u00ab\u0418\u043d\u043d\u043e\u0432\u0430\u0446\u0438\u043e\u043d\u043d\u044b\u0439 \u0446\u0435\u043d\u0442\u0440 \u00ab\u041a\u0410\u041c\u0410\u0417\u00bb",
+        "score": 106.32276,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "EVDxXEqvj5PlZeMn8dYPiw",
+        "matched_name": "KAMAZ Publicly Traded Company",
+        "score": 77.73073,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -356,9 +2218,65 @@
     "input_country": "RUS",
     "entity_id": "9N2v17i-iAzuwbG9aTV_ng",
     "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u041f\u0420\u041e\u0418\u0417\u0412\u041e\u0414\u0421\u0422\u0412\u0415\u041d\u041d\u041e\u0415 \u041e\u0411\u042a\u0415\u0414\u0418\u041d\u0415\u041d\u0418\u0415 \"\u0421\u0415\u0412\u0415\u0420\u041d\u041e\u0415 \u041c\u0410\u0428\u0418\u041d\u041e\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u041e\u0415 \u041f\u0420\u0415\u0414\u041f\u0420\u0418\u042f\u0422\u0418\u0415\"",
-    "match_strength": "value='weak'",
-    "score": 127.42208,
+    "match_strength": "weak",
+    "score": 123.37545,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "9N2v17i-iAzuwbG9aTV_ng",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u041f\u0420\u041e\u0418\u0417\u0412\u041e\u0414\u0421\u0422\u0412\u0415\u041d\u041d\u041e\u0415 \u041e\u0411\u042a\u0415\u0414\u0418\u041d\u0415\u041d\u0418\u0415 \"\u0421\u0415\u0412\u0415\u0420\u041d\u041e\u0415 \u041c\u0410\u0428\u0418\u041d\u041e\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u041e\u0415 \u041f\u0420\u0415\u0414\u041f\u0420\u0418\u042f\u0422\u0418\u0415\"",
+        "score": 123.37545,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "vsfdMzq-kfBZp1qS9nZDZw",
+        "matched_name": "JSC PO Sevmash",
+        "score": 121.87659,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "-HtNhPaw2S5m9Yct4T12fQ",
+        "matched_name": "United Shipbuilding Corporation \u201cProduction Association Northern Machine Building Enterprise\u201d",
+        "score": 72.93051,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "iiTpdPZBTVr_PEVvO5tZYQ",
+        "matched_name": "\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \u00ab\u0421\u0435\u0432\u043c\u0430\u0448-\u0428\u0435\u043b\u044c\u0444\u00bb",
+        "score": 121.61389,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "1gmc6s8XfC84DAV4OYI0XQ",
+        "matched_name": "\"\u041f\u041e\"\u0421\u0435\u0432\u043c\u0430\u0448\"",
+        "score": 90.56377,
+        "match_strength": "weak",
+        "entity_type": "person",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -367,9 +2285,65 @@
     "input_country": "RUS",
     "entity_id": "d2TgQkN7TkoPuE9fvnV9Xw",
     "matched_name": "\u0410\u041e \"\u041a\u041e\u041d\u0426\u0415\u0420\u041d \u0412\u041a\u041e \"\u0410\u041b\u041c\u0410\u0417-\u0410\u041d\u0422\u0415\u0419\"",
-    "match_strength": "value='weak'",
-    "score": 177.44308,
+    "match_strength": "weak",
+    "score": 178.22128,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "d2TgQkN7TkoPuE9fvnV9Xw",
+        "matched_name": "\u0410\u041e \"\u041a\u041e\u041d\u0426\u0415\u0420\u041d \u0412\u041a\u041e \"\u0410\u041b\u041c\u0410\u0417-\u0410\u041d\u0422\u0415\u0419\"",
+        "score": 178.22128,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "yxb4Vw9EsfllQ_NcEhq10A",
+        "matched_name": "\u041e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \u0441 \u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u043d\u043e\u0439 \u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0441\u0442\u044c\u044e \"\u0410\u043b\u043c\u0430\u0437-\u0410\u043d\u0442\u0435\u0439 \u0422\u0435\u043b\u0435\u043a\u043e\u043c\u043c\u0443\u043d\u0438\u043a\u0430\u0446\u0438\u0438\"",
+        "score": 174.87381,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "jTs-aF5no3RFVlNFe7mcSQ",
+        "matched_name": "Joint Stock Company North Western Regional Center of Almaz Antey Concern Obukhovsky Plant",
+        "score": 139.7998,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "zo-ZGb6HGy47ytTsQf9fcw",
+        "matched_name": "Almaz-Antey",
+        "score": 134.73166,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "2rukjWCf2yY_jJqnqO3URg",
+        "matched_name": "Joint-Stock Company Concern Almaz-Antey",
+        "score": 132.75418,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -378,9 +2352,65 @@
     "input_country": "RUS",
     "entity_id": "kpydBqvXd0I81sqNynYMPA",
     "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e  \"\u0423\u0420\u0410\u041b\u042c\u0421\u041a\u0410\u042f \u0411\u041e\u041b\u042c\u0428\u0415\u0413\u0420\u0423\u0417\u041d\u0410\u042f \u0422\u0415\u0425\u041d\u0418\u041a\u0410-\u0423\u0420\u0410\u041b\u0412\u0410\u0413\u041e\u041d\u0417\u0410\u0412\u041e\u0414\"",
-    "match_strength": "value='weak'",
-    "score": 161.14911,
+    "match_strength": "weak",
+    "score": 160.7417,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "kpydBqvXd0I81sqNynYMPA",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e  \"\u0423\u0420\u0410\u041b\u042c\u0421\u041a\u0410\u042f \u0411\u041e\u041b\u042c\u0428\u0415\u0413\u0420\u0423\u0417\u041d\u0410\u042f \u0422\u0415\u0425\u041d\u0418\u041a\u0410-\u0423\u0420\u0410\u041b\u0412\u0410\u0413\u041e\u041d\u0417\u0410\u0412\u041e\u0414\"",
+        "score": 160.7417,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "C15bPgduSxY5hItn-SBs3g",
+        "matched_name": "\u0417\u0410\u041e \u00ab\u0423\u0440\u0430\u043b\u0412\u0430\u0433\u043e\u043d\u0417\u0430\u0432\u043e\u0434-\u0422\u0440\u0430\u043d\u0441\u00bb",
+        "score": 153.39285,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "sdzf36qy5ISk0iY1Yvs4pg",
+        "matched_name": "Joint Stock Company Concern Uralvagonzavod",
+        "score": 121.47751,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "drNKhPh3FNQkNAEFvgPAnw",
+        "matched_name": "Uralvagonzavod",
+        "score": 117.28222,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "KXbxIwSDEkZpJjmoqPkToA",
+        "matched_name": "Uralvagonzavod",
+        "score": 101.09449,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -389,9 +2419,68 @@
     "input_country": "RUS",
     "entity_id": "zqpMddadf94y39RfB3AgcA",
     "matched_name": "Kalashnikov Concern",
-    "match_strength": "value='weak'",
-    "score": 189.91663,
+    "match_strength": "weak",
+    "score": 190.03668,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "zqpMddadf94y39RfB3AgcA",
+        "matched_name": "Kalashnikov Concern",
+        "score": 190.03668,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "SyiWoXAi7JAAOfdzOWpBDQ",
+        "matched_name": "\u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0421 \u041e\u0413\u0420\u0410\u041d\u0418\u0427\u0415\u041d\u041d\u041e\u0419 \u041e\u0422\u0412\u0415\u0422\u0421\u0422\u0412\u0415\u041d\u041d\u041e\u0421\u0422\u042c\u042e \"\u0418\u041d\u041d\u041e\u0412\u0410\u0426\u0418\u041e\u041d\u041d\u042b\u0419 \u0426\u0415\u041d\u0422\u0420 \"\u041a\u041e\u041d\u0426\u0415\u0420\u041d\u0410 \"\u041a\u0410\u041b\u0410\u0428\u041d\u0418\u041a\u041e\u0412\"\"",
+        "score": 169.41309,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "Siogj2_Mz7EDUiZWyqat2g",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u041a\u041e\u041d\u0426\u0415\u0420\u041d \"\u041a\u0410\u041b\u0410\u0428\u041d\u0418\u041a\u041e\u0412\"",
+        "score": 152.48965,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "AUS",
+          "USA",
+          "CAN"
+        ]
+      },
+      {
+        "entity_id": "FFJFIE2KWO2GaPp8GGCcIQ",
+        "matched_name": "Kalashnikov Concern",
+        "score": 111.58234,
+        "match_strength": "weak",
+        "entity_type": "person",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "DQRH8RDpR2qJm9zRrX--gA",
+        "matched_name": "Kalashnikov Concern",
+        "score": 103.58234,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -400,9 +2489,45 @@
     "input_country": "RUS",
     "entity_id": "DSdGMprorXMqoAktAQpqYg",
     "matched_name": "JSC NPO High Precision Systems",
-    "match_strength": "value='weak'",
-    "score": 158.20035,
+    "match_strength": "weak",
+    "score": 158.54926,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "DSdGMprorXMqoAktAQpqYg",
+        "matched_name": "JSC NPO High Precision Systems",
+        "score": 158.54926,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "ovrLII3hXNggbJr9SyHcjg",
+        "matched_name": "NPO High Precision Systems JSC",
+        "score": 138.77264,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "4rZ1JJKzuuqPOogbpkC7bQ",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u041d\u041f\u041e \u0412\u042b\u0421\u041e\u041a\u041e\u0422\u041e\u0427\u041d\u042b\u0415 \u0421\u0418\u0421\u0422\u0415\u041c\u042b \u0418 \u0422\u0415\u0425\u041d\u041e\u041b\u041e\u0413\u0418\u0418\"",
+        "score": 115.7866,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -411,9 +2536,66 @@
     "input_country": "RUS",
     "entity_id": "_vTC8Me3RSuPhcn6mVWx2w",
     "matched_name": "Tactical Missiles Corporation JSC",
-    "match_strength": "value='weak'",
-    "score": 163.89795,
+    "match_strength": "weak",
+    "score": 163.72055,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "_vTC8Me3RSuPhcn6mVWx2w",
+        "matched_name": "Tactical Missiles Corporation JSC",
+        "score": 163.72055,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "MMTM3hkCecHgP_pcfpEhHw",
+        "matched_name": "Tactical Missiles Corporation JSC",
+        "score": 160.30463,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "UKR"
+        ]
+      },
+      {
+        "entity_id": "AA4OUgwJ2bjTZoqibmI9SQ",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u041a\u0420\u0410\u0421\u041d\u042b\u0419 \u0413\u0418\u0414\u0420\u041e\u041f\u0420\u0415\u0421\u0421\"",
+        "score": 148.8686,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "Dxq8F6ItV7e11f3AWf4awQ",
+        "matched_name": "\u041e\u0442\u043a\u0440\u044b\u0442\u043e\u0435 \u0430\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \"\u0412\u0435\u0440\u0445\u043d\u0435\u0443\u0444\u0430\u043b\u0435\u0439\u0441\u043a\u0438\u0439 \u0437\u0430\u0432\u043e\u0434 \"\u0423\u0440\u0430\u043b\u044d\u043b\u0435\u043c\u0435\u043d\u0442\"",
+        "score": 127.60663,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "RInUvgXCwO4Sukz9_l9kHA",
+        "matched_name": "Aktsionernoe Obshchestvo Elektrotyaga",
+        "score": 126.79776,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -422,9 +2604,35 @@
     "input_country": "RUS",
     "entity_id": "GIVMkDyqah36h-CCfdtQJg",
     "matched_name": "NPK Tekhmash OAO",
-    "match_strength": "value='weak'",
-    "score": 135.57321,
+    "match_strength": "weak",
+    "score": 137.95883,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "GIVMkDyqah36h-CCfdtQJg",
+        "matched_name": "NPK Tekhmash OAO",
+        "score": 137.95883,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "NT1aeV-iuQHoBph-HWftBg",
+        "matched_name": "NPK Tekhmash OAO",
+        "score": 105.01621,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -433,9 +2641,36 @@
     "input_country": "RUS",
     "entity_id": "fgqxIqm6DgNRyri_hjWioA",
     "matched_name": "MOLOT-ORUZHIE, OOO",
-    "match_strength": "value='weak'",
-    "score": 196.46921,
+    "match_strength": "weak",
+    "score": 198.40416,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "fgqxIqm6DgNRyri_hjWioA",
+        "matched_name": "MOLOT-ORUZHIE, OOO",
+        "score": 198.40416,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "USA"
+        ]
+      },
+      {
+        "entity_id": "9zlXCQTr9BSfRkPaYgTuWg",
+        "matched_name": "REPRESENTATIVE OFFICE OF MOLOT-ORUZHIE LLC IN MOSCOW",
+        "score": 102.93082,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -444,9 +2679,45 @@
     "input_country": "RUS",
     "entity_id": "OnByUNAhTU9SYfzDmox5Ww",
     "matched_name": "\u041e\u041e\u041e\"\u0420\u0423\u0421\u0422\u042d\u041a-\u0422\u0420\u0415\u0419\u0414\u0418\u041d\u0413\"",
-    "match_strength": "value='weak'",
-    "score": 107.41313,
+    "match_strength": "weak",
+    "score": 107.40246,
     "entity_type": "company",
+    "confidence": "low",
+    "needs_review": true,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "OnByUNAhTU9SYfzDmox5Ww",
+        "matched_name": "\u041e\u041e\u041e\"\u0420\u0423\u0421\u0422\u042d\u041a-\u0422\u0420\u0415\u0419\u0414\u0418\u041d\u0413\"",
+        "score": 107.40246,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "3xfNixaimS7NyZ20rb0nRw",
+        "matched_name": "\u0420\u0423\u0421\u0422\u042d\u041a",
+        "score": 82.08759,
+        "match_strength": "weak",
+        "entity_type": "person",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "T3Xf0uAERXBbLq2zp99SGw",
+        "matched_name": "\u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0421 \u041e\u0413\u0420\u0410\u041d\u0418\u0427\u0415\u041d\u041d\u041e\u0419 \u041e\u0422\u0412\u0415\u0422\u0421\u0422\u0412\u0415\u041d\u041d\u041e\u0421\u0422\u042c\u042e \"\u0420\u0423\u0421\u0422\u0415\u0425\"",
+        "score": 71.324844,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -455,9 +2726,70 @@
     "input_country": "RUS",
     "entity_id": "9LtTGZXn_LlN05C47cwZ5w",
     "matched_name": "\u0410\u041e \"\u0420\u041e\u0421\u041e\u0411\u041e\u0420\u041e\u041d\u042d\u041a\u0421\u041f\u041e\u0420\u0422\"",
-    "match_strength": "value='weak'",
-    "score": 164.68108,
+    "match_strength": "weak",
+    "score": 165.3583,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "9LtTGZXn_LlN05C47cwZ5w",
+        "matched_name": "\u0410\u041e \"\u0420\u041e\u0421\u041e\u0411\u041e\u0420\u041e\u041d\u042d\u041a\u0421\u041f\u041e\u0420\u0422\"",
+        "score": 165.3583,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "USA",
+          "MMR",
+          "AUS",
+          "KOR"
+        ]
+      },
+      {
+        "entity_id": "_EFN9auxFKILdVjiY1nC3A",
+        "matched_name": "JSC ROSOBORONEXPORT",
+        "score": 158.26071,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "MEX"
+        ]
+      },
+      {
+        "entity_id": "_57retATgHVCjoK3k3txJg",
+        "matched_name": "\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e '\u0420\u0430\u0434\u0438\u043e\u043f\u0440\u0438\u0431\u043e\u0440\u0441\u043d\u0430\u0431'",
+        "score": 117.28961,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "gxIu6Tx6FkR7ZEvovdK0dA",
+        "matched_name": "Rosoboronexport OJSC (ROE)",
+        "score": 110.77383,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "i_KX7GLyC3wgHqbcrUFIlw",
+        "matched_name": "\u041e\u0442\u043a\u0440\u044b\u0442\u043e\u0435 \u0430\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \"\u041a\u0440\u0430\u0441\u043d\u043e\u0437\u0430\u0432\u043e\u0434\u0441\u043a\u0438\u0439 \u0445\u0438\u043c\u0438\u0447\u0435\u0441\u043a\u0438\u0439 \u0437\u0430\u0432\u043e\u0434\"",
+        "score": 104.36563,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -465,21 +2797,155 @@
     "input_name": "Power Machines",
     "input_country": "RUS",
     "entity_id": "c4CsFbk2nqG5QgemfgCczg",
-    "matched_name": "JSC POWER MACHINES",
-    "match_strength": "value='weak'",
-    "score": 126.63541,
+    "matched_name": "PJSC Power Machines",
+    "match_strength": "weak",
+    "score": 124.662384,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "c4CsFbk2nqG5QgemfgCczg",
+        "matched_name": "PJSC Power Machines",
+        "score": 124.662384,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "DEU",
+          "CYP",
+          "CAN",
+          "LUX",
+          "USA",
+          "BEL",
+          "VNM"
+        ]
+      },
+      {
+        "entity_id": "n1FN6gZv5218B1eTOKolFQ",
+        "matched_name": "\u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0421 \u041e\u0413\u0420\u0410\u041d\u0418\u0427\u0415\u041d\u041d\u041e\u0419 \u041e\u0422\u0412\u0415\u0422\u0421\u0422\u0412\u0415\u041d\u041d\u041e\u0421\u0422\u042c\u042e \"\u0421\u0418\u041b\u041e\u0412\u042b\u0415 \u041c\u0410\u0428\u0418\u041d\u042b - \u0417\u0410\u0412\u041e\u0414 \u0420\u0415\u041e\u0421\u0422\u0410\u0422\"",
+        "score": 109.69896,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "lANN829zGNlYBo_VA7wXvQ",
+        "matched_name": "SUZHOU PARSUN POWER MACHINE CO.,LTD",
+        "score": 103.00588,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "CHN",
+          "MEX",
+          "AUS",
+          "USA",
+          "RUS",
+          "CAN",
+          "ECU",
+          "GBR",
+          "JPN"
+        ]
+      },
+      {
+        "entity_id": "6vpIpPLm0W4dwJZbzgwZpQ",
+        "matched_name": "\u041e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \u0421 \u041e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u043d\u043e\u0439 \u041e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0441\u0442\u044c\u044e \u0421\u0435\u0432\u0435\u0440\u043d\u044b\u0435 \u0422\u0435\u0445\u043d\u043e\u043b\u043e\u0433\u0438\u0438",
+        "score": 99.71569,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "DEU",
+          "ITA"
+        ]
+      },
+      {
+        "entity_id": "EcvyFamNqjL9R5kctHJ1IQ",
+        "matched_name": "\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \u00ab\u0420\u0443\u0441\u0441\u043a\u0430\u044f \u042d\u043d\u0435\u0440\u0433\u043e\u041c\u0430\u0448\u0438\u043d\u043e\u0441\u0442\u0440\u043e\u0438\u0442\u0435\u043b\u044c\u043d\u0430\u044f \u041a\u043e\u043c\u043f\u0430\u043d\u0438\u044f\u00bb",
+        "score": 98.07041,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
   {
     "input_name": "Sukhoi Company",
     "input_country": "RUS",
-    "entity_id": "5wVHdujAfKLkHO7efPnAjQ",
-    "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0410\u0412\u0418\u0410\u0426\u0418\u041e\u041d\u041d\u0410\u042f \u0425\u041e\u041b\u0414\u0418\u041d\u0413\u041e\u0412\u0410\u042f \u041a\u041e\u041c\u041f\u0410\u041d\u0418\u042f \"\u0421\u0423\u0425\u041e\u0419\"",
-    "match_strength": "value='weak'",
-    "score": 138.93639,
+    "entity_id": "nHNMmVYgdK0mFdTsKNzVPQ",
+    "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0410\u0412\u0418\u0410\u0426\u0418\u041e\u041d\u041d\u0410\u042f \u0425\u041e\u041b\u0414\u0418\u041d\u0413\u041e\u0412\u0410\u042f \u041a\u041e\u041c\u041f\u0410\u041d\u0418\u042f \"\u0421\u0423\u0425\u041e\u0419\"",
+    "match_strength": "weak",
+    "score": 140.45369,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "nHNMmVYgdK0mFdTsKNzVPQ",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0410\u0412\u0418\u0410\u0426\u0418\u041e\u041d\u041d\u0410\u042f \u0425\u041e\u041b\u0414\u0418\u041d\u0413\u041e\u0412\u0410\u042f \u041a\u041e\u041c\u041f\u0410\u041d\u0418\u042f \"\u0421\u0423\u0425\u041e\u0419\"",
+        "score": 140.45369,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "5wVHdujAfKLkHO7efPnAjQ",
+        "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0410\u0412\u0418\u0410\u0426\u0418\u041e\u041d\u041d\u0410\u042f \u0425\u041e\u041b\u0414\u0418\u041d\u0413\u041e\u0412\u0410\u042f \u041a\u041e\u041c\u041f\u0410\u041d\u0418\u042f \"\u0421\u0423\u0425\u041e\u0419\"",
+        "score": 140.1511,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "USA"
+        ]
+      },
+      {
+        "entity_id": "ZCDrIT8FOnMmkTznvypHkQ",
+        "matched_name": "\u0410\u041e \"\u0413\u0420\u0410\u0416\u0414\u0410\u041d\u0421\u041a\u0418\u0415 \u0421\u0410\u041c\u041e\u041b\u0401\u0422\u042b \u0421\u0423\u0425\u041e\u0413\u041e\"",
+        "score": 134.39447,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CYP",
+          "USA"
+        ]
+      },
+      {
+        "entity_id": "EOoN-ABqrtk965ogR7wBTg",
+        "matched_name": "\u041e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \u0441 \u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u043d\u043e\u0439 \u043e\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0441\u0442\u044c\u044e \"\u041d\u0430\u0443\u0447\u043d\u043e-\u043f\u0440\u043e\u0438\u0437\u0432\u043e\u0434\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0439 \u043a\u043e\u043d\u0446\u0435\u0440\u043d \"\u0428\u0442\u0443\u0440\u043c\u043e\u0432\u0438\u043a\u0438 \u0421\u0443\u0445\u043e\u0433\u043e\"",
+        "score": 124.11737,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "T8xxeh7qY1AW7ISrGZKLdQ",
+        "matched_name": "\u041f\u0410\u041e \"\u041e\u0411\u042a\u0415\u0414\u0418\u041d\u0415\u041d\u041d\u0410\u042f \u0410\u0412\u0418\u0410\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u0410\u042f \u041a\u041e\u0420\u041f\u041e\u0420\u0410\u0426\u0418\u042f\"",
+        "score": 103.62143,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "CHN",
+          "USA"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -488,9 +2954,65 @@
     "input_country": "RUS",
     "entity_id": "U7pXtLgp1t_mJGCi3d6J8g",
     "matched_name": "\u041f\u0410\u041e \"\u041a\u041e\u0420\u041f\u041e\u0420\u0410\u0426\u0418\u042f \"\u0418\u0420\u041a\u0423\u0422\"",
-    "match_strength": "value='weak'",
-    "score": 154.71455,
+    "match_strength": "weak",
+    "score": 155.35068,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "U7pXtLgp1t_mJGCi3d6J8g",
+        "matched_name": "\u041f\u0410\u041e \"\u041a\u041e\u0420\u041f\u041e\u0420\u0410\u0426\u0418\u042f \"\u0418\u0420\u041a\u0423\u0422\"",
+        "score": 155.35068,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "Iq3hh5N2iyk-q5WblzaQLA",
+        "matched_name": "PJSC Irkut Corporation",
+        "score": 114.44131,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "ouMv3S4P1EWuNohnQQLNnQ",
+        "matched_name": "Irkut Research and Production Corporation Public Joint Stock Company",
+        "score": 107.50022,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "OgfL8S5UxnbxWf4-JdGmMw",
+        "matched_name": "JSC Irkut Corporation",
+        "score": 104.88364,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "Fehood1P8KtLOLh6nX0xxw",
+        "matched_name": "Irkut Corporation",
+        "score": 104.41454,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -499,9 +3021,50 @@
     "input_country": "RUS",
     "entity_id": "qgjNlQSAvdiFrSXZLdzGYA",
     "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0420\u041e\u0421\u0421\u0418\u0419\u0421\u041a\u0410\u042f \u0421\u0410\u041c\u041e\u041b\u0415\u0422\u041e\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u0410\u042f \u041a\u041e\u0420\u041f\u041e\u0420\u0410\u0426\u0418\u042f \"\u041c\u0418\u0413\"",
-    "match_strength": "value='weak'",
-    "score": 157.9563,
+    "match_strength": "weak",
+    "score": 158.11058,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "qgjNlQSAvdiFrSXZLdzGYA",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0420\u041e\u0421\u0421\u0418\u0419\u0421\u041a\u0410\u042f \u0421\u0410\u041c\u041e\u041b\u0415\u0422\u041e\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u0410\u042f \u041a\u041e\u0420\u041f\u041e\u0420\u0410\u0426\u0418\u042f \"\u041c\u0418\u0413\"",
+        "score": 158.11058,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "DZA",
+          "MMR",
+          "POL",
+          "SYR",
+          "YEM"
+        ]
+      },
+      {
+        "entity_id": "baVuAtK8xhrCw9t75-id9g",
+        "matched_name": "NPO BAZALT",
+        "score": 92.81409,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "hhI3yL3D587QDL-5ZS7Hig",
+        "matched_name": "Russian Aircraft Corporation MiG",
+        "score": 76.32601,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -510,9 +3073,65 @@
     "input_country": "RUS",
     "entity_id": "KA4EYcuYj6GGWLp6DRNsxw",
     "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0422\u0423\u041f\u041e\u041b\u0415\u0412\"",
-    "match_strength": "value='weak'",
-    "score": 156.66306,
+    "match_strength": "weak",
+    "score": 156.6755,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "KA4EYcuYj6GGWLp6DRNsxw",
+        "matched_name": "\u041f\u0423\u0411\u041b\u0418\u0427\u041d\u041e\u0415 \u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0422\u0423\u041f\u041e\u041b\u0415\u0412\"",
+        "score": 156.6755,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "pZujKNmy-6MIGfEGDSdczQ",
+        "matched_name": "Tupolev JSC",
+        "score": 133.13489,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "ihMoC4YVQspHUroH-f_FhQ",
+        "matched_name": "JSC TUPOLEV",
+        "score": 130.76422,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "x8MPEruXEClJAm7J9x9Ihw",
+        "matched_name": "JSC TUPOLEV",
+        "score": 123.33585,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "qrQxd6KMXyNfLCKdupTAwA",
+        "matched_name": "Tupolev CJSC",
+        "score": 123.12415,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -521,9 +3140,65 @@
     "input_country": "RUS",
     "entity_id": "YA4d9w1CSR2dpqzMhYoYVw",
     "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0410\u0414\u041c\u0418\u0420\u0410\u041b\u0422\u0415\u0419\u0421\u041a\u0418\u0415 \u0412\u0415\u0420\u0424\u0418\"",
-    "match_strength": "value='weak'",
-    "score": 159.03284,
+    "match_strength": "weak",
+    "score": 163.01788,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "YA4d9w1CSR2dpqzMhYoYVw",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0410\u0414\u041c\u0418\u0420\u0410\u041b\u0422\u0415\u0419\u0421\u041a\u0418\u0415 \u0412\u0415\u0420\u0424\u0418\"",
+        "score": 163.01788,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "szSFeGzBWL_ApFoPI8ESFg",
+        "matched_name": "Admiralty Shipyard JSC",
+        "score": 94.410774,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "Zq82BAYItBFv5e2CzuoGjQ",
+        "matched_name": "ADMIRALTY SHIPYARDS",
+        "score": 136.14047,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "rRQActMz38DRNBoWaHX-ZQ",
+        "matched_name": "ADMIRALTY SHIPYARD JSC",
+        "score": 115.18065,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "jpWGMLN30OJ4axQD67xjQw",
+        "matched_name": "\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \u00ab\u0410\u0434\u043c\u0438\u0440\u0430\u043b\u0442\u0435\u0439\u0441\u043a\u0438\u0435 \u0432\u0435\u0440\u0444\u0438\u00bb",
+        "score": 105.07308,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
@@ -532,20 +3207,134 @@
     "input_country": "RUS",
     "entity_id": "uvq9R4Byykp6HBsX9Ohp3A",
     "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0426\u0415\u041d\u0422\u0420 \u0421\u0423\u0414\u041e\u0420\u0415\u041c\u041e\u041d\u0422\u0410 \"\u0417\u0412\u0415\u0417\u0414\u041e\u0427\u041a\u0410\"",
-    "match_strength": "value='weak'",
-    "score": 147.09421,
+    "match_strength": "weak",
+    "score": 150.46829,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "uvq9R4Byykp6HBsX9Ohp3A",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u0426\u0415\u041d\u0422\u0420 \u0421\u0423\u0414\u041e\u0420\u0415\u041c\u041e\u041d\u0422\u0410 \"\u0417\u0412\u0415\u0417\u0414\u041e\u0427\u041a\u0410\"",
+        "score": 150.46829,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "UKR"
+        ]
+      },
+      {
+        "entity_id": "9-trNPDWAVokTfIl35d24Q",
+        "matched_name": "United Shipbuilding Corporation \u201c5th Shipyard\u201d",
+        "score": 83.13394,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "xGKYExEwIFVBB9vKe0L9kg",
+        "matched_name": "Scientific-Production Association Vint of Zvezdochka Shipyard (SPU Vint)",
+        "score": 77.67633,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "fJZa3qzZrqlkzfa5iuY5eg",
+        "matched_name": "Subsidiary Sevastopol Naval Plant of Zvezdochka Shipyard (Sevastopol Naval Plant)",
+        "score": 69.294334,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS",
+          "UKR"
+        ]
+      },
+      {
+        "entity_id": "7GZUxbeT2XeFH7mvXP90cQ",
+        "matched_name": "United Shipbuilding Corporation JSC \u201c35th Shipyard\u201d",
+        "score": 60.94392,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   },
   {
     "input_name": "Baltic Shipyard",
     "input_country": "RUS",
-    "entity_id": "UTqozNydpeMkK77bVml1Xg",
-    "matched_name": "\u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0421 \u041e\u0413\u0420\u0410\u041d\u0418\u0427\u0415\u041d\u041d\u041e\u0419 \u041e\u0422\u0412\u0415\u0422\u0421\u0422\u0412\u0415\u041d\u041d\u041e\u0421\u0422\u042c\u042e \"\u0411\u0410\u041b\u0422\u0418\u0419\u0421\u041a\u0418\u0419 \u0417\u0410\u0412\u041e\u0414 - \u0421\u0423\u0414\u041e\u0421\u0422\u0420\u041e\u0415\u041d\u0418\u0415\"",
-    "match_strength": "value='weak'",
-    "score": 139.56693,
+    "entity_id": "9fiGgW8JSHDcfCUeKnVMXA",
+    "matched_name": "\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \"\u0411\u0430\u043b\u0442\u0438\u0439\u0441\u043a\u0438\u0439 \u0437\u0430\u0432\u043e\u0434\"",
+    "match_strength": "weak",
+    "score": 140.89081,
     "entity_type": "company",
+    "confidence": "high",
+    "needs_review": false,
+    "reviewed": false,
+    "manual_override": false,
+    "candidates": [
+      {
+        "entity_id": "9fiGgW8JSHDcfCUeKnVMXA",
+        "matched_name": "\u0410\u043a\u0446\u0438\u043e\u043d\u0435\u0440\u043d\u043e\u0435 \u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e \"\u0411\u0430\u043b\u0442\u0438\u0439\u0441\u043a\u0438\u0439 \u0437\u0430\u0432\u043e\u0434\"",
+        "score": 140.89081,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "UTqozNydpeMkK77bVml1Xg",
+        "matched_name": "\u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \u0421 \u041e\u0413\u0420\u0410\u041d\u0418\u0427\u0415\u041d\u041d\u041e\u0419 \u041e\u0422\u0412\u0415\u0422\u0421\u0422\u0412\u0415\u041d\u041d\u041e\u0421\u0422\u042c\u042e \"\u0411\u0410\u041b\u0422\u0418\u0419\u0421\u041a\u0418\u0419 \u0417\u0410\u0412\u041e\u0414 - \u0421\u0423\u0414\u041e\u0421\u0422\u0420\u041e\u0415\u041d\u0418\u0415\"",
+        "score": 136.83702,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "2LlstOOQKWJMpGhiph87IA",
+        "matched_name": "\u0410\u041a\u0426\u0418\u041e\u041d\u0415\u0420\u041d\u041e\u0415 \u041e\u0411\u0429\u0415\u0421\u0422\u0412\u041e \"\u041f\u0420\u0418\u0411\u0410\u041b\u0422\u0418\u0419\u0421\u041a\u0418\u0419 \u0421\u0423\u0414\u041e\u0421\u0422\u0420\u041e\u0418\u0422\u0415\u041b\u042c\u041d\u042b\u0419 \u0417\u0410\u0412\u041e\u0414 \"\u042f\u041d\u0422\u0410\u0420\u042c\"",
+        "score": 120.166176,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "kLdhtoUDDI0a3Q7IWOWShg",
+        "matched_name": "BALTIC SHIPYARD",
+        "score": 128.0094,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      },
+      {
+        "entity_id": "fFZj8JQpJeFNG9zxMLkdxA",
+        "matched_name": "BALTIC SHIPYARD",
+        "score": 128.0094,
+        "match_strength": "weak",
+        "entity_type": "company",
+        "countries": [
+          "RUS"
+        ]
+      }
+    ],
     "resolved": true,
     "error": null
   }

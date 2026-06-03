@@ -32,6 +32,17 @@ A conversational interface powered by Claude. Ask any natural language question 
 
 The AI chat and dashboard share the same data cache and are intentionally separate — the dashboard for visual overviews, the chat for ad-hoc deep-dive queries.
 
+### 🪪 Resolution Review (`pages/Resolution_Review.py`)
+
+Name resolution is probabilistic — the Sayari endpoint returns a *ranked list* of candidates with confidence scores, and naively taking the top one risks false positives (in our dataset, *"State Development Bank VEB.RF"* (Russia) initially matched a *Belarusian* bank at a low score). Rather than gate matches with the API's `minimum_score_threshold` — which would silently drop weak matches and hide that risk — `resolver.py` keeps every match but captures the **top-5 candidates** and a **confidence band** for each entity. Low-confidence matches are flagged `needs_review`.
+
+This tab is the human-in-the-loop triage:
+
+- A confidence badge (✅ high / ⚠️ low / ❌ unresolved) and score for every entity
+- Automatic **jurisdiction-mismatch** warnings (input country vs. matched country)
+- A candidate picker to **re-map** a weak match to the correct entity, or mark it unresolved
+- Decisions persist back to `resolved.json` with a `reviewed` / `manual_override` audit trail
+
 Key findings from the dataset: **93.9% of entities are sanctioned**, spanning **53 countries** with **428,000+ known network connections** across **21 distinct sanctions lists**.
 
 ---
@@ -141,14 +152,14 @@ docker compose down
 python -m pytest tests/ -v
 ```
 
-**144 tests** covering every non-UI module — no API calls, no file I/O. All tests use fixture factories that build synthetic profile and relationship data, plus mocked SDK clients for the fetch paths, so the full suite runs in under 10 seconds.
+**162 tests** covering every non-UI module — no API calls, no file I/O. All tests use fixture factories that build synthetic profile and relationship data, plus mocked SDK clients for the fetch paths, so the full suite runs in under 10 seconds.
 
 ```
 tests/test_analytics.py     40 tests   Pure analytics functions over the profiles cache
 tests/test_tools.py         64 tests   All 6 AI chat tools + 4 shared resolution helpers
 tests/test_fetcher.py       24 tests   Risk flag/level extraction, sanctions parsing, fetch_profile
 tests/test_rel_fetcher.py    9 tests   Relationship flattening + fetch_relationships error path
-tests/test_resolver.py       7 tests   Resolution success, no-match, and exception handling
+tests/test_resolver.py      25 tests   Candidate capture, confidence banding, review decisions
 ```
 
 The Sayari API calls in `fetcher.py`, `rel_fetcher.py`, and `resolver.py` are exercised with mocked SDK clients, so no credentials or network access are required. The Streamlit UI layers (`Dashboards.py`, `pages/Chat.py`) and the credentialed client factory (`client.py`) are intentionally excluded, as they require a live session or real API keys.
@@ -164,10 +175,11 @@ The Sayari API calls in `fetcher.py`, `rel_fetcher.py`, and `resolver.py` are ex
 ├── tools.py                # LLM-callable data-access functions (6 tools)
 ├── fetcher.py              # Fetches full entity profiles from the Sayari API
 ├── rel_fetcher.py          # Fetches top-50 network connections per entity
-├── resolver.py             # Resolves entity names to Sayari entity IDs by best match score
+├── resolver.py             # Resolves names to entity IDs; captures candidates + confidence
 ├── client.py               # Authenticated Sayari SDK client factory
 ├── pages/
-│   └── Chat.py             # AI chat interface (Claude + tool use)
+│   ├── Chat.py             # AI chat interface (Claude + tool use)
+│   └── Resolution_Review.py # Human-in-the-loop triage for low-confidence matches
 ├── data/
 │   ├── resolved.json       # Cached name → entity ID mappings (49/50 resolved)
 │   ├── profiles.json       # Cached full entity profiles (49/50 fetched)

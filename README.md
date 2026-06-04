@@ -8,7 +8,7 @@ A Streamlit dashboard that surfaces macro-level intelligence across 50 high-risk
 
 The app resolves a curated list of sanctioned entities against the Sayari knowledge graph, fetches their full risk profiles, and presents the findings in two ways:
 
-### 📊 Analytics Dashboard (`app.py`)
+### 📊 Analytics Dashboard (`Dashboards.py`)
 
 Five interactive tabs for visual exploration:
 
